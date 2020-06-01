@@ -3,8 +3,8 @@
 module WebmockSpotifyApiHelpers
   WebMock.enable!
   WebMock.disable_net_connect!(
-      allow_localhost: true,
-      allow: "chromedriver.storage.googleapis.com"
+    allow_localhost: true,
+    allow: "chromedriver.storage.googleapis.com"
   )
 
   def mock_search_results
