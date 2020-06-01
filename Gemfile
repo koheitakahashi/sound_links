@@ -56,6 +56,7 @@ group :test do
   gem "webdrivers"
   gem "rspec-rails", "~> 4.0.0"
   gem "factory_bot"
+  gem "webmock"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
