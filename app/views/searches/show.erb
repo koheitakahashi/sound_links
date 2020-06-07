@@ -1,0 +1,19 @@
+<h1>searches#show</h1>
+
+<% if @results.present? %>
+  <h2>Songs Found</h2>
+  <table>
+    <tr>
+      <th>曲名</th>
+      <th>アーティスト</th>
+      <th>URL</th>
+    </tr>
+    <% @results.each do |result| %>
+      <tr>
+        <td><%= result[:name]%></td>
+        <td><%= result[:artist_name]%></td>
+        <td><%= result[:url]%></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
