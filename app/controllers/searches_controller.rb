@@ -9,19 +9,21 @@ class SearchesController < ApplicationController
     query = params[:query]
     return unless query.present?
 
+    # TODO 複数のAPIからのレスポンスを曲名、アーティス名を参照して統合して表示できるようにすること
     spotify = SpotifyRepository.new
-    sounds = spotify.search(query)
-    @results = formatted(sounds)
+    youtube = YoutubeRepository.new
+    spotifay_response = spotify.search(query)
+    youtube_response = youtube.search(query)
+    @results = sounds_data(spotifay_response, youtube_response)
   end
 
   private
-    def formatted(response)
-      JSON.parse(response.body)["tracks"]["items"].map do |item|
-        {
-          name: item["name"],
-          artist_name: item["artists"][0]["name"],
-          url: item["external_urls"]["spotify"]
-        }
+    # TODO mapを使った処理ができないかを考えること
+    def sounds_data(spotifay_response, youtube_response)
+      data = []
+      spotifay_response.each_with_index do |s_res, index|
+        data << s_res.merge(youtube_response[index])
       end
+      data
     end
 end
