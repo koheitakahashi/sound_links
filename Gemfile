@@ -17,6 +17,7 @@ gem "bootsnap", ">= 1.4.2", require: false
 # not default
 gem "google-api-client", "> 0.7"
 gem "slim-rails"
+gem "jwt"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
