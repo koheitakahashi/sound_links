@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-module WebmockSpotifyApiHelpers
+module WebmockSpotifyApiHelper
   WebMock.enable!
   WebMock.disable_net_connect!(
     allow_localhost: true,
     allow: "chromedriver.storage.googleapis.com"
   )
 
-  def mock_search_results
+  def mock_spotify_search_results
     WebMock.stub_request(:post, "https://accounts.spotify.com/api/token")
       .to_return(
         body: { token: "aaaa" }.to_json,
