@@ -26,8 +26,8 @@ describe "楽曲検索機能", type: :system do
       visit root_path
       fill_in "query", with: "リライト"
       click_on "Search"
-      expect(page).to have_selector '.spotify-url', text: 'https://open.spotify.com/track/3h5e4tpgR9q0cjQXzo8FMD?si=WN7JPlJ5SuSQhrhh9Z-8Yw'
-      expect(page).to have_selector '.youtube-url', text: "https://youtu.be/cr8magEp0Ho"
+      expect(page).to have_selector ".spotify-url", text: "https://open.spotify.com/track/3h5e4tpgR9q0cjQXzo8FMD?si=WN7JPlJ5SuSQhrhh9Z-8Yw"
+      expect(page).to have_selector ".youtube-url", text: "https://youtu.be/cr8magEp0Ho"
     end
   end
 end
