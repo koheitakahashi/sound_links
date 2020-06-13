@@ -6,15 +6,13 @@
     <tr>
       <th>曲名</th>
       <th>アーティスト</th>
-      <th>Spotify URL</th>
-      <th>Youtube URL</th>
+      <th>URL</th>
     </tr>
     <% @results.each do |result| %>
       <tr>
-        <td><%= result[:spotify_title]%></td>
-        <td><%= result[:spotify_artists]%></td>
-        <td class="spotify-url"><%= result[:spotify_url]%></td>
-        <td class="youtube-url"><%= result[:youtube_url]%></td>
+        <td><%= result[:name]%></td>
+        <td><%= result[:artist_name]%></td>
+        <td><%= result[:url]%></td>
       </tr>
     <% end %>
   </table>

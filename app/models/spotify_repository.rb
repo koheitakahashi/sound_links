@@ -13,10 +13,7 @@ class SpotifyRepository
 
     search_request["Authorization"] = "Bearer #{access_token}"
 
-    response = api_response(search_uri, search_request)
-
-    # TODO 仮に検索結果から5つを取り出しているが、クエリを変更したり、他の処理に置き換えること
-    format(response).take(5)
+    api_response(search_uri, search_request)
   end
 
   private
@@ -43,15 +40,5 @@ class SpotifyRepository
 
       auth_response = api_response(auth_uri, auth_request)
       JSON.parse(auth_response.body)["access_token"]
-    end
-
-    def format(response)
-      JSON.parse(response.body)["tracks"]["items"].map do |item|
-        {
-          spotify_title: item["name"],
-          spotify_artists: item["artists"][0]["name"],
-          spotify_url: item["external_urls"]["spotify"]
-        }
-      end
     end
 end
