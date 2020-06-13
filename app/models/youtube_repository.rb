@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'google/apis/youtube_v3'
+require "google/apis/youtube_v3"
 
 class YoutubeRepository
   GOOGLE_API_KEY= Rails.application.credentials.google[:api_key]
@@ -45,7 +45,7 @@ class YoutubeRepository
     def request_options(query)
       {
         q: query,
-        type: 'video',
+        type: "video",
         max_results: 10,
         video_category_id: "10",
         video_license: "youtube",
