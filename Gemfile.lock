@@ -104,14 +104,9 @@ GEM
       os (>= 0.9, < 2.0)
       signet (~> 0.14)
     hashdiff (1.0.1)
-    hpricot (0.8.6)
-    html2slim (0.2.0)
-      hpricot
     httpclient (2.8.3)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
-    jbuilder (2.10.0)
-      activesupport (>= 5.0.0)
     jwt (2.2.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -306,8 +301,6 @@ DEPENDENCIES
   capybara (>= 2.15)
   factory_bot
   google-api-client (> 0.7)
-  html2slim
-  jbuilder (~> 2.7)
   listen (>= 3.0.5, < 3.2)
   puma (~> 4.3)
   rails (~> 6.0.2, >= 6.0.2.1)
@@ -323,7 +316,6 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
-  tzinfo-data
   web-console (>= 3.3.0)
   webdrivers
   webmock
