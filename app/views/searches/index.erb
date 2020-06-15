@@ -1,7 +1,0 @@
-<h1>search</h1>
-
-<%= form_with url: searches_path, method: :get, local: true do |form| %>
-  <%= form.label "Search for:" %>
-  <%= form.text_field(:query)  %>
-  <%= form.submit("Search") %>
-<% end %>
