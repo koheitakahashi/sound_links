@@ -1,0 +1,25 @@
+h1
+  | searches#show
+- if @results.present?
+  h2
+    | Songs Found
+  table
+    tr
+      th
+        | 曲名
+      th
+        | アーティスト
+      th
+        | Spotify URL
+      th
+        | Youtube URL
+    - @results.each do |result|
+      tr
+        td
+          = result[:spotify_title]
+        td
+          = result[:spotify_artists]
+        td.spotify-url
+          = result[:spotify_url]
+        td.youtube-url
+          = result[:youtube_url]

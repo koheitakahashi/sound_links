@@ -46,6 +46,7 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-rails"
   gem "rubocop-rspec"
+  gem "html2slim"
 end
 
 group :test do
@@ -63,3 +64,4 @@ end
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "google-api-client", "> 0.7"
+gem "slim-rails"
