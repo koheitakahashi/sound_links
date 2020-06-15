@@ -46,7 +46,7 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  gem 'html2slim'
+  gem "html2slim"
 end
 
 group :test do
