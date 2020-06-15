@@ -1,0 +1,63 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.6-node-browsers
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1
+
+      - run:
+          name: Install Bundle
+          command: gem install bundler
+
+      - run:
+          name: set bundle config path
+          command: bundle config set path "vendor/bundle"
+
+      - run:
+          name: set bundle config clean
+          command: bundle config set clean "true"
+
+      - run:
+          name: Install gems
+          command: bundle install
+
+      - save_cache:
+          key: gem-chace-v1-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ./vendor/bundle
+
+      - restore_cache:
+          keys:
+            - yarn-chace-v1-{{ checksum "yarn.lock" }}
+            - yarn-chace-v1-
+
+      - run:
+          name: Yarn Install
+          command: yarn install
+
+      - save_cache:
+          key: yarn-chace-v1-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+      - run:
+          name: rubocop
+          command: bundle exec rubocop -c .rubocop.yml
+
+      - run:
+          name: Test
+          command: bundle exec rspec
+
+      - store_test_results:
+          path: tmp/test-results
+      - store_artifacts:
+          path: tmp/screenshots
+          destination: screenshots
