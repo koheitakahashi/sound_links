@@ -12,17 +12,19 @@ class SearchesController < ApplicationController
     # TODO 複数のAPIからのレスポンスを曲名、アーティス名を参照して統合して表示できるようにすること
     spotify = SpotifyRepository.new
     youtube = YoutubeRepository.new
+    apple_music = AppleMusicRepository.new
     spotifay_response = spotify.search(query)
     youtube_response = youtube.search(query)
-    @results = sounds_data(spotifay_response, youtube_response)
+    apple_music_response = apple_music.search(query)
+    @results = sounds_data(spotifay_response, youtube_response, apple_music_response)
   end
 
   private
     # TODO mapを使った処理ができないかを考えること
-    def sounds_data(spotifay_response, youtube_response)
+    def sounds_data(spotifay_response, youtube_response, apple_music_response)
       data = []
       spotifay_response.each_with_index do |s_res, index|
-        data << s_res.merge(youtube_response[index])
+        data << s_res.merge(youtube_response[index], apple_music_response[index])
       end
       data
     end
