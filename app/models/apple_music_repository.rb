@@ -20,7 +20,6 @@ class AppleMusicRepository
   end
 
   private
-
     # TODO spotify_repositoryとほぼ同じ構造なので、モジュールに切り分けたい
     def api_response(uri, request)
       Net::HTTP.start(uri.hostname, uri.port, request_schema(uri)) do |http|
@@ -42,7 +41,7 @@ class AppleMusicRepository
 
     def authentication_token
       private_key = OpenSSL::PKey::EC.new(API_SECRET_KEY)
-      JWT.encode(authentication_payload, private_key, 'ES256', kid: API_KEY)
+      JWT.encode(authentication_payload, private_key, "ES256", kid: API_KEY)
     end
 
     def format(response)
