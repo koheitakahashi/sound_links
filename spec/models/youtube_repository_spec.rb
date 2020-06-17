@@ -3,7 +3,7 @@
 require "spec_helper"
 require "rails_helper"
 require "webmock/rspec"
-require "support/webmock_youtube_api_helper.rb"
+require "support/webmock_youtube_api_helper"
 
 describe "YoutubeRepositoryのmodelテスト", type: :model do
   include WebmockYoutubeApiHelper
@@ -15,7 +15,7 @@ describe "YoutubeRepositoryのmodelテスト", type: :model do
     it "#search" do
       youtube= YoutubeRepository.new
       actual = youtube.search("リライト")
-      expect = [
+      expected = [
         {
           youtube_title: "ASIAN KUNG-FU GENERATION　『リライト』",
           youtube_artists: "ASIAN KUNG-FU GENERATION Official YouTube Channel",
@@ -24,7 +24,7 @@ describe "YoutubeRepositoryのmodelテスト", type: :model do
         }
       ]
 
-      expect(expect).to eq actual
+      expect(expected).to eq actual
     end
   end
 end
