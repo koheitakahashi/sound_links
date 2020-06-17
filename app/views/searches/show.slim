@@ -13,6 +13,9 @@ h1
         | Spotify URL
       th
         | Youtube URL
+      th
+        | Apple Music URL
+
     - @results.each do |result|
       tr
         td
@@ -23,3 +26,5 @@ h1
           = result[:spotify_url]
         td.youtube-url
           = result[:youtube_url]
+        td.apple-music-url
+          = result[:apple_music_url]

@@ -302,6 +302,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   factory_bot
   google-api-client (> 0.7)
+  jwt
   listen (>= 3.0.5, < 3.2)
   puma (~> 4.3)
   rails (~> 6.0.2, >= 6.0.2.1)
