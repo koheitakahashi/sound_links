@@ -12,19 +12,19 @@ h1
       th
         | Spotify URL
       th
-        | Youtube URL
-      th
         | Apple Music URL
+      th
+        | Youtube URL
 
     - @results.each do |result|
       tr
         td
-          = result[:spotify_title]
+          = result[:title]
         td
-          = result[:spotify_artists]
+          = result[:artist]
         td.spotify-url
           = result[:spotify_url]
-        td.youtube-url
-          = result[:youtube_url]
         td.apple-music-url
           = result[:apple_music_url]
+        td.youtube-url
+          = result[:youtube_url]
