@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AppleMusicRepository
+class AppleMusicApiRepository
   API_KEY =  Rails.application.credentials.apple_music[:key_id]
   API_SECRET_KEY = Rails.application.credentials.apple_music[:private_key]
   APPLE_TEAM_ID = Rails.application.credentials.apple_music[:team_id]
@@ -8,20 +8,20 @@ class AppleMusicRepository
   SEARCH_URL = "https://api.music.apple.com/v1/catalog/jp/search?"
   SEARCH_TRACKS_NUMBER = 5
 
-  def search(query)
-    search_uri = URI.parse(SEARCH_URL + { term: query, limit: SEARCH_TRACKS_NUMBER, types: "songs" }.to_query)
+  def search(keyword)
+    search_uri = URI.parse(SEARCH_URL + { term: keyword, limit: SEARCH_TRACKS_NUMBER, types: "songs" }.to_query)
 
     search_request = Net::HTTP::Get.new(search_uri)
     search_request["Authorization"] = "Bearer #{authentication_token}"
 
-    response = api_response(search_uri, search_request)
+    response = receive_response(search_uri, search_request)
 
-    format(response)
+    format_response(response)
   end
 
   private
     # TODO spotify_repositoryとほぼ同じ構造なので、モジュールに切り分けたい
-    def api_response(uri, request)
+    def receive_response(uri, request)
       Net::HTTP.start(uri.hostname, uri.port, request_schema(uri)) do |http|
         http.request(request)
       end
@@ -44,13 +44,14 @@ class AppleMusicRepository
       JWT.encode(authentication_payload, private_key, "ES256", kid: API_KEY)
     end
 
-    def format(response)
+    def format_response(response)
       JSON.parse(response.body)["results"]["songs"]["data"].map do |item|
         {
-          apple_music_title: item["attributes"]["name"],
-          apple_music_artists: item["attributes"]["artistName"],
+          isrc: item["attributes"]["isrc"],
+          title: item["attributes"]["name"],
+          artist: item["attributes"]["artistName"],
           apple_music_url: item["attributes"]["url"]
-        }
+      }
       end
     end
 end
