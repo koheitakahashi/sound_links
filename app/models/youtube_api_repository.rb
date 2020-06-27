@@ -19,7 +19,6 @@ class YoutubeApiRepository
   end
 
   private
-
     def trim_response_data(response)
       response.items.map { |item| format(item) if check_license(item.id.video_id) }.compact
     end

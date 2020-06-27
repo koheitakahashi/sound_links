@@ -14,7 +14,6 @@ class SoundApisRepository
   end
 
   private
-
     def sound_format
       {
         isrc: nil,

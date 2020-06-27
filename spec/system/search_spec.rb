@@ -4,7 +4,7 @@ require "rails_helper"
 require "support/webmock_apis_response_helper"
 
 describe "楽曲検索機能", type: :system do
-  include  WebmockApisResponseHelper
+  include WebmockApisResponseHelper
 
   before do
     mock_apis_search_results

@@ -21,7 +21,6 @@ class SpotifyApiRepository
   end
 
   private
-
     def authorization_key
       Base64.encode64("#{API_KEY}:#{API_SECRET_KEY}").gsub(/[\r\n]/, "")
     end

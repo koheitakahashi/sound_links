@@ -15,7 +15,7 @@ module WebmockSpotifyApiHelper
         headers: { "Content-Type" =>  "application/json" }
       )
 
-    WebMock.stub_request(:get, "https://api.spotify.com/v1/search?limit=5&market=JP&q=%E3%83%AA%E3%83%A9%E3%82%A4%E3%83%88&type=track" )
+    WebMock.stub_request(:get, "https://api.spotify.com/v1/search?limit=5&market=JP&q=%E3%83%AA%E3%83%A9%E3%82%A4%E3%83%88&type=track")
       .to_return(
         body: File.read("#{Rails.root}/spec/fixtures/spotify_api_response.json"),
         status: 200,
