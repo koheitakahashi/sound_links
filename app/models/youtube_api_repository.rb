@@ -14,7 +14,6 @@ class YoutubeApiRepository
 
     response = service.list_searches(:snippet, request_options(query))
 
-    # TODO メソッド名が他のクラスと異なるため、統一すること
     trim_response_data(response)
   end
 
@@ -30,11 +29,9 @@ class YoutubeApiRepository
       response = service.list_videos(:content_details, id: id, fields: "items(content_details(licensed_content))")
 
       str_license = response.items.map { |item| item.content_details.licensed_content }.join("")
-      # str_licenseが文字列のためbooleanに変換している
       @license = ActiveRecord::Type::Boolean.new.cast(str_license)
     end
 
-    # TODO 無意味にインスタンス変数を使っているため修正すること
     def format(item)
       {
         title: item.snippet.title,

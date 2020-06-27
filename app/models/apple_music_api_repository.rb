@@ -20,7 +20,7 @@ class AppleMusicApiRepository
   end
 
   private
-    # TODO spotify_repositoryとほぼ同じ構造なので、モジュールに切り分けたい
+    # TODO spotify_repositoryとほぼ同じ構造なので、モジュールに切り分けること
     def receive_response(uri, request)
       Net::HTTP.start(uri.hostname, uri.port, request_schema(uri)) do |http|
         http.request(request)
