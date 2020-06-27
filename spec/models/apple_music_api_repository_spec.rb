@@ -14,12 +14,13 @@ describe "AppelMusicRepositoryのmodelテスト", type: :model do
     end
 
     it "#search" do
-      apple_music = AppleMusicRepository.new
+      apple_music = AppleMusicApiRepository.new
       actual = apple_music.search("リライト")
       expected = [
         {
-          apple_music_title: "リライト",
-          apple_music_artists: "ASIAN KUNG-FU GENERATION",
+          isrc: "JPKS00400641",
+          title: "リライト",
+          artist: "ASIAN KUNG-FU GENERATION",
           apple_music_url: "https://music.apple.com/jp/album/%E3%83%AA%E3%83%A9%E3%82%A4%E3%83%88/570003767?i=570003920"
         }
       ]

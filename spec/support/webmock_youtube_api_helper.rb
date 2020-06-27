@@ -16,5 +16,11 @@ module WebmockYoutubeApiHelper
                  body: File.read("#{Rails.root}/spec/fixtures/youtube_api_license_response.json"),
                  headers: { "Content-Type"=> "application/json" }
       )
+
+    WebMock.stub_request(:get, "https://www.googleapis.com/youtube/v3/videos?fields=items(contentDetails(licensedContent))&id=bOZixNTn_ck&key=#{GOOGLE_API_KEY}&part=content_details")
+      .to_return(status: 200,
+                 body: File.read("#{Rails.root}/spec/fixtures/youtube_api_license_response.json"),
+                 headers: { "Content-Type"=> "application/json" }
+      )
   end
 end
