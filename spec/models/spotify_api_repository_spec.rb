@@ -13,12 +13,13 @@ describe "SpotifyRepositoryのmodelテスト", type: :model do
     end
 
     it "#search" do
-      spotify = SpotifyRepository.new
+      spotify = SpotifyApiRepository.new
       actual = spotify.search("リライト")
       expected = [
         {
-          spotify_title: "リライト",
-          spotify_artists: "ASIAN KUNG-FU GENERATION",
+          isrc: "JPKS00400641",
+          title: "リライト",
+          artist: "ASIAN KUNG-FU GENERATION",
           spotify_url: "https://open.spotify.com/track/3h5e4tpgR9q0cjQXzo8FMD?si=WN7JPlJ5SuSQhrhh9Z-8Yw"
         }
       ]

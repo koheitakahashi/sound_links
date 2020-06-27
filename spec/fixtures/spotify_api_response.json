@@ -1,6 +1,9 @@
 {
   "tracks" : {
     "items" : [{
+      "external_ids": {
+        "isrc" : "JPKS00400641"
+      },
       "name" : "リライト",
       "artists" : [{
         "name" : "ASIAN KUNG-FU GENERATION"

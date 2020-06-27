@@ -13,14 +13,20 @@ describe "YoutubeRepositoryのmodelテスト", type: :model do
     end
 
     it "#search" do
-      youtube= YoutubeRepository.new
+      youtube= YoutubeApiRepository.new
       actual = youtube.search("リライト")
       expected = [
         {
-          youtube_title: "ASIAN KUNG-FU GENERATION　『リライト』",
-          youtube_artists: "ASIAN KUNG-FU GENERATION Official YouTube Channel",
+          title: "ASIAN KUNG-FU GENERATION　『リライト』",
+          artist: "ASIAN KUNG-FU GENERATION Official YouTube Channel",
           youtube_url: "https://youtu.be/cr8magEp0Ho",
           youtube_license: true,
+        },
+        {
+          title: "ASIAN KUNG-FU GENERATION 『リライト(2016ver.)』",
+          artist: "ASIAN KUNG-FU GENERATION Official YouTube Channel",
+          youtube_url: "https://youtu.be/bOZixNTn_ck",
+          youtube_license: true
         }
       ]
 

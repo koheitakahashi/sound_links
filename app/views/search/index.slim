@@ -1,0 +1,6 @@
+h1
+  | search
+= form_with url: results_path, method: :get, local: true do |form|
+  = form.label "Search for:"
+  = form.text_field(:keyword)
+  = form.submit("Search")
