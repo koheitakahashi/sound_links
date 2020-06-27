@@ -1,24 +1,38 @@
-# README
+# Sound Linksとは
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+「Sound Links」とは、使っている音楽プラットフォームが違うことにより、他の人と楽曲を共有しづらいという問題を解決するための、音楽配信プラットフォーム横断検索サービスです。
 
-Things you may want to cover:
+ユーザーは楽曲名でSpotify・Apple Music・YouTubeを検索することができ、その楽曲を共有するためのプラットフォーム固有のURLを、ボタン一つでクリップボードにコピーできます。
 
-* Ruby version
+## インストール
 
-* System dependencies
+```sh
+$ bin/setup
+$ rails server
+```
 
-* Configuration
+## テスト
 
-* Database creation
+```sh
+$ bundle exec rspec
+```
 
-* Database initialization
+## Lint
 
-* How to run the test suite
+Rubocopを実行します
 
-* Services (job queues, cache servers, search engines, etc.)
+```sh
+$ bundle exec rubocop
+```
 
-* Deployment instructions
+## 注意
 
-* ...
+本アプリを動かすためには、Spotify・Apple Music・YouTube、それぞれのAPIキーを取得する必要があります。
+
+以下を参考に取得してください。
+
+[Web API \| Spotify for Developers](https://developer.spotify.com/documentation/web-api/)
+
+[Apple Music API \| Apple Developer Documentation](https://developer.apple.com/documentation/applemusicapi)
+
+[YouTube Data API  \|  Google Developers](https://developers.google.com/youtube/v3)
