@@ -14,7 +14,7 @@ describe "SoundApiRepositoryのmodelテスト", type: :model do
     end
 
     it "#search" do
-      sound_api = SoundApisRepository.new
+      sound_api = SoundAPI.new
       actual = sound_api.search("リライト")
       expected = [
         {

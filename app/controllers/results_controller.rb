@@ -6,7 +6,7 @@ class ResultsController < ApplicationController
     keyword = params[:keyword]
     return unless keyword.present?
 
-    sounds_api = SoundApisRepository.new
-    @results = sounds_api.search(keyword)
+    sound_api = SoundAPI.new
+    @results = sound_api.search(keyword)
   end
 end
