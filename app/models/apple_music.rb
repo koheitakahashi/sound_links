@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AppleMusicApiRepository
+class AppleMusic
   API_KEY =  Rails.application.credentials.apple_music[:key_id]
   API_SECRET_KEY = Rails.application.credentials.apple_music[:private_key]
   APPLE_TEAM_ID = Rails.application.credentials.apple_music[:team_id]

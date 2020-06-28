@@ -5,7 +5,7 @@ require "rails_helper"
 require "webmock/rspec"
 require "support/webmock_youtube_api_helper"
 
-describe "YoutubeRepositoryのmodelテスト", type: :model do
+describe "Youtubeのmodelテスト", type: :model do
   include WebmockYoutubeApiHelper
   describe "APIレスポンス(mock)を取得する" do
     before do
@@ -13,7 +13,7 @@ describe "YoutubeRepositoryのmodelテスト", type: :model do
     end
 
     it "#search" do
-      youtube= YoutubeApiRepository.new
+      youtube= Youtube.new
       actual = youtube.search("リライト")
       expected = [
         {

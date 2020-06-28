@@ -2,7 +2,7 @@
 
 require "google/apis/youtube_v3"
 
-class YoutubeApiRepository
+class Youtube
   GOOGLE_API_KEY= Rails.application.credentials.google[:api_key]
   YOUTUBE_URL = "https://youtu.be/"
 

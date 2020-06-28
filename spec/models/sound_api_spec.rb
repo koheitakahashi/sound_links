@@ -5,7 +5,7 @@ require "rails_helper"
 require "webmock/rspec"
 require "support/webmock_apis_response_helper"
 
-describe "SoundApiRepositoryのmodelテスト", type: :model do
+describe "SoundAPIのmodelテスト", type: :model do
   include WebmockApisResponseHelper
 
   describe "Spotify・Apple Music・YouTubeのAPIを介した楽曲情報検索機能" do

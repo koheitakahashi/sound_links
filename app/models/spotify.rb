@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SpotifyApiRepository
+class Spotify
   API_KEY = Rails.application.credentials.spotify[:client_id]
   API_SECRET_KEY = Rails.application.credentials.spotify[:client_secret]
 
