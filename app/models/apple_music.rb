@@ -16,11 +16,11 @@ class AppleMusic
 
     response = receive_response(search_uri, search_request)
 
-    format_response(response)
+    format_responses(response)
   end
 
   private
-    # TODO spotify_repositoryとほぼ同じ構造なので、モジュールに切り分けること
+    # TODO spotify.rbとほぼ同じ構造なので、モジュールに切り分けること
     def receive_response(uri, request)
       Net::HTTP.start(uri.hostname, uri.port, request_schema(uri)) do |http|
         http.request(request)
@@ -44,14 +44,15 @@ class AppleMusic
       JWT.encode(authentication_payload, private_key, "ES256", kid: API_KEY)
     end
 
-    def format_response(response)
-      JSON.parse(response.body)["results"]["songs"]["data"].map do |item|
-        {
+    def format_responses(response)
+      formatted_responses = JSON.parse(response.body)["results"]["songs"]["data"].map do |item|
+        SearchResult.new(
           isrc: item["attributes"]["isrc"],
           title: item["attributes"]["name"],
           artist: item["attributes"]["artistName"],
           apple_music_url: item["attributes"]["url"]
-      }
+        )
       end
+      formatted_responses.uniq { |item| item.isrc }
     end
 end

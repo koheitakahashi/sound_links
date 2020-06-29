@@ -14,31 +14,30 @@ class Youtube
 
     response = service.list_searches(:snippet, request_options(query))
 
-    trim_response_data(response)
+    format_responses(response)
   end
 
   private
-    def trim_response_data(response)
-      response.items.map { |item| format(item) if check_license(item.id.video_id) }.compact
+    def format_responses(response)
+      results = response.items.map do |item|
+        SearchResult.new(
+          title: item.snippet.title,
+          artist: item.snippet.channel_title,
+          youtube_url: url(item),
+          youtube_license: has_license?(item.id.video_id)
+        )
+      end
+      results.delete_if { |result| result.youtube_license === false }
     end
 
-    def check_license(id)
+    def has_license?(id)
       service = Google::Apis::YoutubeV3::YouTubeService.new
       service.key = GOOGLE_API_KEY
 
       response = service.list_videos(:content_details, id: id, fields: "items(content_details(licensed_content))")
 
       str_license = response.items.map { |item| item.content_details.licensed_content }.join("")
-      @license = ActiveRecord::Type::Boolean.new.cast(str_license)
-    end
-
-    def format(item)
-      {
-        title: item.snippet.title,
-        artist: item.snippet.channel_title,
-        youtube_url: url(item),
-        youtube_license: @license
-      }
+      ActiveRecord::Type::Boolean.new.cast(str_license)
     end
 
     def request_options(query)

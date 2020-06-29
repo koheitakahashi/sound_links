@@ -17,7 +17,7 @@ class Spotify
 
     response = receive_response(search_uri, search_request)
 
-    format_response(response)
+    format_responses(response)
   end
 
   private
@@ -46,14 +46,15 @@ class Spotify
       JSON.parse(auth_response.body)["access_token"]
     end
 
-    def format_response(response)
-      JSON.parse(response.body)["tracks"]["items"].map do |item|
-        {
+    def format_responses(response)
+      formatted_responses = JSON.parse(response.body)["tracks"]["items"].map do |item|
+        SearchResult.new(
           isrc: item["external_ids"]["isrc"],
           title: item["name"],
           artist: item["artists"][0]["name"],
           spotify_url: item["external_urls"]["spotify"],
-        }
+        )
       end
+      formatted_responses.uniq { |item| item.isrc }
     end
 end
