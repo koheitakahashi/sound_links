@@ -4,13 +4,13 @@ class SearchResult
   attr_reader :isrc, :title, :artist, :spotify_url, :apple_music_url, :youtube_url, :youtube_license
 
   def initialize(isrc: nil, title: nil, artist: nil, spotify_url: nil, apple_music_url: nil, youtube_url: nil, youtube_license: nil)
-      @isrc = isrc
-      @title = title
-      @artist = artist
-      @spotify_url = spotify_url
-      @apple_music_url = apple_music_url
-      @youtube_url = youtube_url
-      @youtube_license = youtube_license
+    @isrc = isrc
+    @title = title
+    @artist = artist
+    @spotify_url = spotify_url
+    @apple_music_url = apple_music_url
+    @youtube_url = youtube_url
+    @youtube_license = youtube_license
   end
 
   def merge(another)
