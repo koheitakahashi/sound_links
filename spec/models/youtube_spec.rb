@@ -3,34 +3,27 @@
 require "spec_helper"
 require "rails_helper"
 require "webmock/rspec"
-require "support/webmock_youtube_api_helper"
+require "support/webmock_youtube_helper"
 
 describe "Youtubeのmodelテスト", type: :model do
-  include WebmockYoutubeApiHelper
-  describe "APIレスポンス(mock)を取得する" do
+  include WebmockYoutubeHelper
+
+  describe "#search" do
     before do
       mock_youtube_search_results
-    end
-
-    it "#search" do
       youtube= Youtube.new
-      actual = youtube.search("リライト")
-      expected = [
-        {
-          title: "ASIAN KUNG-FU GENERATION　『リライト』",
-          artist: "ASIAN KUNG-FU GENERATION Official YouTube Channel",
-          youtube_url: "https://youtu.be/cr8magEp0Ho",
-          youtube_license: true,
-        },
-        {
-          title: "ASIAN KUNG-FU GENERATION 『リライト(2016ver.)』",
-          artist: "ASIAN KUNG-FU GENERATION Official YouTube Channel",
-          youtube_url: "https://youtu.be/bOZixNTn_ck",
-          youtube_license: true
-        }
-      ]
-
-      expect(expected).to eq actual
+      @results = youtube.search("リライト")
     end
+
+    it { expect(@results.first.isrc).to be_nil }
+    it { expect(@results.first.title).to eq "ASIAN KUNG-FU GENERATION　『リライト』" }
+    it { expect(@results.first.artist).to eq "ASIAN KUNG-FU GENERATION Official YouTube Channel" }
+    it { expect(@results.first.spotify_url).to be_nil }
+    it { expect(@results.first.apple_music_url).to be_nil }
+    it { expect(@results.first.youtube_url).to eq "https://youtu.be/cr8magEp0Ho" }
+    it { expect(@results.first.youtube_license).to be true }
+
+    it { expect(@results.count).to eq 2 }
+    it { expect(@results.second.title).to eq "ASIAN KUNG-FU GENERATION 『リライト(2016ver.)』" }
   end
 end

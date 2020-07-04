@@ -13,18 +13,6 @@ class SearchResult
       @youtube_license = youtube_license
   end
 
-  def to_h
-    {
-      isrc: self.isrc,
-      title: self.title,
-      artist: self.artist,
-      spotify_url: self.spotify_url,
-      apple_music_url: self.apple_music_url,
-      youtube_url: self.youtube_url,
-      youtube_license: self.youtube_license
-    }
-  end
-
   def merge(another)
     SearchResult.new(
       isrc: self.isrc.nil? ? another.isrc : self.isrc,

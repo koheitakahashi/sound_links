@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module WebmockAppleMusicApiHelper
+module WebmockAppleMusicHelper
   WebMock.enable!
 
   def mock_apple_music_search_results
