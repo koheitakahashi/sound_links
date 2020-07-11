@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
-require "spec_helper"
 require "rails_helper"
-require "webmock/rspec"
-require "support/webmock_youtube_helper"
 
 describe "Youtubeのmodelテスト", type: :model do
-  include WebmockYoutubeHelper
-
   describe "#search" do
     before do
       mock_youtube_search_results

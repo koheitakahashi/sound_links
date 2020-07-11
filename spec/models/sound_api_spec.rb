@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
-require "spec_helper"
 require "rails_helper"
-require "webmock/rspec"
-require "support/webmock_search_response_helper"
 
 describe "SoundAPIのmodelテスト", type: :model do
-  include WebmockSearchResponseHelper
-
   describe "#search" do
     before do
       mock_apis_search_results

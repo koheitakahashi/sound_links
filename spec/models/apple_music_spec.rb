@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
-require "spec_helper"
 require "rails_helper"
-require "webmock/rspec"
-require "support/webmock_apple_music_helper"
 
 describe "AppelMusicのmodelテスト", type: :model do
-  include WebmockAppleMusicHelper
-
   describe "#search" do
     before do
       mock_apple_music_search_results

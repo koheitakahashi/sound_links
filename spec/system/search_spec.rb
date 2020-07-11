@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
 require "rails_helper"
-require "support/webmock_search_response_helper"
 
 describe "楽曲検索機能", type: :system do
-  include WebmockSearchResponseHelper
-
   before do
-    mock_apis_search_results
+    mock_search_results
   end
 
   it "検索した楽曲のSpotifyとYoutube、Apple MusicのURLを表示できる" do
