@@ -49,6 +49,6 @@ class SoundSearcher
 
     def format_results(results)
       result_struct = Struct.new(:isrc, :title, :artist, :spotify_url, :apple_music_url, :youtube_url, :youtube_license, keyword_init: true)
-      results.map { |result| result_struct.new(result.to_h)}
+      results.map { |result| result_struct.new(result.to_h) }
     end
 end
