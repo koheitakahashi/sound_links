@@ -16,8 +16,5 @@ describe "Spotifyのmodelテスト", type: :model do
     it { expect(result.title).to eq "リライト" }
     it { expect(result.artist).to eq "ASIAN KUNG-FU GENERATION" }
     it { expect(result.spotify_url).to eq "https://open.spotify.com/track/3h5e4tpgR9q0cjQXzo8FMD?si=WN7JPlJ5SuSQhrhh9Z-8Yw" }
-    it { expect(result.apple_music_url).to be_nil }
-    it { expect(result.youtube_url).to be_nil }
-    it { expect(result.youtube_license).to be_nil }
   end
 end
