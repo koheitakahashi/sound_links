@@ -19,15 +19,20 @@ class Youtube
 
   private
     def format_responses(response)
-      results = response.items.map do |item|
-        SearchResult.new(
-          title: item.snippet.title,
-          artist: item.snippet.channel_title,
-          youtube_url: url(item),
-          youtube_license: has_license?(item.id.video_id)
+      result = Struct.new(:title, :artist, :youtube_url, :youtube_license)
+      formatted_responses = response.items.map do |item|
+        result.new(
+          item.snippet.title,
+          item.snippet.channel_title,
+          url(item),
+          has_license?(item.id.video_id)
         )
       end
-      results.delete_if { |result| result.youtube_license === false }
+      delete_unlicensed_response(formatted_responses)
+    end
+
+    def delete_unlicensed_response(array)
+      array.delete_if { |item| item.youtube_license === false }
     end
 
     def has_license?(id)
