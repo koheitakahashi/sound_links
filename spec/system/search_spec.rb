@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe "楽曲検索機能", type: :system do
+RSpec.describe "楽曲検索機能", type: :system do
   before do
     mock_search_results
   end

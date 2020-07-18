@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-describe "Youtubeのmodelテスト", type: :model do
-  let(:youtube) { Youtube.new }
+RSpec.describe Youtube, type: :model do
+  let(:youtube) { described_class.new }
 
   describe "#search" do
     before do

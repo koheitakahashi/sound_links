@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-describe "SoundSearcherのmodelテスト", type: :model do
-  let(:sound_api) { SoundSearcher.new }
+RSpec.describe SoundSearcher, type: :model do
+  let(:sound_api) { described_class.new }
 
   describe "#search" do
     before do

@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-describe "Spotifyのmodelテスト", type: :model do
-  let(:spotify) { Spotify.new }
+RSpec.describe Spotify, type: :model do
+  let(:spotify) { described_class.new }
 
   describe "#search" do
     before do

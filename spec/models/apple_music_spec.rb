@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-describe "AppelMusicのmodelテスト", type: :model do
-  let(:apple_music) { AppleMusic.new }
+RSpec.describe AppleMusic, type: :model do
+  let(:apple_music) { described_class.new }
 
   describe "#search" do
     before do
