@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AppleMusicApiRepository
+class AppleMusic
   API_KEY =  Rails.application.credentials.apple_music[:key_id]
   API_SECRET_KEY = Rails.application.credentials.apple_music[:private_key]
   APPLE_TEAM_ID = Rails.application.credentials.apple_music[:team_id]
@@ -16,11 +16,11 @@ class AppleMusicApiRepository
 
     response = receive_response(search_uri, search_request)
 
-    format_response(response)
+    format_responses(response)
   end
 
   private
-    # TODO spotify_repositoryとほぼ同じ構造なので、モジュールに切り分けること
+    # TODO spotify.rbとほぼ同じ構造なので、モジュールに切り分けること
     def receive_response(uri, request)
       Net::HTTP.start(uri.hostname, uri.port, request_schema(uri)) do |http|
         http.request(request)
@@ -44,14 +44,20 @@ class AppleMusicApiRepository
       JWT.encode(authentication_payload, private_key, "ES256", kid: API_KEY)
     end
 
-    def format_response(response)
-      JSON.parse(response.body)["results"]["songs"]["data"].map do |item|
-        {
-          isrc: item["attributes"]["isrc"],
-          title: item["attributes"]["name"],
-          artist: item["attributes"]["artistName"],
-          apple_music_url: item["attributes"]["url"]
-      }
+    def format_responses(response)
+      result = Struct.new(:isrc, :title, :artist, :apple_music_url)
+      formatted_responses = JSON.parse(response.body)["results"]["songs"]["data"].map do |item|
+        result.new(
+          item["attributes"]["isrc"],
+          item["attributes"]["name"],
+          item["attributes"]["artistName"],
+          item["attributes"]["url"]
+        )
       end
+      formatted_responses.uniq { |item| item.isrc }
+    end
+
+    def uniq_by_isrc(array)
+      array.uniq { |item| item.isrc }
     end
 end

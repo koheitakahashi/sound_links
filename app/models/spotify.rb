@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SpotifyApiRepository
+class Spotify
   API_KEY = Rails.application.credentials.spotify[:client_id]
   API_SECRET_KEY = Rails.application.credentials.spotify[:client_secret]
 
@@ -17,7 +17,7 @@ class SpotifyApiRepository
 
     response = receive_response(search_uri, search_request)
 
-    format_response(response)
+    format_responses(response)
   end
 
   private
@@ -46,14 +46,20 @@ class SpotifyApiRepository
       JSON.parse(auth_response.body)["access_token"]
     end
 
-    def format_response(response)
-      JSON.parse(response.body)["tracks"]["items"].map do |item|
-        {
-          isrc: item["external_ids"]["isrc"],
-          title: item["name"],
-          artist: item["artists"][0]["name"],
-          spotify_url: item["external_urls"]["spotify"],
-        }
+    def format_responses(response)
+      result = Struct.new(:isrc, :title, :artist, :spotify_url)
+      formatted_responses = JSON.parse(response.body)["tracks"]["items"].map do |item|
+        result.new(
+          item["external_ids"]["isrc"],
+          item["name"],
+          item["artists"][0]["name"],
+          item["external_urls"]["spotify"],
+          )
       end
+      uniq_by_isrc(formatted_responses)
+    end
+
+    def uniq_by_isrc(array)
+      array.uniq { |item| item.isrc }
     end
 end

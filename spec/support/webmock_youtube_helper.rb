@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module WebmockYoutubeApiHelper
+module WebmockYoutubeHelper
   WebMock.enable!
   GOOGLE_API_KEY= Rails.application.credentials.google[:api_key]
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module WebmockSpotifyApiHelper
+module WebmockSpotifyHelper
   WebMock.enable!
   WebMock.disable_net_connect!(
     allow_localhost: true,
