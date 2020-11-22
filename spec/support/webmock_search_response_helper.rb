@@ -4,6 +4,5 @@ module WebmockSearchResponseHelper
   def mock_search_results
     mock_spotify_search_results
     mock_apple_music_search_results
-    mock_youtube_search_results
   end
 end

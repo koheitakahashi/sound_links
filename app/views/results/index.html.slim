@@ -7,7 +7,6 @@ h1 results#index
       th アーティスト
       th Spotify URL
       th Apple Music URL
-      th Youtube URL
 
     - @results.each do |result|
       tr
@@ -15,4 +14,3 @@ h1 results#index
         td.artist = result.artist
         td.spotify-url = result.spotify_url
         td.apple-music-url = result.apple_music_url
-        td.youtube-url = result.youtube_url

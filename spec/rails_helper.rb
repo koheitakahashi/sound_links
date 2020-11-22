@@ -65,6 +65,5 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include WebmockSpotifyHelper
   config.include WebmockAppleMusicHelper
-  config.include WebmockYoutubeHelper
   config.include WebmockSearchResponseHelper
 end
