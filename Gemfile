@@ -15,7 +15,6 @@ gem "turbolinks", "~> 5"
 gem "bootsnap", ">= 1.4.2", require: false
 
 # not default
-gem "google-api-client", "> 0.7"
 gem "slim-rails"
 gem "jwt"
 
