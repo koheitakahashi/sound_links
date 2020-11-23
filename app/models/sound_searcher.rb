@@ -10,7 +10,6 @@ class SoundSearcher
   end
 
   private
-
     def merge_results(*results)
       sounds = {}
       results.flatten.each do |result|

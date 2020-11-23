@@ -10,7 +10,7 @@ class Kkbox
   SEARCH_TRACKS_NUMBER = 5
 
   def search(keyword)
-    search_uri = URI.parse(SEARCH_URI + {q: keyword, type: "track", territory: "JP", limit: SEARCH_TRACKS_NUMBER}.to_query)
+    search_uri = URI.parse(SEARCH_URI + { q: keyword, type: "track", territory: "JP", limit: SEARCH_TRACKS_NUMBER }.to_query)
     search_request = Net::HTTP::Get.new(search_uri)
     search_request["Authorization"] = "Bearer #{access_token}"
 
@@ -19,7 +19,7 @@ class Kkbox
 
   private
     def receive_response(uri, request)
-      req_options = {use_ssl: uri.scheme == "https", }
+      req_options = { use_ssl: uri.scheme == "https", }
       Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
         http.request(request)
       end
@@ -28,8 +28,8 @@ class Kkbox
     def access_token
       uri = URI.parse(AUTH_URI)
       request = Net::HTTP::Post.new(uri)
-      request.set_form_data({grant_type: "client_credentials", client_id: API_KEY, client_secret: API_SECRET_KEY})
-      req_options = {use_ssl: uri.scheme == "https", }
+      request.set_form_data({ grant_type: "client_credentials", client_id: API_KEY, client_secret: API_SECRET_KEY })
+      req_options = { use_ssl: uri.scheme == "https", }
 
       response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
         http.request(request)
