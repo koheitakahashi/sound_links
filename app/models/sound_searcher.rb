@@ -4,7 +4,9 @@ class SoundSearcher
   def search(keyword)
     spotify_results = Spotify.new.search(keyword)
     apple_music_results = AppleMusic.new.search(keyword)
+    kkbox_results = Kkbox.new.search(keyword)
 
+    # TODO: KKBOX の検索結果をマージする
     merge_results_by_condition(spotify_results, apple_music_results, equal_isrc)
   end
 
