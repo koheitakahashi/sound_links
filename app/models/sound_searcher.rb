@@ -6,37 +6,25 @@ class SoundSearcher
     apple_music_results = AppleMusic.new.search(keyword)
     kkbox_results = Kkbox.new.search(keyword)
 
-    # TODO: KKBOX の検索結果をマージする
-    merge_results_by_condition(spotify_results, apple_music_results, equal_isrc)
+    merge_results(spotify_results, apple_music_results, kkbox_results)
   end
 
   private
-    def equal_isrc
-      Proc.new { |item_1, item_2| item_1[:isrc] === item_2[:isrc] }
-    end
 
-    def merge_results_by_condition(results_1, results_2, find_condition)
-      sound_list = []
-
-      results_1.each do |result|
-        if (sound = results_2.find { |item| find_condition.call(item, result) })
-          sound_list << merge_struct(result, sound)
-          results_2.delete(sound)
+    def merge_results(*results)
+      sounds = {}
+      results.flatten.each do |result|
+        if sounds[result[:isrc]]
+          sounds[result[:isrc]] = sounds[result[:isrc]].merge(result)
         else
-          sound_list << result
+          sounds[result[:isrc]] = result
         end
       end
-
-      results_2.each { |item| sound_list << item }
-      format_results(sound_list)
-    end
-
-    def merge_struct(struct_1, struct_2)
-      struct_1.to_h.merge(struct_2.to_h) { |_key, val_1, val_2| val_1.nil? ? val_2 : val_1 }
+      format_results(sounds.values)
     end
 
     def format_results(results)
-      result_struct = Struct.new(:isrc, :title, :artist, :spotify_url, :apple_music_url, :youtube_license, keyword_init: true)
-      results.map { |result| result_struct.new(result.to_h) }
+      result_struct = Struct.new(:isrc, :title, :artist, :spotify_url, :apple_music_url, :kkbox_url, keyword_init: true)
+      results.map { |result| result_struct.new(result) }
     end
 end
