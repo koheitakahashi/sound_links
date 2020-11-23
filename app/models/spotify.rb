@@ -16,7 +16,6 @@ class Spotify
     search_request["Authorization"] = "Bearer #{access_token}"
 
     response = receive_response(search_uri, search_request)
-
     format_responses(response)
   end
 
@@ -47,19 +46,14 @@ class Spotify
     end
 
     def format_responses(response)
-      result = Struct.new(:isrc, :title, :artist, :spotify_url)
       formatted_responses = JSON.parse(response.body)["tracks"]["items"].map do |item|
-        result.new(
-          item["external_ids"]["isrc"],
-          item["name"],
-          item["artists"][0]["name"],
-          item["external_urls"]["spotify"],
-          )
+        {
+          isrc: item["external_ids"]["isrc"],
+          title: item["name"],
+          artist: item["artists"][0]["name"],
+          spotify_url: item["external_urls"]["spotify"],
+        }
       end
-      uniq_by_isrc(formatted_responses)
-    end
-
-    def uniq_by_isrc(array)
-      array.uniq { |item| item.isrc }
+      formatted_responses.uniq { |item| item[:isrc] }
     end
 end

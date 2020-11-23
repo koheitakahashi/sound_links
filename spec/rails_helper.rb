@@ -63,8 +63,12 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  WebMock.disable_net_connect!(
+    allow_localhost: true,
+    allow:           "chromedriver.storage.googleapis.com"
+  )
   config.include WebmockSpotifyHelper
   config.include WebmockAppleMusicHelper
-  config.include WebmockYoutubeHelper
   config.include WebmockSearchResponseHelper
+  config.include WebmockKkboxHelper
 end

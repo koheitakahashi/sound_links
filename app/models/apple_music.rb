@@ -45,19 +45,14 @@ class AppleMusic
     end
 
     def format_responses(response)
-      result = Struct.new(:isrc, :title, :artist, :apple_music_url)
       formatted_responses = JSON.parse(response.body)["results"]["songs"]["data"].map do |item|
-        result.new(
-          item["attributes"]["isrc"],
-          item["attributes"]["name"],
-          item["attributes"]["artistName"],
-          item["attributes"]["url"]
-        )
+        {
+          isrc: item["attributes"]["isrc"],
+          title: item["attributes"]["name"],
+          artist: item["attributes"]["artistName"],
+          apple_music_url: item["attributes"]["url"]
+        }
       end
-      formatted_responses.uniq { |item| item.isrc }
-    end
-
-    def uniq_by_isrc(array)
-      array.uniq { |item| item.isrc }
+      formatted_responses.uniq { |item| item[:isrc] }
     end
 end
