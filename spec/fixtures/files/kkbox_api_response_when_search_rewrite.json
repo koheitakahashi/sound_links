@@ -1,0 +1,21 @@
+{
+  "tracks": {
+    "data": [
+      {
+        "id": "HZPWABJyEYKfn-Jl6V",
+        "name": "リライト",
+        "isrc": "JPKS00400641",
+        "url": "https://www.kkbox.com/jp/ja/song/FcqGD-90I.n6HlVI7lVI70P4-index.html",
+        "available_territories": [
+          "JP"
+        ],
+        "album": {
+          "artist": {
+            "id": "-k0GlLUKzxULLYcD2D",
+            "name": "ASIAN KUNG-FU GENERATION"
+          }
+        }
+      }
+    ]
+  }
+}
