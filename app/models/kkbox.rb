@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class Kkbox
-  API_KEY = Rails.application.credentials.kkbox[:client_id]
-  API_SECRET_KEY = Rails.application.credentials.kkbox[:client_secret]
-
   AUTH_URI = "https://account.kkbox.com/oauth2/token"
   SEARCH_URI = "https://api.kkbox.com/v1.1/search?"
 
@@ -28,7 +25,7 @@ class Kkbox
     def access_token
       uri = URI.parse(AUTH_URI)
       request = Net::HTTP::Post.new(uri)
-      request.set_form_data({ grant_type: "client_credentials", client_id: API_KEY, client_secret: API_SECRET_KEY })
+      request.set_form_data({ grant_type: "client_credentials",client_id: SoundLinksConstants::KKBOX_API_KEY, client_secret: SoundLinksConstants::KKBOX_API_SECRET_KEY})
       req_options = { use_ssl: uri.scheme == "https", }
 
       response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|

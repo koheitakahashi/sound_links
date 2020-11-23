@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class Spotify
-  API_KEY = Rails.application.credentials.spotify[:client_id]
-  API_SECRET_KEY = Rails.application.credentials.spotify[:client_secret]
-
   AUTH_URI = "https://accounts.spotify.com/api/token"
   SEARCH_URI = "https://api.spotify.com/v1/search?"
 
@@ -21,7 +18,7 @@ class Spotify
 
   private
     def authorization_key
-      Base64.encode64("#{API_KEY}:#{API_SECRET_KEY}").gsub(/[\r\n]/, "")
+      Base64.encode64("#{SoundLinksConstants::SPOTIFY_API_KEY}:#{SoundLinksConstants::SPOTIFY_API_SECRET_KEY}").gsub(/[\r\n]/, "")
     end
 
     def request_schema(uri)

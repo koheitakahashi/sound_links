@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class AppleMusic
-  API_KEY =  Rails.application.credentials.apple_music[:key_id]
-  API_SECRET_KEY = Rails.application.credentials.apple_music[:private_key]
-  APPLE_TEAM_ID = Rails.application.credentials.apple_music[:team_id]
-
   SEARCH_URL = "https://api.music.apple.com/v1/catalog/jp/search?"
   SEARCH_TRACKS_NUMBER = 5
 
@@ -33,15 +29,15 @@ class AppleMusic
 
     def authentication_payload
       {
-        iss: APPLE_TEAM_ID,
+        iss: SoundLinksConstants::APPLE_MUSIC_TEAM_ID,
         iat: Time.now.to_i,
         exp: Time.now.to_i + 3600
       }
     end
 
     def authentication_token
-      private_key = OpenSSL::PKey::EC.new(API_SECRET_KEY)
-      JWT.encode(authentication_payload, private_key, "ES256", kid: API_KEY)
+      private_key = OpenSSL::PKey::EC.new(SoundLinksConstants::APPLE_MUSIC_API_SECRET_KEY)
+      JWT.encode(authentication_payload, private_key, "ES256", kid: SoundLinksConstants::APPLE_MUSIC_API_KEY)
     end
 
     def format_responses(response)
