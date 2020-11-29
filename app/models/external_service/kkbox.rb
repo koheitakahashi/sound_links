@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module ExternalService
-  class Kkbox
-    SEARCH_TRACKS_NUMBER = 5
-
+  class Kkbox < Base
     def search(keyword)
       response = Faraday.get(SoundLinksConstants::KKBOX_SEARCH_URL) do |request|
         request.params = { q: keyword, type: "track", territory: "JP", limit: SEARCH_TRACKS_NUMBER }

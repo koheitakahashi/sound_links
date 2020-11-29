@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module ExternalService
-  class Spotify
-    SEARCH_TRACKS_NUMBER = 5
-
+  class Spotify < Base
     def search(keyword)
       response = Faraday.get(SoundLinksConstants::SPOTIFY_SEARCH_URL) do |request|
         request.params = { q: keyword, type: "track", market: "JP", limit: SEARCH_TRACKS_NUMBER }

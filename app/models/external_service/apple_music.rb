@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module ExternalService
-  class AppleMusic
-    SEARCH_TRACKS_NUMBER = 5
-
+  class AppleMusic < Base
     def search(keyword)
       response = Faraday.get(SoundLinksConstants::APPLE_MUSIC_SEARCH_URL) do |request|
         request.params = { term: keyword, limit: SEARCH_TRACKS_NUMBER, types: "songs" }
