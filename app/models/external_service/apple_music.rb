@@ -3,12 +3,13 @@
 module ExternalService
   class AppleMusic < Base
     def search(keyword)
-      response = Faraday.get(SoundLinksConstants::APPLE_MUSIC_SEARCH_URL) do |request|
-        request.params = { term: keyword, limit: SEARCH_TRACKS_NUMBER, types: "songs" }
-        request.headers["Authorization"] = "Bearer #{authentication_token}"
-      end
+      response = ExternalService::Request.new.get(
+        url: SoundLinksConstants::APPLE_MUSIC_SEARCH_URL,
+        headers: { Authorization: "Bearer #{authentication_token}" },
+        params: { term: keyword, limit: SEARCH_TRACKS_NUMBER, types: "songs" }
+      )
 
-      format_response(response)
+      format_response(response.body)
     end
 
     private
@@ -26,7 +27,7 @@ module ExternalService
       end
 
       def format_response(response)
-        JSON.parse(response.body)["results"]["songs"]["data"].map do |item|
+        response["results"]["songs"]["data"].map do |item|
           {
             isrc: item["attributes"]["isrc"],
             title: item["attributes"]["name"],

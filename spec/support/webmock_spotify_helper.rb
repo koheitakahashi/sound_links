@@ -10,7 +10,7 @@ module WebmockSpotifyHelper
   def mock_spotify_search_results
     WebMock.stub_request(:post, "https://accounts.spotify.com/api/token")
       .to_return(
-        body: { token: "aaaa" }.to_json,
+        body: { access_token: "aaaa" }.to_json,
         status: 200,
         headers: { "Content-Type" =>  "application/json" }
       )
