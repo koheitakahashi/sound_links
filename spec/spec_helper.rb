@@ -96,4 +96,8 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+  # headless chrome を使用
+  config.before(:each, type: :system) do
+    driven_by :selenium_chrome_headless
+  end
 end
