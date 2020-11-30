@@ -13,7 +13,7 @@ module WebmockKkboxHelper
         })
       .to_return(status: 200, body: file_fixture("kkbox_api_response_when_authentication.json"))
 
-    stub_request(:get, "https://api.kkbox.com/v1.1/search?limit=5&q=%E3%83%AA%E3%83%A9%E3%82%A4%E3%83%88&territory=JP&type=track")
+    stub_request(:get, "https://api.kkbox.com/v1.1/search?limit=5&q=リライト&territory=JP&type=track")
       .with(
         headers: {
           "Authorization" => "Bearer {NEW_ACCESS_TOKEN}",
