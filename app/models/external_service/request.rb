@@ -7,6 +7,7 @@ module ExternalService
     def initialize
     end
 
+    # TODO: 例外処理を追加
     def get(url:, headers:, params:)
       Rails.logger.info("** url = [#{url}]")
       Rails.logger.info("** params = [#{params}]")
@@ -20,6 +21,8 @@ module ExternalService
     end
 
     def post(url:, headers: nil, body: nil)
+      Rails.logger.info("** url = [#{url}]")
+
       response = client.post(url) do |request|
         request.headers = headers if headers.present?
         request.body = body if body.present?

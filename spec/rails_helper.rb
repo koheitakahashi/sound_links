@@ -71,4 +71,5 @@ RSpec.configure do |config|
   config.include WebmockAppleMusicHelper
   config.include WebmockSearchResponseHelper
   config.include WebmockKkboxHelper
+  config.include WebmockRequestHelper
 end
