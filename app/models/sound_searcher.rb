@@ -2,9 +2,9 @@
 
 class SoundSearcher
   def search(keyword)
-    spotify_results = Spotify.new.search(keyword)
-    apple_music_results = AppleMusic.new.search(keyword)
-    kkbox_results = Kkbox.new.search(keyword)
+    spotify_results = ExternalService::Spotify.new.search(keyword)
+    apple_music_results = ExternalService::AppleMusic.new.search(keyword)
+    kkbox_results = ExternalService::Kkbox.new.search(keyword)
 
     merge_results(spotify_results, apple_music_results, kkbox_results)
   end

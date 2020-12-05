@@ -1,63 +1,78 @@
 version: 2.1
 
-jobs:
-  build:
+executors:
+  default:
     docker:
       - image: circleci/ruby:2.6.6-node-browsers
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          RAILS_ENV: test
 
+commands:
+  setup:
     steps:
-      - checkout
-
       - restore_cache:
           keys:
-            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v1
+            - gem-chace-v1-{{ checksum "Gemfile.lock" }}
+            - gem-chace-v1
 
       - run:
-          name: Install Bundle
-          command: gem install bundler
+          name: Update bundler
+          command: gem update bundler
 
       - run:
-          name: set bundle config path
-          command: bundle config set path "vendor/bundle"
-
-      - run:
-          name: set bundle config clean
+          name: Set bundle config clean
           command: bundle config set clean "true"
 
       - run:
           name: Install gems
-          command: bundle install
+          command: bundle check || bundle install
 
       - save_cache:
           key: gem-chace-v1-{{ checksum "Gemfile.lock" }}
           paths:
-            - ./vendor/bundle
+            - vendor/bundle
 
       - restore_cache:
           keys:
             - yarn-chace-v1-{{ checksum "yarn.lock" }}
-            - yarn-chace-v1-
+            - yarn-chace-v1
 
       - run:
           name: Yarn Install
-          command: yarn install
+          command: yarn install --cache-folder ~/.cache/yarn
 
       - save_cache:
           key: yarn-chace-v1-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
 
+jobs:
+  test:
+    executor: default
+    steps:
+      - checkout
+      - setup
       - run:
-          name: rubocop
+          name: Run rubocop
           command: bundle exec rubocop -c .rubocop.yml
 
       - run:
-          name: Test
+          name: Run RSpec
           command: bundle exec rspec
 
       - store_test_results:
           path: tmp/test-results
+
       - store_artifacts:
           path: tmp/screenshots
           destination: screenshots
+
+workflows:
+  version: 2.1
+
+  build_and_test:
+    jobs:
+      - test
