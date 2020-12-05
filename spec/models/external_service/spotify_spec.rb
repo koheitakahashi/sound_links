@@ -21,7 +21,7 @@ module ExternalService
       end
 
       context "引数に空文字が与えられた場合" do
-        it { expect(spotify.search("") ).to eq [] }
+        it { expect(spotify.search("")).to eq [] }
       end
     end
   end

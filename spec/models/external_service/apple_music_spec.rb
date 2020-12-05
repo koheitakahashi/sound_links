@@ -22,7 +22,7 @@ module ExternalService
     end
 
     context "引数に空文字が与えられた場合" do
-      it { expect(apple_music.search("") ).to eq [] }
+      it { expect(apple_music.search("")).to eq [] }
     end
   end
 end
