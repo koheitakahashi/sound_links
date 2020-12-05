@@ -16,6 +16,8 @@ module ExternalService
 
     private
       def access_token
+        return @access_token if @access_token
+
         response = ExternalService::Request.new.post(
           url: SoundLinksConstants::KKBOX_AUTH_URL,
           body: "grant_type=client_credentials&client_id=#{SoundLinksConstants::KKBOX_API_KEY}&client_secret=#{SoundLinksConstants::KKBOX_API_SECRET_KEY}")

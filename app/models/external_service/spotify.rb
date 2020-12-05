@@ -17,12 +17,14 @@ module ExternalService
 
     private
       def access_token
+        return @access_token if @access_token
+
         response = ExternalService::Request.new.post(
           url: SoundLinksConstants::SPOTIFY_AUTH_URL,
           body: "grant_type=client_credentials",
           headers: { Authorization: "Basic #{authorization_key}" })
 
-        response.body["access_token"]
+        @access_token = response.body["access_token"]
       end
 
       def authorization_key

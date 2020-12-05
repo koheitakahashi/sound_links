@@ -22,8 +22,10 @@ module ExternalService
       end
 
       def authentication_token
+        return @authentication_token if @authentication_token
+
         private_key = OpenSSL::PKey::EC.new(SoundLinksConstants::APPLE_MUSIC_API_SECRET_KEY)
-        JWT.encode(authentication_payload, private_key, "ES256", kid: SoundLinksConstants::APPLE_MUSIC_API_KEY)
+        @authentication_token = JWT.encode(authentication_payload, private_key, "ES256", kid: SoundLinksConstants::APPLE_MUSIC_API_KEY)
       end
 
       def format_response(response)
