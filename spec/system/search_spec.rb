@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe "楽曲検索機能", type: :system do
   before do
+    skip(message="フロントエンドを Vue.js で構築するため、一時的に skip する。フロントエンドが固まり次第 system spec を調整する。")
     mock_search_results
   end
 

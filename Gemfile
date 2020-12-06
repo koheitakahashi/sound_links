@@ -11,11 +11,10 @@ gem "sqlite3", "~> 1.4"
 gem "puma", "~> 4.3.6"
 gem "sass-rails", ">= 6"
 gem "webpacker", "~> 4.0"
-gem "turbolinks", "~> 5"
+# gem "turbolinks", "~> 5"
 gem "bootsnap", ">= 1.4.2", require: false
 
 # not default
-gem "slim-rails"
 gem "jwt"
 gem "faraday"
 

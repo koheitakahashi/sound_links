@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ResultsController < ApplicationController
+class API::SearchController < ApplicationController
   def index
     # TODO 検索フォームが空の時にエラーを表示するなどの処理を加えること
     keyword = params[:keyword]
