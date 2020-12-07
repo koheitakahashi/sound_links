@@ -6,7 +6,7 @@
 require("@rails/ujs").start();
 
 import { createApp } from "vue";
-import app from "./components/app.vue";
+import app from "./app.vue";
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

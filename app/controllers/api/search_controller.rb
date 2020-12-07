@@ -6,6 +6,6 @@ class API::SearchController < ApplicationController
     keywords = params[:keywords]
     return unless keywords.present?
 
-    render json: SoundSearcher.new.search(keywords)
+    render json: SoundSearcher.new.search(keyword)
   end
 end
