@@ -1,5 +1,4 @@
 #!/bin/zsh
 
 bundle exec rubocop -A
-bin/yarn eslint --fix app/javascript/packs
-bin/yarn eslint --fix app/javascript/packs/components/*
+bin/yarn eslint --fix app/javascript/packs/*
