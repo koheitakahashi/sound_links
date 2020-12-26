@@ -13,7 +13,28 @@
       <button @click="submitSearch">search</button>
     </div>
     <h2>results</h2>
-    <div v-show="state.results.length !== 0">{{ state.results }}</div>
+    <div v-show="state.results.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th>楽曲名</th>
+            <th>アーティスト名</th>
+            <th>Spotify</th>
+            <th>Apple Music</th>
+            <th>KKBOX</th>
+          </tr>
+        </thead>
+        <tbody v-for="result in state.results">
+          <tr>
+            <td>{{ result.title }}</td>
+            <td>{{ result.artist}}</td>
+            <td>{{ result.spotifyUrl }} </td>
+            <td>{{ result.appleMusicUrl }}</td>
+            <td>{{ result.kkboxUrl }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
