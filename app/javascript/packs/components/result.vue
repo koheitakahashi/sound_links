@@ -1,5 +1,6 @@
 <template>
   <tr>
+    <td><img :src="thumbnail()" /></td>
     <td>{{ result.title }}</td>
     <td>{{ result.artist }}</td>
     <td>{{ result.spotifyUrl }}</td>
@@ -69,8 +70,12 @@ export default defineComponent({
       return urls.join("\n");
     }
 
+    function thumbnail(): string {
+      return this.result.thumbnail;
+    }
     return {
       state,
+      thumbnail,
       copyUrlsToClipBoard,
     };
   },
