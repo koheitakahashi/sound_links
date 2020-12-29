@@ -12,8 +12,10 @@
       />
       <button @click="submitSearch">search</button>
     </div>
-    <h2>results</h2>
-    <div v-show="state.results.length !== 0">{{ state.results }}</div>
+    <results-list
+      v-show="state.results.length !== 0"
+      :results="state.results"
+    ></results-list>
   </div>
 </template>
 
@@ -21,9 +23,13 @@
 import { defineComponent, reactive } from "vue";
 import axios from "axios";
 import { parseResponseData } from "./utils/parseResponseData";
+import resultsList from "./components/resultsList.vue";
 
 export default defineComponent({
   name: "App",
+  components: {
+    "results-list": resultsList,
+  },
   setup() {
     const state = reactive({
       keywords: "",
@@ -37,6 +43,7 @@ export default defineComponent({
         });
         state.results = parseResponseData(response.data);
       } catch (error) {
+        // TODO: エラー時の処理を追加
         console.log(`Error! : ${error}`);
       }
     }
