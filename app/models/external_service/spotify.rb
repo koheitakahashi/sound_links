@@ -34,6 +34,8 @@ module ExternalService
       def format_response(response)
         response["tracks"]["items"].map do |item|
           { isrc: item["external_ids"]["isrc"],
+            # height = 300, width = 300 のサムネイルを取得するためにインデックス1の url を取得
+            thumbnail: item["album"]["images"][1]["url"],
             title: item["name"],
             artist: item["artists"][0]["name"],
             spotify_url: item["external_urls"]["spotify"] }

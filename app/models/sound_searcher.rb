@@ -23,7 +23,7 @@ class SoundSearcher
     end
 
     def format_results(results)
-      result_struct = Struct.new(:isrc, :title, :artist, :spotify_url, :apple_music_url, :kkbox_url, keyword_init: true)
+      result_struct = Struct.new(:isrc, :thumbnail, :title, :artist, :spotify_url, :apple_music_url, :kkbox_url, keyword_init: true)
       results.map { |result| result_struct.new(result) }
     end
 end
