@@ -7,7 +7,10 @@
             "isrc": "JPKS00400641",
             "artistName": "ASIAN KUNG-FU GENERATION",
             "name":"リライト",
-            "url": "https://music.apple.com/jp/album/%E3%83%AA%E3%83%A9%E3%82%A4%E3%83%88/570003767?i=570003920"
+            "url": "https://music.apple.com/jp/album/%E3%83%AA%E3%83%A9%E3%82%A4%E3%83%88/570003767?i=570003920",
+            "artwork": {
+              "url": "https://is5-ssl.mzstatic.com/image/thumb/Music/v4/33/a3/42/33a342ac-ae02-91c4-4816-28c181b5284b/jacket_KSCL01917B01A_600over.jpg/{w}x{h}bb.jpeg"
+            }
           }
         }
       ]

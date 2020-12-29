@@ -13,7 +13,10 @@
           "artist": {
             "id": "-k0GlLUKzxULLYcD2D",
             "name": "ASIAN KUNG-FU GENERATION"
-          }
+          },
+          "images": [{
+            "url": "https://i.kfs.io/album/global/1825860,5v1/fit/160x160.jpg"
+          }]
         }
       }
     ]

@@ -15,6 +15,7 @@ module ExternalService
         subject(:result) { kkbox.search("リライト").first }
 
         it { expect(result[:isrc]).to eq "JPKS00400641" }
+        it { expect(result[:thumbnail]).to eq "https://i.kfs.io/album/global/1825860,5v1/fit/160x160.jpg" }
         it { expect(result[:title]).to eq "リライト" }
         it { expect(result[:artist]).to eq "ASIAN KUNG-FU GENERATION" }
         it { expect(result[:kkbox_url]).to eq "https://www.kkbox.com/jp/ja/song/FcqGD-90I.n6HlVI7lVI70P4-index.html" }

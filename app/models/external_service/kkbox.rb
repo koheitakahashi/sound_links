@@ -28,6 +28,8 @@ module ExternalService
       def format_response(response)
         response["tracks"]["data"].map do |item|
           { isrc: item["isrc"],
+            # height = 160, width = 160 のサムネイルを取得するためにインデックス0番目の URL を取得する
+            thumbnail: item["album"]["images"][0]["url"],
             title: item["name"],
             artist: item["album"]["artist"]["name"],
             kkbox_url: item["url"] }

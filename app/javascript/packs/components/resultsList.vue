@@ -5,6 +5,7 @@
       <table>
         <thead>
           <tr>
+            <th>サムネイル</th>
             <th>楽曲名</th>
             <th>アーティスト名</th>
             <th>Spotify</th>

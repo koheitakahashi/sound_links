@@ -10,6 +10,14 @@
       }],
       "external_urls" : {
         "spotify" : "https://open.spotify.com/track/3h5e4tpgR9q0cjQXzo8FMD?si=WN7JPlJ5SuSQhrhh9Z-8Yw"
+      },
+      "album": {
+        "images": [
+          {},
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e02fa355dc948984a72010ff83e"
+          }
+        ]
       }
     }]
   }

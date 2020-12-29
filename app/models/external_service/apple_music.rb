@@ -3,7 +3,6 @@
 module ExternalService
   class AppleMusic < Base
     def search(keyword)
-      # TODO: keyword を escape する
       return [] if keyword.blank?
 
       response = ExternalService::Request.new.get(
@@ -31,10 +30,15 @@ module ExternalService
       def format_response(response)
         response["results"]["songs"]["data"].map do |item|
           { isrc: item["attributes"]["isrc"],
+            thumbnail: format_artwork_url(item["attributes"]["artwork"]["url"]),
             title: item["attributes"]["name"],
             artist: item["attributes"]["artistName"],
             apple_music_url: item["attributes"]["url"] }
         end.uniq { |item| item[:isrc] }
+      end
+
+      def format_artwork_url(artwork_url)
+        artwork_url.gsub(/{w}|{h}/, "300")
       end
   end
 end
