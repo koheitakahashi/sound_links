@@ -7,9 +7,10 @@
       type="search"
       name="keywords"
       id="form"
+      data-test="search-form"
       placeholder="キーワードを入力してください"
     />
-    <button @click="submitSearch(state.keywords)">search</button>
+    <button @click="submitSearch(state.keywords)" data-test="search-submit-button">search</button>
   </div>
 </template>
 
