@@ -57,12 +57,7 @@ jobs:
       - setup
       - run:
           name: Run Lint
-          command: |
-            bundle exec rubocop -c .rubocop.yml
-            bin/yarn eslint app/javascript/packs/
-            bin/yarn eslint app/javascript/packs/app.vue
-            bin/yarn eslint app/javascript/packs/components/*
-
+          command: bin/lint
 
       - run:
           name: Run RSpec

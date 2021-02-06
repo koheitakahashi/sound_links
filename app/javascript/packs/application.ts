@@ -1,1 +1,1 @@
-require("../src/main.ts")
+require("../src/main.ts");

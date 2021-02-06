@@ -10,7 +10,12 @@
       data-test="search-form"
       placeholder="キーワードを入力してください"
     />
-    <button @click="submitSearch(state.keywords)" data-test="search-submit-button">search</button>
+    <button
+      @click="submitSearch(state.keywords)"
+      data-test="search-submit-button"
+    >
+      search
+    </button>
   </div>
 </template>
 
