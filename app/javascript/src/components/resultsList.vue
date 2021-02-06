@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import result from "./result";
+import result from "./result.vue";
 
 export default defineComponent({
   name: "ResultList",
