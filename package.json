@@ -5,7 +5,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
     "@vue/compiler-sfc": "^3.0.4",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "es6-promise": "^4.2.8",
     "serialize-javascript": "^3.1.0",
     "ts-loader": "^8.0.11",
