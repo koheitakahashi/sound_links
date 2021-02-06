@@ -1,6 +1,8 @@
-#!/bin/zsh
+#!/bin/bash
 
-bundle exec rubocop -A
-bin/yarn eslint --fix app/javascript/packs/
-bin/yarn eslint --fix app/javascript/packs/app.vue
-bin/yarn eslint --fix app/javascript/packs/components/*
+bundle exec rubocop -a
+bin/yarn eslint --fix app/javascript/packs/*.ts
+bin/yarn eslint --fix app/javascript/src/*.ts
+bin/yarn eslint --fix app/javascript/src/*.vue
+bin/yarn eslint --fix app/javascript/src/*/*.vue
+bin/yarn eslint --fix app/javascript/src/*/*.ts

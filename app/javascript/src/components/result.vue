@@ -1,11 +1,11 @@
 <template>
   <tr>
     <td><img :src="thumbnail()" /></td>
-    <td>{{ result.title }}</td>
-    <td>{{ result.artist }}</td>
-    <td>{{ result.spotifyUrl }}</td>
-    <td>{{ result.appleMusicUrl }}</td>
-    <td>{{ result.kkboxUrl }}</td>
+    <td data-test="title">{{ result.title }}</td>
+    <td data-test="artist">{{ result.artist }}</td>
+    <td data-test="spotify-url">{{ result.spotifyUrl }}</td>
+    <td data-test="apple-music-url">{{ result.appleMusicUrl }}</td>
+    <td data-test="kkbox-url">{{ result.kkboxUrl }}</td>
     <td>
       <button @click="copyUrlsToClipBoard(result)">この曲をシェアする</button>
       <div v-show="state.isCopiedUrls">
