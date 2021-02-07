@@ -3,8 +3,8 @@ require("@rails/ujs").start();
 import { createApp } from "vue";
 import { store, key } from "./store";
 import app from "./main.vue";
-import topPage from "./view/topPage.vue";
-import resultsPage from "./view/resultsPage.vue";
+import TopPage from "./view/TopPage.vue";
+import ResultsPage from "./view/ResultsPage.vue";
 
 import {
   createRouter,
@@ -15,8 +15,8 @@ import {
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: "/", component: topPage, name: "topPage" },
-    { path: "/search", component: resultsPage, name: "resultsPage" },
+    { path: "/", component: TopPage, name: "TopPage" },
+    { path: "/search", component: ResultsPage, name: "ResultsPage" },
   ],
 });
 

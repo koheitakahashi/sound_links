@@ -6,9 +6,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import SearchForm from "../components/searchForm.vue";
-import TopPageHeader from "../components/topPageHeader.vue"
-import FooterComponent from "../components/footer"
+import SearchForm from "../components/SearchForm.vue";
+import TopPageHeader from "../components/TopPageHeader.vue"
+import FooterComponent from "../components/Footer.vue"
 
 export default defineComponent({
   name: "TopPage",

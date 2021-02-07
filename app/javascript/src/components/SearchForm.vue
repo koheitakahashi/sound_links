@@ -22,10 +22,10 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import { useStore } from "vuex";
-import { key } from "../store";
 import { parseResponseData } from "../utils/parseResponseData";
-import axios from "axios";
 import { useRouter, useRoute } from "vue-router";
+import axios from "axios";
+import { key } from "../store";
 
 export default defineComponent({
   name: "SearchForm",
@@ -46,7 +46,7 @@ export default defineComponent({
         store.commit("addKeywords", keyword);
         store.commit("addResults", parseResponseData(response.data));
         await router.push({
-          name: "resultsPage",
+          name: "ResultsPage",
           query: { keywords: keyword },
         });
       } catch (error) {

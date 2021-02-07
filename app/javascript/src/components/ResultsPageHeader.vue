@@ -5,10 +5,10 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import SearchForm from "../components/searchForm"
+import SearchForm from "./SearchForm.vue"
 
 export default defineComponent({
-  name: "resultPageHeader",
+  name: "ResultPageHeader",
   components: {
     SearchForm
   }

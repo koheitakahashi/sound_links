@@ -24,12 +24,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import result from "./result.vue";
+import Result from "./Result.vue";
 
 export default defineComponent({
   name: "ResultList",
   components: {
-    result: result,
+    result: Result,
   },
   props: {
     results: {

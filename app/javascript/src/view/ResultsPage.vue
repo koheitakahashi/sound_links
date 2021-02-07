@@ -7,14 +7,14 @@
 import { defineComponent } from "vue";
 import { key } from "../store";
 import { useStore } from "vuex";
-import ResultPageHeader from "../components/resultPageHeader";
-import resultsList from "../components/resultsList";
+import ResultPageHeader from "../components/ResultsPageHeader";
+import ResultsList from "../components/ResultsList";
 
 export default defineComponent({
   name: "ResultsPage",
   components: {
     ResultPageHeader,
-    resultsList
+    ResultsList
   },
   setup() {
     const store = useStore(key);

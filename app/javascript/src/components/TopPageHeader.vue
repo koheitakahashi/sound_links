@@ -1,14 +1,14 @@
 <template>
-  <footer>
-    <span>©️koheitakahashi 2021</span>
-    <a href="">利用規約</a>
-  </footer>
+  <div>
+    <h1>Sound Links</h1>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 export default defineComponent({
-  name: "footer"
+  name: "TopPageHeader"
 })
 </script>
 
