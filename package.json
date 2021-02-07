@@ -2,6 +2,10 @@
   "name": "sound_links",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-brands-svg-icons": "^5.15.2",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/vue-fontawesome": "3.0.0-1",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
     "@vue/compiler-sfc": "^3.0.4",
