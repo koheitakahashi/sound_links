@@ -1,22 +1,20 @@
 <template>
-  <div>
-    <search-form></search-form>
-    <results-list :results="store.state.results"></results-list>
-  </div>
+  <result-page-header></result-page-header>
+  <results-list :results="store.state.results"></results-list>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-import searchForm from "../components/searchForm";
-import resultsList from "../components/resultsList";
 import { key } from "../store";
 import { useStore } from "vuex";
+import ResultPageHeader from "../components/resultPageHeader";
+import resultsList from "../components/resultsList";
 
 export default defineComponent({
   name: "ResultsPage",
   components: {
-    searchForm,
-    resultsList,
+    ResultPageHeader,
+    resultsList
   },
   setup() {
     const store = useStore(key);

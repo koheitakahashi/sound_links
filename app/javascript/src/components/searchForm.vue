@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label for="form">検索フォーム</label>
+    <label for="form"></label>
     <input
       v-model="state.keywords"
       @keydown.enter="submitSearch(state.keywords)"

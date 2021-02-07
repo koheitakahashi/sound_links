@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-show="results.length !== 0">
-      <h2>検索結果</h2>
+      <h2>検索結果一覧</h2>
       <table>
         <thead>
           <tr>
