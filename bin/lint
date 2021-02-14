@@ -6,3 +6,6 @@ bin/yarn eslint --fix app/javascript/src/*.ts
 bin/yarn eslint --fix app/javascript/src/*.vue
 bin/yarn eslint --fix app/javascript/src/*/*.vue
 bin/yarn eslint --fix app/javascript/src/*/*.ts
+bin/yarn stylelint --fix app/assets/stylesheets/base/*.scss
+bin/yarn stylelint --fix app/assets/stylesheets/modules/*.scss
+bin/yarn stylelint --fix app/assets/stylesheets/application.scss

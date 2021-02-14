@@ -4,7 +4,7 @@
 }
 
 .search-form__input {
-  border: 1.5px solid #999999;
+  border: 1.5px solid #999;
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
   width: 90%;
@@ -17,16 +17,16 @@
 }
 
 .search-form__button {
-  border: 1.5px solid #999999;
+  border: 1.5px solid #999;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   border-left: none;
-  color: #999999;
+  color: #999;
   width: 10%;
 }
 
 .search-form__button:hover {
-  background-color: #DADADA;
+  background-color: #dadada;
 }
 
 // TODO: placeholder の文字を大きく、薄く
