@@ -36,6 +36,13 @@ html {
      # General elements
      # ================================================================= */
 
+audio,
+canvas,
+progress,
+video {
+  display: inline-block; /* Internet Explorer 11+, Windows Phone 8.1+ */
+}
+
 /* Add the correct display in iOS 4-7. */
 audio:not([controls]) {
   display: none;
@@ -99,7 +106,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, monospace; /* Specify the font family of code elements */
+  font-family: monospace; /* Specify the font family of code elements */
 }
 
 b,
@@ -162,6 +169,7 @@ button,
 
 [type="search"] {
   -webkit-appearance: textfield; /* Safari 8+ */
+  outline-offset: -2px; /* Correct the outline style in Safari */
 }
 
 [type="search"]::-webkit-search-cancel-button,
@@ -190,23 +198,6 @@ button {
   overflow: visible; /* Address `overflow` set to `hidden` in IE 8/9/10/11 */
 }
 
-/* Remove inner padding and border in Firefox 4+ */
-button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
-  border-style: 0;
-  padding: 0;
-}
-
-/* Replace focus style removed in the border reset above */
-button:-moz-focusring,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
-  outline: 1px dotted ButtonText;
-}
-
 button,
 html [type="button"],
 [type="reset"],
@@ -227,6 +218,23 @@ textarea {
   background-color: transparent;
   border-style: none;
   color: inherit;
+}
+
+/* Remove inner padding and border in Firefox 4+ */
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: 0;
+  padding: 0;
+}
+
+/* Replace focus style removed in the border reset above */
+button:-moz-focusring,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  outline: 1px dotted ButtonText;
 }
 
 /* Style select like a standard input */
@@ -256,11 +264,6 @@ legend {
   font: inherit; /* Change font properties to `inherit` in Chrome and Safari */
 }
 
-[type="search"] {
-  -webkit-appearance: textfield; /* Correct the odd appearance in Chrome and Safari */
-  outline-offset: -2px; /* Correct the outline style in Safari */
-}
-
 /* # =================================================================
      # Specify media element style
      # ================================================================= */
@@ -278,12 +281,6 @@ svg:not(:root) {
   overflow: hidden; /* Internet Explorer 11- */
 }
 
-audio,
-canvas,
-progress,
-video {
-  display: inline-block; /* Internet Explorer 11+, Windows Phone 8.1+ */
-}
 
 /* # =================================================================
      # Accessibility
