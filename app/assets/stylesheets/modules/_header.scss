@@ -3,6 +3,7 @@
   width: 100%;
   height: 4rem;
   display: flex;
+  align-items: center;
 }
 
 .header__logo {
@@ -14,6 +15,7 @@
 .header__title {
   margin-left: 0.5rem;
   color: #fff;
-  font-size: 2.5rem
+  font-size: 2.5rem;
+  text-decoration: none;
   // TODO: フォントを考える
 }
