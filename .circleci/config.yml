@@ -57,7 +57,16 @@ jobs:
       - setup
       - run:
           name: Run Lint
-          command: bin/lint
+          command: |
+            bundle exec rubocop
+            bin/yarn eslint app/javascript/packs/*.ts
+            bin/yarn eslint app/javascript/src/*.ts
+            bin/yarn eslint app/javascript/src/*.vue
+            bin/yarn eslint app/javascript/src/*/*.vue
+            bin/yarn eslint app/javascript/src/*/*.ts
+            bin/yarn stylelint app/assets/stylesheets/base/*.scss
+            bin/yarn stylelint app/assets/stylesheets/modules/*.scss
+            bin/yarn stylelint app/assets/stylesheets/application.scss
 
       - run:
           name: Run RSpec

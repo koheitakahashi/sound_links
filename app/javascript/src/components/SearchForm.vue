@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <label for="form">検索フォーム</label>
+  <div class="search-form">
+    <label for="form"></label>
     <input
       v-model="state.keywords"
       @keydown.enter="submitSearch(state.keywords)"
@@ -8,13 +8,15 @@
       name="keywords"
       id="form"
       data-test="search-form"
-      placeholder="キーワードを入力してください"
+      placeholder="楽曲名を入力してください"
+      class="search-form__input"
     />
     <button
       @click="submitSearch(state.keywords)"
       data-test="search-submit-button"
+      class="search-form__button"
     >
-      search
+      <search-icon size="lg" class="search-form-button__icon"></search-icon>
     </button>
   </div>
 </template>
@@ -22,13 +24,17 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import { useStore } from "vuex";
-import { key } from "../store";
 import { parseResponseData } from "../utils/parseResponseData";
-import axios from "axios";
 import { useRouter, useRoute } from "vue-router";
+import axios from "axios";
+import { key } from "../store";
+import SearchIcon from "./SearchIcon";
 
 export default defineComponent({
   name: "SearchForm",
+  components: {
+    SearchIcon,
+  },
   setup() {
     const router = useRouter();
     const route = useRoute();
@@ -39,6 +45,10 @@ export default defineComponent({
     });
 
     const submitSearch = async (keyword) => {
+      if (keyword === "") {
+        return;
+      }
+
       try {
         const response = await axios.get("api/search", {
           params: { keywords: keyword },
@@ -46,7 +56,7 @@ export default defineComponent({
         store.commit("addKeywords", keyword);
         store.commit("addResults", parseResponseData(response.data));
         await router.push({
-          name: "resultsPage",
+          name: "ResultsPage",
           query: { keywords: keyword },
         });
       } catch (error) {

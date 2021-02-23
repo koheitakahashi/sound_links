@@ -1,0 +1,21 @@
+.header {
+  background-color: #7797a7;
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+}
+
+.header__logo {
+  margin: auto 0 auto 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.header__title {
+  margin-left: 0.5rem;
+  color: #fff;
+  font-size: 2.5rem;
+  text-decoration: none;
+  // TODO: フォントを考える
+}

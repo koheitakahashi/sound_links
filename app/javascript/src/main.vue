@@ -1,10 +1,8 @@
 <template>
-  <!--  TODO: ホームへのリンクを追加-->
-  <h1>SearchForm</h1>
   <router-view></router-view>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({

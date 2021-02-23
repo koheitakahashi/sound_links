@@ -1,22 +1,28 @@
 <template>
-  <div>
+  <header>
+    <h1>Sound Links</h1>
     <search-form></search-form>
+  </header>
+  <main>
     <results-list :results="store.state.results"></results-list>
-  </div>
+  </main>
+  <footer-component></footer-component>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-import searchForm from "../components/searchForm";
-import resultsList from "../components/resultsList";
 import { key } from "../store";
 import { useStore } from "vuex";
+import ResultsList from "../components/ResultsList";
+import FooterComponent from "../components/Footer";
+import SearchForm from "../components/SearchForm";
 
 export default defineComponent({
   name: "ResultsPage",
   components: {
-    searchForm,
-    resultsList,
+    SearchForm,
+    ResultsList,
+    FooterComponent,
   },
   setup() {
     const store = useStore(key);

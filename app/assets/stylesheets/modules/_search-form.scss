@@ -1,0 +1,32 @@
+.search-form {
+  display: flex;
+  height: 3rem;
+}
+
+.search-form__input {
+  border: 1.5px solid #999;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  width: 90%;
+  padding-left: 1rem;
+  font-size: 1.1rem;
+}
+
+.search-form__input:focus {
+  outline: none;
+}
+
+.search-form__button {
+  border: 1.5px solid #999;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-left: none;
+  color: #999;
+  width: 10%;
+}
+
+.search-form__button:hover {
+  background-color: #dadada;
+}
+
+// TODO: placeholder の文字を大きく、薄く

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-show="results.length !== 0">
-      <h2>検索結果</h2>
+      <h2>検索結果一覧</h2>
       <table>
         <thead>
           <tr>
@@ -24,12 +24,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import result from "./result.vue";
+import Result from "./Result.vue";
 
 export default defineComponent({
   name: "ResultList",
   components: {
-    result: result,
+    result: Result,
   },
   props: {
     results: {
