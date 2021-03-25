@@ -1,19 +1,30 @@
 <template>
-  <tr>
-    <td><img :src="thumbnail()" /></td>
-    <td data-test="title">{{ result.title }}</td>
-    <td data-test="artist">{{ result.artist }}</td>
-    <td data-test="spotify-url">{{ result.spotifyUrl }}</td>
-    <td data-test="apple-music-url">{{ result.appleMusicUrl }}</td>
-    <td data-test="kkbox-url">{{ result.kkboxUrl }}</td>
-    <td>
-      <button @click="copyUrlsToClipBoard(result)">この曲をシェアする</button>
-      <div v-show="state.isCopiedUrls">
-        クリップボードにURLがコピーされました
+  <div class="results-item">
+    <img :src="thumbnail()" alt="" class="results-item__image">
+    <div class="results-item-section">
+      <div class="results-item-section__explain">
+        <p class="results-item-section-explain__title" data-test="title">{{ result.title }}</p>
+        <p class="results-item-section-explain__artist-name" data-test="artist">{{ result.artist }}</p>
       </div>
-      <div v-show="state.isFailedCopyUrls">URLのコピーが失敗しました</div>
-    </td>
-  </tr>
+      <div class="results-item-section__actions">
+        <div class="results-item-section__copy-actions">
+          <button @click="copyUrlsToClipBoard(result)" class="results-item-section__button">この曲をシェアする</button>
+          <span v-show="state.isCopiedUrls || state.isFailedCopyUrls" :class="tooltipClass()">楽曲のURLがコピーされました</span>
+        </div>
+        <div class="results-item-section__images">
+          <a :href="result.spotifyUrl">
+            <img src="../../images/spotify_icon.svg" alt="" v-show="result.spotifyUrl" class="results-item-section__icon">
+          </a>
+          <a :href="result.appleMusicUrl">
+            <img src="../../images/apple_music_icon.svg" alt="" v-show="result.appleMusicUrl" class="results-item-section__icon">
+          </a>
+          <a :href="result.appleMusicUrl">
+            <img src="../../images/kkbox_icon.svg" alt="" v-show="result.kkboxUrl" class="results-item-section__icon">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -31,13 +42,13 @@ export default defineComponent({
     },
   },
 
-  setup() {
+  setup(props) {
     const state = reactive({
       isCopiedUrls: false,
       isFailedCopyUrls: false,
     });
 
-    function copyUrlsToClipBoard(result) {
+    function copyUrlsToClipBoard(result): void {
       navigator.clipboard
         .writeText(urlsText(result))
         .then(() => {
@@ -73,10 +84,20 @@ export default defineComponent({
     function thumbnail(): string {
       return this.result.thumbnail;
     }
+
+    function tooltipClass(): string {
+      if (state.isCopiedUrls) {
+        return "tooltip__copied--notice"
+      } else if (state.isFailedCopyUrls) {
+        return "tooltip__copied--alert"
+      }
+    }
+
     return {
       state,
       thumbnail,
       copyUrlsToClipBoard,
+      tooltipClass
     };
   },
 });

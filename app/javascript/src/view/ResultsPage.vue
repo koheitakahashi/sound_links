@@ -1,12 +1,14 @@
 <template>
-  <header>
-    <h1>Sound Links</h1>
-    <search-form></search-form>
+  <header class="header">
+    <!-- TODO: 後で差し替える-->
+    <img src="https://placehold.jp/150x150.png" alt="" class="header__logo" />
+    <h1><router-link to="/" class="header__title">Sound Links</router-link></h1>
+    <search-form class="search-form-wrapper__results"></search-form>
   </header>
-  <main>
+  <main class="main-wrapper__results">
     <results-list :results="store.state.results"></results-list>
   </main>
-  <footer-component></footer-component>
+  <footer-component class="footer-wrapper__results"></footer-component>
 </template>
 
 <script>
