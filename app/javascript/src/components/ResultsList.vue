@@ -1,7 +1,11 @@
 <template>
   <div v-show="results.length !== 0" class="results-section">
     <h2 class="result-section__title">検索結果一覧</h2>
-    <div class="result-section__list" v-for="result in results" :key="result.isrc">
+    <div
+      class="result-section__list"
+      v-for="result in results"
+      :key="result.isrc"
+    >
       <result :result="result"></result>
     </div>
   </div>

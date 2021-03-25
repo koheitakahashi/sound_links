@@ -1,5 +1,5 @@
 require("@rails/ujs").start();
-import "../assets/stylesheets/application.scss"
+import "../assets/stylesheets/application.scss";
 
 import { createApp } from "vue";
 import { store, key } from "./store";

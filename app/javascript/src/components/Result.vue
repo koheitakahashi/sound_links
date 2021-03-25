@@ -1,25 +1,53 @@
 <template>
   <div class="results-item">
-    <img :src="thumbnail()" alt="" class="results-item__image">
+    <img :src="thumbnail()" alt="" class="results-item__image" />
     <div class="results-item-section">
       <div class="results-item-section__explain">
-        <p class="results-item-section-explain__title" data-test="title">{{ result.title }}</p>
-        <p class="results-item-section-explain__artist-name" data-test="artist">{{ result.artist }}</p>
+        <p class="results-item-section-explain__title" data-test="title">
+          {{ result.title }}
+        </p>
+        <p class="results-item-section-explain__artist-name" data-test="artist">
+          {{ result.artist }}
+        </p>
       </div>
       <div class="results-item-section__actions">
         <div class="results-item-section__copy-actions">
-          <button @click="copyUrlsToClipBoard(result)" class="results-item-section__button">この曲をシェアする</button>
-          <span v-show="state.isCopiedUrls || state.isFailedCopyUrls" :class="tooltipClass()">楽曲のURLがコピーされました</span>
+          <button
+            @click="copyUrlsToClipBoard(result)"
+            class="results-item-section__button"
+          >
+            この曲をシェアする
+          </button>
+          <span
+            v-show="state.isCopiedUrls || state.isFailedCopyUrls"
+            :class="tooltipClass()"
+            >楽曲のURLがコピーされました</span
+          >
         </div>
         <div class="results-item-section__images">
           <a :href="result.spotifyUrl">
-            <img src="../../images/spotify_icon.svg" alt="" v-show="result.spotifyUrl" class="results-item-section__icon">
+            <img
+              src="../../images/spotify_icon.svg"
+              alt=""
+              v-show="result.spotifyUrl"
+              class="results-item-section__icon"
+            />
           </a>
           <a :href="result.appleMusicUrl">
-            <img src="../../images/apple_music_icon.svg" alt="" v-show="result.appleMusicUrl" class="results-item-section__icon">
+            <img
+              src="../../images/apple_music_icon.svg"
+              alt=""
+              v-show="result.appleMusicUrl"
+              class="results-item-section__icon"
+            />
           </a>
           <a :href="result.kkboxUrl">
-            <img src="../../images/kkbox_icon.svg" alt="" v-show="result.kkboxUrl" class="results-item-section__icon">
+            <img
+              src="../../images/kkbox_icon.svg"
+              alt=""
+              v-show="result.kkboxUrl"
+              class="results-item-section__icon"
+            />
           </a>
         </div>
       </div>
@@ -42,7 +70,7 @@ export default defineComponent({
     },
   },
 
-  setup(props) {
+  setup() {
     const state = reactive({
       isCopiedUrls: false,
       isFailedCopyUrls: false,
@@ -87,9 +115,9 @@ export default defineComponent({
 
     function tooltipClass(): string {
       if (state.isCopiedUrls) {
-        return "tooltip__copied--notice"
+        return "tooltip__copied--notice";
       } else if (state.isFailedCopyUrls) {
-        return "tooltip__copied--alert"
+        return "tooltip__copied--alert";
       }
     }
 
@@ -97,7 +125,7 @@ export default defineComponent({
       state,
       thumbnail,
       copyUrlsToClipBoard,
-      tooltipClass
+      tooltipClass,
     };
   },
 });
