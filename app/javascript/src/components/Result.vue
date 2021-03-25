@@ -19,8 +19,8 @@
             この曲をシェアする
           </button>
           <span
-            v-show="state.isCopiedUrls || state.isFailedCopyUrls"
-            :class="tooltipClass()"
+            v-show="state.isCopiedUrls"
+            class="tooltip__copied--notice"
             >楽曲のURLがコピーされました</span
           >
         </div>
@@ -84,12 +84,6 @@ export default defineComponent({
           setTimeout(function () {
             state.isCopiedUrls = false;
           }, TOOLTIP_SHOW_TIME);
-        })
-        .catch(() => {
-          state.isFailedCopyUrls = true;
-          setTimeout(function () {
-            state.isFailedCopyUrls = false;
-          }, TOOLTIP_SHOW_TIME);
         });
     }
 
@@ -113,19 +107,10 @@ export default defineComponent({
       return this.result.thumbnail;
     }
 
-    function tooltipClass(): string {
-      if (state.isCopiedUrls) {
-        return "tooltip__copied--notice";
-      } else if (state.isFailedCopyUrls) {
-        return "tooltip__copied--alert";
-      }
-    }
-
     return {
       state,
       thumbnail,
       copyUrlsToClipBoard,
-      tooltipClass,
     };
   },
 });
