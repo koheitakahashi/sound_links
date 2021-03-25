@@ -19,9 +19,7 @@
           >
             この曲をシェアする
           </button>
-          <span
-            v-show="state.isCopiedUrls"
-            class="tooltip__copied--notice"
+          <span v-show="state.isCopiedUrls" class="tooltip__copied--notice"
             >楽曲のURLがコピーされました</span
           >
         </div>
@@ -78,14 +76,12 @@ export default defineComponent({
     });
 
     function copyUrlsToClipBoard(result): void {
-      navigator.clipboard
-        .writeText(urlsText(result))
-        .then(() => {
-          state.isCopiedUrls = true;
-          setTimeout(function () {
-            state.isCopiedUrls = false;
-          }, TOOLTIP_SHOW_TIME);
-        });
+      navigator.clipboard.writeText(urlsText(result)).then(() => {
+        state.isCopiedUrls = true;
+        setTimeout(function () {
+          state.isCopiedUrls = false;
+        }, TOOLTIP_SHOW_TIME);
+      });
     }
 
     function urlsText(result): string {
