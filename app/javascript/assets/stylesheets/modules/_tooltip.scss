@@ -27,3 +27,33 @@
   left: -2rem;
   top: 1rem;
 }
+
+.tooltip__copied--alert {
+  display: flex;
+  position: relative;
+  margin-left: 1rem;
+  background-color: #b3d4fc;
+  border-radius: 10px;
+  padding: 0.5rem 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.tooltip__copied--alert::before,
+.tooltip__copied--alert::after {
+  -webkit-transition: all 0.2s;
+  position: absolute;
+  transition: all 0.2s;
+}
+
+.tooltip__copied--alert::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border: 0.5rem solid transparent;
+  border-right: 1.5rem solid #b3d4fc;
+  left: -2rem;
+  top: 1rem;
+}
