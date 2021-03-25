@@ -15,6 +15,7 @@
           <button
             @click="copyUrlsToClipBoard(result)"
             class="results-item-section__button"
+            data-test="url-copy-button"
           >
             この曲をシェアする
           </button>
@@ -25,7 +26,7 @@
           >
         </div>
         <div class="results-item-section__images">
-          <a :href="result.spotifyUrl">
+          <a :href="result.spotifyUrl" data-test="spotify-url">
             <img
               src="../../images/spotify_icon.svg"
               alt=""
@@ -33,7 +34,7 @@
               class="results-item-section__icon"
             />
           </a>
-          <a :href="result.appleMusicUrl">
+          <a :href="result.appleMusicUrl" data-test="apple-music-url">
             <img
               src="../../images/apple_music_icon.svg"
               alt=""
@@ -41,7 +42,7 @@
               class="results-item-section__icon"
             />
           </a>
-          <a :href="result.kkboxUrl">
+          <a :href="result.kkboxUrl" data-test="kkbox-url">
             <img
               src="../../images/kkbox_icon.svg"
               alt=""
