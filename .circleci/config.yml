@@ -64,9 +64,9 @@ jobs:
             bin/yarn eslint app/javascript/src/*.vue
             bin/yarn eslint app/javascript/src/*/*.vue
             bin/yarn eslint app/javascript/src/*/*.ts
-            bin/yarn stylelint app/assets/stylesheets/base/*.scss
-            bin/yarn stylelint app/assets/stylesheets/modules/*.scss
-            bin/yarn stylelint app/assets/stylesheets/application.scss
+            bin/yarn stylelint app/javascript/assets/stylesheets/layout/*.scss
+            bin/yarn stylelint app/javascript/assets/stylesheets/modules/*.scss
+            bin/yarn stylelint app/javascript/assets/stylesheets/application.scss
 
       - run:
           name: Run RSpec

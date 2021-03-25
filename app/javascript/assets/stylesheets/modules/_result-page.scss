@@ -1,0 +1,97 @@
+.container-wrapper__results {
+  width: 100%;
+  background-color: #666;
+}
+
+.main-wrapper__results {
+  margin-left: 4.5rem;
+  margin-top: 2rem;
+}
+
+.results-item {
+  display: flex;
+  margin-bottom: 3rem;
+  height: 200px;
+}
+
+.result-section__title {
+  font-size: 1.75rem;
+}
+
+.result-section__list {
+  margin-top: 1rem;
+}
+
+.results-item-section {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  height: 100%;
+}
+
+.results-item-section__explain {
+  display: flex;
+  min-height: 20%;
+  max-height: 30%;
+}
+
+.results-item-section__actions {
+  max-height: 50%;
+}
+
+.results-item__image {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #808080;
+}
+
+.results-item-section-explain__title {
+  margin: 0 1rem;
+  font-size: 1.25rem;
+  height: 100%;
+  max-width: 40%;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.results-item-section-explain__artist-name {
+  margin: 0 1rem;
+  font-size: 1.25rem;
+  height: 100%;
+  max-width: 60%;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.results-item-section__button {
+  border: 1px solid #808080;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  margin: 0 1rem 0;
+  background-color: #ddd;
+  height: 2.5rem;
+  overflow: hidden;
+}
+
+.results-item-section__icon {
+  width: 60px;
+  height: 60px;
+  margin: 0.5rem 1rem 0 1rem;
+}
+
+.results-item-section__images {
+  align-items: center;
+}
+
+.results-item-section__copy-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  height: 3rem;
+}

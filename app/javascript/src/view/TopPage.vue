@@ -58,7 +58,7 @@
           <div class="welcome-small-section">
             <a href="https://www.kkbox.com/jp/ja/">
               <img
-                src="../../images/kkbox-icon.svg"
+                src="../../images/kkbox_icon.svg"
                 alt=""
                 class="welcome-small-section__image"
               />
@@ -75,7 +75,7 @@
     </main>
   </div>
 
-  <footer-component></footer-component>
+  <footer-component class="footer-wrapper__top-page"></footer-component>
 </template>
 
 <script lang="ts">
