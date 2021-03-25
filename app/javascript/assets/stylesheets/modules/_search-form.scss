@@ -1,3 +1,16 @@
+.search-form-wrapper__header {
+  background-color: #b3d4fc;
+  // TODO: 右よせ
+}
+
+.search-form-wrapper__results {
+  margin-left: auto;
+  margin-right: 2rem;
+  background-color: #ffffff;
+  border-radius: 5px;
+  width: 40%;
+}
+
 .search-form {
   display: flex;
   height: 3rem;
