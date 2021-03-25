@@ -18,7 +18,7 @@
           <a :href="result.appleMusicUrl">
             <img src="../../images/apple_music_icon.svg" alt="" v-show="result.appleMusicUrl" class="results-item-section__icon">
           </a>
-          <a :href="result.appleMusicUrl">
+          <a :href="result.kkboxUrl">
             <img src="../../images/kkbox_icon.svg" alt="" v-show="result.kkboxUrl" class="results-item-section__icon">
           </a>
         </div>
