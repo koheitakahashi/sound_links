@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "es6-promise": "^4.2.8",
     "serialize-javascript": "^3.1.0",
+    "ssri": "8.0.1",
     "stylelint": "^13.10.0",
     "stylelint-config-standard": "^20.0.0",
     "ts-loader": "^8.0.11",
