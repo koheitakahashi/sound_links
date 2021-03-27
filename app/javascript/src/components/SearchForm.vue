@@ -50,17 +50,20 @@ export default defineComponent({
       }
 
       try {
+        store.commit("setIsLoading", true)
         const response = await axios.get("api/search", {
           params: { keywords: keyword },
         });
-        store.commit("addKeywords", keyword);
-        store.commit("addResults", parseResponseData(response.data));
+        store.commit("setKeyword", keyword);
+        store.commit("setResults", parseResponseData(response.data));
+        store.commit("setIsLoading", false)
         await router.push({
           name: "ResultsPage",
           query: { keywords: keyword },
         });
       } catch (error) {
         // TODO: エラー時の処理を追加
+        store.commit("setIsLoading", false)
         console.log(`Error! : ${error}`);
       }
     };

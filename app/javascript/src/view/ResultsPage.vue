@@ -11,7 +11,7 @@
   <footer-component class="footer-wrapper__results"></footer-component>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
 import { key } from "../store";
 import { useStore } from "vuex";
