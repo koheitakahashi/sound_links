@@ -7,7 +7,10 @@
   </header>
   <main class="main-wrapper__results">
     <div v-show="store.state.isLoading" class="loader">Loading...</div>
-    <results-list v-show="!store.state.isLoading" :results="store.state.results"></results-list>
+    <results-list
+      v-show="!store.state.isLoading"
+      :results="store.state.results"
+    ></results-list>
   </main>
   <footer-component class="footer-wrapper__results"></footer-component>
 </template>

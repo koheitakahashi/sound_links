@@ -4,8 +4,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { key } from "./store";
-import { useStore } from "vuex";
 
 export default defineComponent({
   name: "App",

@@ -18,13 +18,13 @@ export const store = createStore<State>({
   },
 
   mutations: {
-    setKeyword(state, keyword :string) {
+    setKeyword(state, keyword: string) {
       state.keyword = keyword;
     },
-    setResults(state, results :result[]) {
+    setResults(state, results: result[]) {
       state.results = results;
     },
-    setIsLoading(state, boolean :boolean) {
+    setIsLoading(state, boolean: boolean) {
       state.isLoading = boolean;
     },
   },
