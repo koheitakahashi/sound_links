@@ -1,5 +1,4 @@
 <template>
-  <div v-show="store.state.isLoading">aaaa</div>
   <router-view></router-view>
 </template>
 
@@ -10,12 +9,6 @@ import { useStore } from "vuex";
 
 export default defineComponent({
   name: "App",
-  setup() {
-    const store = useStore(key);
-    return {
-      store
-    }
-  }
 });
 </script>
 
