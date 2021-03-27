@@ -6,12 +6,16 @@
     <search-form class="search-form-wrapper__results"></search-form>
   </header>
   <main class="main-wrapper__results">
-    <results-list :results="store.state.results"></results-list>
+    <div v-show="store.state.isLoading" class="loader">Loading...</div>
+    <results-list
+      v-show="!store.state.isLoading"
+      :results="store.state.results"
+    ></results-list>
   </main>
   <footer-component class="footer-wrapper__results"></footer-component>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
 import { key } from "../store";
 import { useStore } from "vuex";

@@ -3,26 +3,29 @@ import { createStore, Store } from "vuex";
 import { result } from "../types/result";
 
 export interface State {
-  keywords: string;
+  keyword: string;
   results: result[];
+  isLoading: boolean;
 }
 
 export const key: InjectionKey<Store<State>> = Symbol();
 
 export const store = createStore<State>({
-  state() {
-    return {
-      keywords: "",
-      results: [],
-    };
+  state: {
+    keyword: "",
+    results: [],
+    isLoading: false,
   },
 
   mutations: {
-    addKeywords(state, keyword) {
-      state.keywords = keyword;
+    setKeyword(state, keyword: string) {
+      state.keyword = keyword;
     },
-    addResults(state, results) {
+    setResults(state, results: result[]) {
       state.results = results;
+    },
+    setIsLoading(state, boolean: boolean) {
+      state.isLoading = boolean;
     },
   },
 });
