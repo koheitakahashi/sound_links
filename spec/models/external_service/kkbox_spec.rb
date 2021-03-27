@@ -24,6 +24,17 @@ module ExternalService
       context "引数に空文字が与えられた場合" do
         it { expect(kkbox.search("")).to eq [] }
       end
+
+      context "外部APIからエラーレスポンスが返ってきた場合" do
+        before do
+          mock_kkbox_authentication_error_response
+        end
+
+        it " ExternalService::Errorが raise される" do
+          expect { kkbox.search("bad_params") }.to raise_error { |error|
+            expect(error.message).to eq "There was an error connecting with the KKBOX API. HTTP Status Code: 401, Error message: Invalid Authentication" }
+        end
+      end
     end
   end
 end

@@ -5,12 +5,14 @@ module ExternalService
     def search(keyword)
       return [] if keyword.blank?
 
-      response = ExternalService::Request.new.get(
+      @response = ExternalService::Request.new.get(
         url: SoundLinksConstants::APPLE_MUSIC_SEARCH_URL,
         headers: { Authorization: "Bearer #{authentication_token}" },
-        params: { term: keyword, limit: SEARCH_TRACKS_NUMBER, types: "songs" })
+        params: { term: keyword, limit: SEARCH_TRACKS_NUMBER, types: "songs" }
+      )
 
-      format_response(response.body)
+      raise_external_service_error(response: @response) if @response.status_code != 200
+      format_response(@response.body)
     end
 
     private
@@ -28,7 +30,7 @@ module ExternalService
       end
 
       def format_response(response)
-        response["results"]["songs"]["data"].map do |item|
+        response.dig("results", "songs", "data").map do |item|
           { isrc: item["attributes"]["isrc"],
             thumbnail: format_artwork_url(item["attributes"]["artwork"]["url"]),
             title: item["attributes"]["name"],
@@ -39,6 +41,11 @@ module ExternalService
 
       def format_artwork_url(artwork_url)
         artwork_url.gsub(/{w}|{h}/, "300")
+      end
+
+      def raise_external_service_error(response:)
+        error_message = response.body.dig("error")
+        raise ExternalService::Error.new, "There was an error connecting with the AppleMusic API. HTTP Status Code: #{response.status_code}, Error message: #{error_message["title"]}, #{error_message["detail"]}"
       end
   end
 end

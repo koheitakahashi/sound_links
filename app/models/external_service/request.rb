@@ -4,10 +4,6 @@ module ExternalService
   class Request
     TIME_OUT_SECOND = 120
 
-    def initialize
-    end
-
-    # TODO: 例外処理を追加
     def get(url:, headers:, params:)
       Rails.logger.info("** url = [#{url}]")
       Rails.logger.info("** params = [#{params}]")
@@ -17,18 +13,19 @@ module ExternalService
         request.params = params
       end
 
-      ExternalService::Response.new(response.body)
+      ExternalService::Response.new(status_code: response.status, body: response.body)
     end
 
     def post(url:, headers: nil, body: nil)
       Rails.logger.info("** url = [#{url}]")
 
       response = client.post(url) do |request|
+        # TODO: presence にリファクタリング
         request.headers = headers if headers.present?
         request.body = body if body.present?
       end
 
-      ExternalService::Response.new(response.body)
+      ExternalService::Response.new(status_code: response.status, body: response.body)
     end
 
     private
