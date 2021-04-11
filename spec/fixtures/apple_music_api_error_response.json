@@ -1,0 +1,7 @@
+{
+  "error": {
+    "status": 401,
+    "title": "No token provided",
+    "detail": "No token provided"
+  }
+}

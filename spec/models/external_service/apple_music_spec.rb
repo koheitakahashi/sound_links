@@ -20,10 +20,21 @@ module ExternalService
         it { expect(result[:artist]).to eq "ASIAN KUNG-FU GENERATION" }
         it { expect(result[:apple_music_url]).to eq "https://music.apple.com/jp/album/%E3%83%AA%E3%83%A9%E3%82%A4%E3%83%88/570003767?i=570003920" }
       end
-    end
 
-    context "引数に空文字が与えられた場合" do
-      it { expect(apple_music.search("")).to eq [] }
+      context "引数に空文字が与えられた場合" do
+        it { expect(apple_music.search("")).to eq [] }
+      end
+
+      context "外部APIからエラーレスポンスが返ってきた場合" do
+        before do
+          mock_apple_music_error_response
+        end
+
+        it " ExternalService::Errorが raise される" do
+          expect { apple_music.search("bad_params") }.to raise_error { |error|
+            expect(error.message).to eq "There was an error connecting with the AppleMusic API. HTTP Status Code: 401, Error message: No token provided, No token provided" }
+        end
+      end
     end
   end
 end
