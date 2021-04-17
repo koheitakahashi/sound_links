@@ -6,6 +6,7 @@ import { store, key } from "./store";
 import app from "./main.vue";
 import TopPage from "./view/TopPage.vue";
 import ResultsPage from "./view/ResultsPage.vue";
+import TermsPage from "./view/TermsPage.vue";
 
 import {
   createRouter,
@@ -18,6 +19,7 @@ const router = createRouter({
   routes: [
     { path: "/", component: TopPage, name: "TopPage" },
     { path: "/search", component: ResultsPage, name: "ResultsPage" },
+    { path: "/terms", component: TermsPage, name: "TermsPage" },
   ],
 });
 

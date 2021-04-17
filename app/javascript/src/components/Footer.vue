@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <span class="footer__copyright">©️koheitakahashi 2021</span>
-    <a href="#" class="footer__terms">利用規約</a>
+    <router-link to="/terms" class="footer__terms">免責事項</router-link>
   </footer>
 </template>
 
