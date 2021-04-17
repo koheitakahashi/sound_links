@@ -12,21 +12,18 @@
 </template>
 
 <script lang="ts">
-
-import SearchForm from "../components/SearchForm"
-import Terms from "../components/Terms"
-import FooterComponent from "../components/Footer"
+import SearchForm from "../components/SearchForm";
+import Terms from "../components/Terms";
+import FooterComponent from "../components/Footer";
 
 export default {
-  name: "TermsPage.vue",
+  name: "TermsPage",
   components: {
     SearchForm,
     Terms,
-    FooterComponent
-  }
-}
+    FooterComponent,
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
