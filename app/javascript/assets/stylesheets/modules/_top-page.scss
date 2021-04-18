@@ -10,20 +10,38 @@
 
 .welcome-section__explain {
   width: 70%;
+
+  @media(max-width: 480px)  {
+    width: 80%;
+  }
 }
 
 .welcome-section-explain__inner-text {
   margin-top: 1.5rem;
 }
 
+.welcome-section-explain__inner-text p {
+  @media(max-width: 480px)  {
+    margin-top: 1.5rem;
+  }
+}
+
 .welcome-section__search-form {
   width: 70%;
   margin-top: 4rem;
+
+  @media(max-width: 480px)  {
+    width: 80%;
+  }
 }
 
 .welcome-section__external-service {
   margin-top: 5rem;
   width: 70%;
+
+  @media(max-width: 480px)  {
+    width: 80%;
+  }
 }
 
 .welcome-section-external-service__sections {

@@ -1,6 +1,5 @@
 .search-form-wrapper__header {
   background-color: #b3d4fc;
-  // TODO: 右よせ
 }
 
 .search-form-wrapper__results {
@@ -14,6 +13,9 @@
 .search-form {
   display: flex;
   height: 3rem;
+  @media(max-width: 480px)  {
+    width: 100%;
+  }
 }
 
 .search-form__input {
@@ -23,6 +25,15 @@
   width: 90%;
   padding-left: 1rem;
   font-size: 1.1rem;
+
+  @media(max-width: 480px)  {
+    border: 1.5px solid #999;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding-left: 1rem;
+    font-size: 1.1rem;
+    width: 85%;
+  }
 }
 
 .search-form__input:focus {
@@ -36,6 +47,15 @@
   border-left: none;
   color: #999;
   width: 10%;
+
+  @media(max-width: 480px)  {
+    width: 15%;
+  }
+}
+
+.search-form-button__icon {
+  @media(max-width: 480px)  {
+  }
 }
 
 .search-form__button:hover {
