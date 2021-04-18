@@ -8,6 +8,10 @@
   background-color: #fff;
   border-radius: 5px;
   width: 40%;
+
+  @media(max-width: 480px) {
+    display: none !important;
+  }
 }
 
 .search-form {

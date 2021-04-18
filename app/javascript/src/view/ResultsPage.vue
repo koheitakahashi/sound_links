@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header--results">
     <!-- TODO: 後で差し替える-->
     <img src="https://placehold.jp/150x150.png" alt="" class="header__logo" />
     <h1><router-link to="/" class="header__title">Sound Links</router-link></h1>
