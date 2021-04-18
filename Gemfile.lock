@@ -103,6 +103,8 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.0)
+    meta-tags (2.14.0)
+      actionpack (>= 3.2.0, < 6.2)
     method_source (1.0.0)
     mini_mime (1.0.3)
     mini_portile2 (2.5.0)
@@ -266,6 +268,7 @@ DEPENDENCIES
   faraday
   jwt
   listen (>= 3.0.5, < 3.2)
+  meta-tags
   puma (~> 4.3.6)
   rails (~> 6.0.2, >= 6.0.2.1)
   rspec-rails (~> 4.0.0)
