@@ -1,17 +1,18 @@
 import { responseData } from "../types/responseData";
+import { truncateText } from "./truncateText";
 
 export function parseResponseData(responseData: responseData[]) {
   const parsedResponseData = [];
 
-  responseData.forEach((el) => {
+  responseData.forEach((data) => {
     parsedResponseData.push({
-      isrc: el.isrc,
-      thumbnail: el.thumbnail,
-      title: el.title,
-      artist: el.artist,
-      spotifyUrl: el.spotify_url,
-      appleMusicUrl: el.apple_music_url,
-      kkboxUrl: el.kkbox_url,
+      isrc: data.isrc,
+      thumbnail: data.thumbnail,
+      title: truncateText(data.title),
+      artist: truncateText(data.artist),
+      spotifyUrl: data.spotify_url,
+      appleMusicUrl: data.apple_music_url,
+      kkboxUrl: data.kkbox_url,
     });
   });
 

@@ -72,7 +72,6 @@ export default defineComponent({
   setup() {
     const state = reactive({
       isCopiedUrls: false,
-      isFailedCopyUrls: false,
     });
 
     function copyUrlsToClipBoard(result): void {
