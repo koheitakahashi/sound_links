@@ -1,6 +1,6 @@
 export type result = {
   isrc: string;
-  thumbnail: string;
+  thumbnailUrl: string;
   title: string;
   artist: string;
   spotifyUrl: string;

@@ -12,7 +12,7 @@ module ExternalService
       )
 
       raise_external_service_error(response: @response) if @response.status_code != 200
-      format_response(@response.body)
+      build_sounds(@response.body)
     end
 
     private
@@ -28,15 +28,17 @@ module ExternalService
         response.body["access_token"]
       end
 
-      def format_response(response)
-        response["tracks"]["data"].map do |item|
-          { isrc: item["isrc"],
+      def build_sounds(response)
+        response["tracks"]["data"].map do |result|
+          Sound.new(
+            isrc: result["isrc"],
             # NOTE: height = 160, width = 160 のサムネイルを取得するためにインデックス0番目の URL を取得する
-            thumbnail: item["album"]["images"][0]["url"],
-            title: item["name"],
-            artist: item["album"]["artist"]["name"],
-            kkbox_url: item["url"] }
-        end.uniq { |item| item[:isrc] }
+            thumbnail_url: result["album"]["images"][0]["url"],
+            title: result["name"],
+            artist: result["album"]["artist"]["name"],
+            kkbox_url: result["url"]
+          )
+        end.uniq { |sound| sound.isrc }
       end
 
       def raise_external_service_error(response:)

@@ -63,13 +63,22 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # 以下、not default
+  config.include ActiveSupport::Testing::TimeHelpers
+
   WebMock.disable_net_connect!(
     allow_localhost: true,
     allow: "chromedriver.storage.googleapis.com"
   )
+
   config.include WebmockSpotifyHelper
   config.include WebmockAppleMusicHelper
   config.include WebmockSearchResponseHelper
   config.include WebmockKkboxHelper
   config.include WebmockRequestHelper
+
+  # NOTE: FactoryBot を使うための設定
+  # ref: https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md#configure-your-test-suite
+  config.include FactoryBot::Syntax::Methods
 end

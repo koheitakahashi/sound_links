@@ -12,7 +12,7 @@ module ExternalService
       )
 
       raise_external_service_error(response: @response) if @response.status_code != 200
-      format_response(@response.body)
+      build_sounds(@response.body)
     end
 
     private
@@ -29,14 +29,17 @@ module ExternalService
         @authentication_token = JWT.encode(authentication_payload, private_key, "ES256", kid: SoundLinksConstants::APPLE_MUSIC_API_KEY)
       end
 
-      def format_response(response)
-        response.dig("results", "songs", "data").map do |item|
-          { isrc: item["attributes"]["isrc"],
-            thumbnail: format_artwork_url(item["attributes"]["artwork"]["url"]),
-            title: item["attributes"]["name"],
-            artist: item["attributes"]["artistName"],
-            apple_music_url: item["attributes"]["url"] }
-        end.uniq { |item| item[:isrc] }
+      # TODO: 共通化したい
+      def build_sounds(response)
+        response.dig("results", "songs", "data").map do |result|
+          Sound.new(
+            isrc: result["attributes"]["isrc"],
+            thumbnail_url: format_artwork_url(result["attributes"]["artwork"]["url"]),
+            title: result["attributes"]["name"],
+            artist: result["attributes"]["artistName"],
+            apple_music_url: result["attributes"]["url"],
+          )
+        end.uniq { |sound| sound.isrc }
       end
 
       def format_artwork_url(artwork_url)
