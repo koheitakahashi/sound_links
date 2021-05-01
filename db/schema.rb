@@ -10,9 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_05_01_091604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "searches", force: :cascade do |t|
+    t.string "keyword", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["keyword"], name: "index_searches_on_keyword", unique: true
+  end
+
+  create_table "sounds", force: :cascade do |t|
+    t.string "isrc", null: false
+    t.string "thumbnail_url"
+    t.string "title", null: false
+    t.string "artist", null: false
+    t.string "spotify_url"
+    t.string "apple_music_url"
+    t.string "kkbox_url"
+    t.bigint "search_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_at"], name: "index_sounds_on_created_at"
+    t.index ["search_id"], name: "index_sounds_on_search_id"
+  end
+
+  add_foreign_key "sounds", "searches"
 end
