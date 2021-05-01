@@ -9,7 +9,7 @@
   border-radius: 5px;
   width: 40%;
 
-  @media(max-width: 480px) {
+  @media (max-width: 480px) {
     display: none !important;
   }
 }
@@ -17,7 +17,8 @@
 .search-form {
   display: flex;
   height: 3rem;
-  @media(max-width: 480px)  {
+
+  @media (max-width: 480px) {
     width: 100%;
   }
 }
@@ -30,7 +31,7 @@
   padding-left: 1rem;
   font-size: 1.1rem;
 
-  @media(max-width: 480px)  {
+  @media (max-width: 480px) {
     border: 1.5px solid #999;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -52,13 +53,8 @@
   color: #999;
   width: 10%;
 
-  @media(max-width: 480px)  {
+  @media (max-width: 480px) {
     width: 15%;
-  }
-}
-
-.search-form-button__icon {
-  @media(max-width: 480px)  {
   }
 }
 

@@ -10,7 +10,7 @@
   justify-content: center;
   font-size: 1.2rem;
 
-  @media(max-width: 480px) {
+  @media (max-width: 480px) {
     bottom: 2.5rem;
     font-size: 0.8rem;
     padding: 0;
@@ -24,9 +24,6 @@
   -webkit-transition: all 0.2s;
   position: absolute;
   transition: all 0.2s;
-
-  @media(max-width: 480px) {
-  }
 }
 
 .tooltip__copied--notice::before {
@@ -37,7 +34,4 @@
   border-right: 1.5rem solid #b3d4fc;
   left: -2rem;
   top: 1rem;
-
-  @media(max-width: 480px) {
-  }
 }
