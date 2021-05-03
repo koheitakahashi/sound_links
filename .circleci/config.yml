@@ -9,6 +9,12 @@ executors:
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
           RAILS_ENV: test
+      - image: circleci/postgres:12.3
+        environment:
+          POSTGRES_USER: user
+          POSTGRES_DB: sound_links_test
+          POSTGRES_PASSWORD: "postgres"
+
 
 commands:
   setup:
@@ -67,6 +73,14 @@ jobs:
             bin/yarn stylelint app/javascript/assets/stylesheets/layout/*.scss
             bin/yarn stylelint app/javascript/assets/stylesheets/modules/*.scss
             bin/yarn stylelint app/javascript/assets/stylesheets/application.scss
+
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
 
       - run:
           name: Run RSpec
