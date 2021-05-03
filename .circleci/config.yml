@@ -8,6 +8,8 @@ executors:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: user
           RAILS_ENV: test
       - image: circleci/postgres:12.3
         environment:
