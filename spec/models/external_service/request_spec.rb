@@ -14,7 +14,7 @@ module ExternalService
       subject(:response) { request.get(
         url: SoundLinksConstants::SPOTIFY_SEARCH_URL,
         headers: { Authorization: "Bearer NEW_ACCESS_TOKEN" },
-        params: { q: "リライト", type: "track", market: "JP", limit: 5 })}
+        params: { q: "リライト", type: "track", market: "JP", limit: 10, offset: 0 })}
 
       context "url と headers と params を渡した場合"  do
         it { expect(response.body["tracks"]["items"].first["external_ids"]["isrc"]).to eq "JPKS00400641" }

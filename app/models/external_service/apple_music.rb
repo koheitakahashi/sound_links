@@ -2,17 +2,17 @@
 
 module ExternalService
   class AppleMusic < Base
-    def self.search(keyword)
-      new.search(keyword)
+    def initialize(keyword:, offset: DEFAULT_OFFSET_NUMBER)
+      super
     end
 
-    def search(keyword)
+    def search
       return [] if keyword.blank?
 
       @response = ExternalService::Request.new.get(
         url: SoundLinksConstants::APPLE_MUSIC_SEARCH_URL,
         headers: { Authorization: "Bearer #{authentication_token}" },
-        params: { term: keyword, limit: SEARCH_TRACKS_NUMBER, types: "songs" }
+        params: { term: keyword, limit: SEARCH_TRACKS_NUMBER, types: "songs", offset: offset }
       )
 
       raise_external_service_error(response: @response) if @response.status_code != 200

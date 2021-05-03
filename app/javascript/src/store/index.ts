@@ -1,11 +1,14 @@
 import { InjectionKey } from "vue";
 import { createStore, Store } from "vuex";
 import { result } from "../types/result";
+import { responseData } from "../types/responseData";
+import { parseResponseData } from "../utils/parseResponseData";
 
 export interface State {
   keyword: string;
   results: result[];
   isLoading: boolean;
+  currentPage: number;
 }
 
 export const key: InjectionKey<Store<State>> = Symbol();
@@ -15,6 +18,7 @@ export const store = createStore<State>({
     keyword: "",
     results: [],
     isLoading: false,
+    currentPage: 1,
   },
 
   mutations: {
@@ -27,5 +31,21 @@ export const store = createStore<State>({
     setIsLoading(state, boolean: boolean) {
       state.isLoading = boolean;
     },
+    setCurrentPage(state, page: number) {
+      state.currentPage = page;
+    },
+  },
+
+  actions: {
+    updateResultsAndPage({ commit }, responseData: responseData) {
+      commit("setResults", parseResponseData(responseData["results"]))
+      commit("setCurrentPage", responseData["current_page"])
+    },
+    updateCurrentPage( { commit }, page: number) {
+      commit("setCurrentPage", page)
+    },
+    updateKeyword( { commit }, keyword: string ) {
+      commit("setKeyword", keyword)
+    }
   },
 });

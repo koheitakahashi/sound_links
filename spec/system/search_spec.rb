@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe "楽曲検索機能", type: :system do
   before do
-    mock_search_results
+    mock_search_results_without_page
   end
 
   it "検索した楽曲のSpotify・Apple Music・KKBOXのURLを表示できる" do

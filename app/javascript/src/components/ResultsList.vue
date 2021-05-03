@@ -1,6 +1,8 @@
 <template>
+  <div v-show="results.length === 0 && !store.state.isLoading" class="results-message"> 検索結果がありませんでした</div>
   <div v-show="results.length !== 0" class="results-section">
     <h2 class="result-section__title">検索結果一覧</h2>
+    <pagination></pagination>
     <div
       class="result-section__list"
       v-for="result in results"
@@ -13,12 +15,16 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useStore } from "vuex";
+import { key } from "../store";
 import Result from "./Result.vue";
+import Pagination from "./Pagination.vue";
 
 export default defineComponent({
   name: "ResultList",
   components: {
     result: Result,
+    pagination: Pagination,
   },
   props: {
     results: {
@@ -26,6 +32,12 @@ export default defineComponent({
       default: () => [],
     },
   },
+  setup() {
+    const store = useStore(key);
+    return {
+      store,
+    }
+  }
 });
 </script>
 

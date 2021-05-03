@@ -1,7 +1,8 @@
-import { responseData } from "../types/responseData";
+import { sound } from "../types/responseData";
 import { truncateText } from "./truncateText";
 
-export function parseResponseData(responseData: responseData[]) {
+// TODO: メソッド名を parseResponseSound などに rename
+export function parseResponseData(responseData: sound[]) {
   const parsedResponseData = [];
 
   responseData.forEach((data) => {

@@ -23,10 +23,13 @@ RSpec.describe SoundSearcher, type: :model do
     context "同じ keyword を持つ searches レコードがある場合" do
       context "同じ keyword を持つ searches レコードが作成されてから1日経過していない場合" do
         let(:keyword) { "荒野を歩け" }
+        let(:sound) { FactoryBot.create(:sound) }
         subject(:results) { searcher.execute! }
 
         before do
-          travel_to(Time.current.ago(23.hour)) { FactoryBot.create(:sound) }
+          allow(described_class).to receive(:new).and_return(searcher)
+          allow(searcher).to receive(:sounds_in_page_with).and_return([sound])
+          travel_to(Time.current.ago(23.hour)) { sound }
         end
 
         it "searches レコードは作成されない" do

@@ -4,7 +4,8 @@ require "rails_helper"
 
 module ExternalService
   RSpec.describe Spotify, type: :model do
-    let(:spotify) { described_class.new }
+    let(:spotify) { described_class.new(keyword: keyword) }
+    let(:keyword) { "リライト" }
 
     describe ".search" do
       before "#search が呼ばれることのみを検証するためにスタブしている" do
@@ -13,7 +14,7 @@ module ExternalService
       end
 
       it "#search が呼ばれる" do
-        described_class.search("遥か彼方")
+        described_class.search(keyword: "遥か彼方")
         expect(spotify).to have_received(:search)
       end
     end
@@ -24,7 +25,7 @@ module ExternalService
           mock_spotify_search_results
         end
 
-        subject(:result) { spotify.search("リライト").first }
+        subject(:result) { spotify.search.first }
 
         it { expect(result[:isrc]).to eq "JPKS00400641" }
         it { expect(result[:thumbnail_url]).to eq "https://i.scdn.co/image/ab67616d00001e02fa355dc948984a72010ff83e" }
@@ -34,16 +35,18 @@ module ExternalService
       end
 
       context "引数に空文字が与えられた場合" do
-        it { expect(spotify.search("")).to eq [] }
+        let(:keyword) { "" }
+        it { expect(spotify.search).to eq [] }
       end
 
       context "外部APIからエラーレスポンスが返ってきた場合" do
+        let(:keyword) { "bad_params" }
         before do
           mock_spotify_error_response
         end
 
         it " ExternalService::Errorが raise される" do
-          expect { spotify.search("bad_params") }.to raise_error { |error|
+          expect { spotify.search }.to raise_error { |error|
             expect(error.message).to eq "There was an error connecting with the Spotify API. HTTP Status Code: 401, Response error message: No token provided" }
         end
       end
