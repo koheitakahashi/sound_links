@@ -2,17 +2,17 @@
   <div class="search-form">
     <label for="form"></label>
     <input
-      v-model="state.keywords"
-      @keydown.enter="submitSearch(state.keywords)"
+      v-model="state.keyword"
+      @keydown.enter="submitSearch(state.keyword)"
       type="search"
-      name="keywords"
+      name="keyword"
       id="form"
       data-test="search-form"
       placeholder="楽曲名を入力してください"
       class="search-form__input"
     />
     <button
-      @click="submitSearch(state.keywords)"
+      @click="submitSearch(state.keyword)"
       data-test="search-submit-button"
       class="search-form__button"
     >
@@ -41,7 +41,7 @@ export default defineComponent({
     const store = useStore(key);
 
     const state = reactive({
-      keywords: "",
+      keyword: "",
     });
 
     const submitSearch = async (keyword) => {
@@ -52,27 +52,26 @@ export default defineComponent({
       try {
         await router.push({
           name: "ResultsPage",
-          query: { keywords: keyword },
+          query: { keyword: keyword },
         });
         store.commit("setIsLoading", true);
         const response = await axios.get("search.json", {
-          params: { keywords: keyword },
+          params: { keyword: keyword },
         });
         store.commit("setKeyword", keyword);
         store.commit("setResults", parseResponseData(response.data));
         store.commit("setIsLoading", false);
       } catch (error) {
-        // TODO: エラー時の処理を追加
         store.commit("setIsLoading", false);
         console.log(`Error! : ${error}`);
       }
     };
 
-    if (route.query.keywords) {
+    if (route.query.keyword) {
       // NOTE: route.query.keywords をそのまま state.keywords にいれると、route.query.keywordsが String 以外にもなり得るため代入できない
       let params = new URLSearchParams(window.location.search);
-      state.keywords = params.get("keywords");
-      submitSearch(route.query.keywords);
+      state.keyword = params.get("keyword");
+      submitSearch(route.query.keyword);
     }
 
     return {

@@ -7,7 +7,7 @@ ruby "2.6.6"
 
 # default
 gem "rails", "~> 6.0.2", ">= 6.0.2.1"
-gem "sqlite3", "~> 1.4"
+# gem "sqlite3", "~> 1.4"
 gem "puma", "~> 4.3.6"
 gem "sass-rails", ">= 6"
 gem "webpacker", "~> 4.0"
@@ -19,6 +19,7 @@ gem "jwt"
 gem "faraday"
 gem "sprockets", "< 4"
 gem "meta-tags"
+gem "pg"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

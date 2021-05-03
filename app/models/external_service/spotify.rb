@@ -2,6 +2,10 @@
 
 module ExternalService
   class Spotify < Base
+    def self.search(keyword)
+      new.search(keyword)
+    end
+
     def search(keyword)
       return [] if keyword.blank?
 
@@ -12,9 +16,8 @@ module ExternalService
       )
 
       raise_external_service_error(response: @response) if @response.status_code != 200
-      format_response(@response.body)
+      build_sounds(@response.body)
     end
-
 
     private
       def access_token
@@ -34,15 +37,17 @@ module ExternalService
         Base64.encode64("#{SoundLinksConstants::SPOTIFY_API_KEY}:#{SoundLinksConstants::SPOTIFY_API_SECRET_KEY}").gsub(/[\r\n]/, "")
       end
 
-      def format_response(response)
-        response.dig("tracks", "items").map do |item|
-          { isrc: item["external_ids"]["isrc"],
+      def build_sounds(response)
+        response.dig("tracks", "items").map do |result|
+          Sound.new(
+            isrc: result["external_ids"]["isrc"],
             # height = 300, width = 300 のサムネイルを取得するためにインデックス1の url を取得
-            thumbnail: item["album"]["images"][1]["url"],
-            title: item["name"],
-            artist: item["artists"][0]["name"],
-            spotify_url: item["external_urls"]["spotify"] }
-        end.uniq { |item| item[:isrc] }
+            thumbnail_url: result["album"]["images"][1]["url"],
+            title: result["name"],
+            artist: result["artists"][0]["name"],
+            spotify_url: result["external_urls"]["spotify"],
+          )
+        end.uniq { |sound| sound[:isrc] }
       end
 
       def raise_external_service_error(response:)

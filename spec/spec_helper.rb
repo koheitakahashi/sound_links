@@ -96,8 +96,14 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  # 以下 not default
   # headless chrome を使用
   config.before(:each, type: :system) do
     driven_by :selenium_chrome_headless
+  end
+
+  config.before(:all) do
+    FactoryBot.reload
   end
 end

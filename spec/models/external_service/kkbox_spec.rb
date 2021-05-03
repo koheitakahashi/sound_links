@@ -6,6 +6,18 @@ module ExternalService
   RSpec.describe Kkbox, type: :model do
     let(:kkbox) { described_class.new }
 
+    describe ".search" do
+      before "#search が呼ばれることのみを検証するためにスタブしている" do
+        allow(described_class).to receive(:new).and_return(kkbox)
+        allow(kkbox).to receive(:search).and_return(true)
+      end
+
+      it "#search が呼ばれる" do
+        described_class.search("遥か彼方")
+        expect(kkbox).to have_received(:search)
+      end
+    end
+
     describe "#search" do
       context "引数に1単語が与えられた場合" do
         before do
@@ -15,7 +27,7 @@ module ExternalService
         subject(:result) { kkbox.search("リライト").first }
 
         it { expect(result[:isrc]).to eq "JPKS00400641" }
-        it { expect(result[:thumbnail]).to eq "https://i.kfs.io/album/global/1825860,5v1/fit/160x160.jpg" }
+        it { expect(result[:thumbnail_url]).to eq "https://i.kfs.io/album/global/1825860,5v1/fit/160x160.jpg" }
         it { expect(result[:title]).to eq "リライト" }
         it { expect(result[:artist]).to eq "ASIAN KUNG-FU GENERATION" }
         it { expect(result[:kkbox_url]).to eq "https://www.kkbox.com/jp/ja/song/FcqGD-90I.n6HlVI7lVI70P4-index.html" }

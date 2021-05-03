@@ -1,6 +1,6 @@
 export type responseData = {
   isrc: string;
-  thumbnail: string;
+  thumbnail_url: string;
   title: string;
   artist: string;
   spotify_url: string;

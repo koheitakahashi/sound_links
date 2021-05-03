@@ -100,7 +100,7 @@ export default defineComponent({
     }
 
     function thumbnail(): string {
-      return this.result.thumbnail;
+      return this.result.thumbnailUrl;
     }
 
     return {
