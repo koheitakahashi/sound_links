@@ -49,6 +49,7 @@ RSpec.describe SoundSearcher, type: :model do
         before do
           # NOTE: 新しいレコードかどうかを検証できるように、isrcなどを factory とは違うものにしている
           new_sounds = [{ isrc: "JPUUUUUU", title: "荒野を歩け(cover)", artist: "cover_artist" }]
+          # NOTE: 外部APIにリクエストを飛ばさないようにスタブしている
           allow(searcher).to receive(:fetch_results).and_return(new_sounds)
         end
 
@@ -71,8 +72,10 @@ RSpec.describe SoundSearcher, type: :model do
       let!(:search) { create :search, keyword: "荒野を歩け" }
       subject(:results) { searcher.execute! }
 
-      before "" do
+      before do
+        # NOTE: 新しいレコードかどうかを検証できるように、isrcなどを factory とは違うものにしている
         new_sounds = [{ isrc: "JPKS00300301", title: "遥か彼方", artist: "ASIAN KUNG-FU GENERATION" }]
+        # NOTE: 外部APIにリクエストを飛ばさないようにスタブしている
         allow(searcher).to receive(:fetch_results).and_return(new_sounds)
       end
 

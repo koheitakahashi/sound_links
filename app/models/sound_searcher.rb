@@ -27,10 +27,9 @@ class SoundSearcher
     attr_reader :keyword
 
     def fetch_results(keyword)
-      # TODO: search をクラスメソッドにしたい
-      spotify_results = ExternalService::Spotify.new.search(keyword).map { |sound| sound.attributes_exclude(:id) }
-      apple_music_results = ExternalService::AppleMusic.new.search(keyword).map { |sound| sound.attributes_exclude(:id) }
-      kkbox_results = ExternalService::Kkbox.new.search(keyword).map { |sound| sound.attributes_exclude(:id) }
+      spotify_results = ExternalService::Spotify.search(keyword).map { |sound| sound.attributes_exclude(:id) }
+      apple_music_results = ExternalService::AppleMusic.search(keyword).map { |sound| sound.attributes_exclude(:id) }
+      kkbox_results = ExternalService::Kkbox.search(keyword).map { |sound| sound.attributes_exclude(:id) }
 
       merge_results(spotify_results, apple_music_results, kkbox_results)
     end
@@ -38,19 +37,18 @@ class SoundSearcher
     def merge_results(*sounds_hash)
       merged_sound_hash = {}
       sounds_hash.flatten.each do |result|
-        if merged_sound_hash[result["isrc"]]
-          merged_sound_hash[result["isrc"]] = merged_sound_hash[result["isrc"]].merge(result) do |_key, old_value, new_value|
-            if old_value.nil?
-              new_value
-            else
-              old_value
-            end
-          end
+        isrc_value = result["isrc"]
+        if merged_sound_hash[isrc_value]
+          merged_sound_hash[isrc_value] = merged_sound(merged_sound_hash[isrc_value], result)
         else
-          merged_sound_hash[result["isrc"]] = result
+          merged_sound_hash[isrc_value] = result
         end
       end
       merged_sound_hash.values
+    end
+
+    def merged_sound(merged_hash, merge_hash)
+      merged_hash.merge(merge_hash) { |_key, old_value, new_value| old_value.nil? ? new_value : old_value }
     end
 
     # TODO: Rails6.1 から searching.sounds.insert_all(sounds) という記法で、関連付けされたbulk_insert が実行できる。
