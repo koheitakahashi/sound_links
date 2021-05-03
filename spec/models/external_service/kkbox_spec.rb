@@ -6,6 +6,18 @@ module ExternalService
   RSpec.describe Kkbox, type: :model do
     let(:kkbox) { described_class.new }
 
+    describe ".search" do
+      before "#search が呼ばれることのみを検証するためにスタブしている" do
+        allow(described_class).to receive(:new).and_return(kkbox)
+        allow(kkbox).to receive(:search).and_return(true)
+      end
+
+      it "#search が呼ばれる" do
+        described_class.search("遥か彼方")
+        expect(kkbox).to have_received(:search)
+      end
+    end
+
     describe "#search" do
       context "引数に1単語が与えられた場合" do
         before do

@@ -6,6 +6,18 @@ module ExternalService
   RSpec.describe AppleMusic, type: :model do
     let(:apple_music) { described_class.new }
 
+    describe ".search" do
+      before "#search が呼ばれることのみを検証するためにスタブしている" do
+        allow(described_class).to receive(:new).and_return(apple_music)
+        allow(apple_music).to receive(:search).and_return(true)
+      end
+
+      it "#search が呼ばれる" do
+        described_class.search("遥か彼方")
+        expect(apple_music).to have_received(:search)
+      end
+    end
+
     describe "#search" do
       context "引数に1単語が与えられた場合" do
         before do

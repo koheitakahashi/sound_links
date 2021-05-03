@@ -2,6 +2,11 @@
 
 module ExternalService
   class AppleMusic < Base
+
+    def self.search(keyword)
+      new.search(keyword)
+    end
+
     def search(keyword)
       return [] if keyword.blank?
 
