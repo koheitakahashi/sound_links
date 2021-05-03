@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class SearchesController < ApplicationController
-
   def index
     keyword = params[:keyword]
 

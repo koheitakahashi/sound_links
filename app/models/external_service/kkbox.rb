@@ -2,7 +2,6 @@
 
 module ExternalService
   class Kkbox < Base
-
     def self.search(keyword)
       new.search(keyword)
     end

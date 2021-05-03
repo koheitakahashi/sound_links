@@ -2,7 +2,6 @@
 
 module ExternalService
   class AppleMusic < Base
-
     def self.search(keyword)
       new.search(keyword)
     end

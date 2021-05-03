@@ -23,7 +23,6 @@ class SoundSearcher
   end
 
   private
-
     attr_reader :keyword
 
     def fetch_results(keyword)

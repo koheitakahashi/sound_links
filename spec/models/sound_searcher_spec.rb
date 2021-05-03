@@ -80,7 +80,7 @@ RSpec.describe SoundSearcher, type: :model do
       end
 
       it "search レコードを作成し、それに紐づいた sounds レコードを返す" do
-        expect{ results }.to change { Search.count }.from(1).to(2)
+        expect { results }.to change { Search.count }.from(1).to(2)
         expect(results.first.isrc).to eq "JPKS00300301"
         expect(results.first.title).to eq "遥か彼方"
         expect(results.first.artist).to eq "ASIAN KUNG-FU GENERATION"
