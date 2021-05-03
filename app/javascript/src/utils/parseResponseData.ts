@@ -7,7 +7,7 @@ export function parseResponseData(responseData: responseData[]) {
   responseData.forEach((data) => {
     parsedResponseData.push({
       isrc: data.isrc,
-      thumbnailUlr: data.thumbnail_url,
+      thumbnailUrl: data.thumbnail_url,
       title: truncateText(data.title),
       artist: truncateText(data.artist),
       spotifyUrl: data.spotify_url,
