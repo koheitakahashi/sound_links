@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import ExclamationIcon from "./ExclamationIcon";
+import ExclamationIcon from "./fontAwesome/ExclamationIcon";
 
 export default defineComponent({
   name: "ErrorMessage",

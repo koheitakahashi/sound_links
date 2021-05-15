@@ -24,7 +24,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import SearchIcon from "./SearchIcon";
+import SearchIcon from "./fontAwesome/SearchIcon";
 import { key } from "../store";
 import { useStore } from "vuex";
 import axios from "axios";
