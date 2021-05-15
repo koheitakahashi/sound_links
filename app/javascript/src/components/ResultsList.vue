@@ -4,7 +4,7 @@
     <pagination></pagination>
     <div
       v-show="results.length === 0 && !store.state.isLoading"
-      class="results-message"
+      class="result-section__no-message"
       data-test="no-result-message"
     >
       検索結果がありませんでした
