@@ -1,7 +1,7 @@
 export type responseData = {
-  sounds: sound[],
-  current_page: number,
-}
+  sounds: sound[];
+  current_page: number;
+};
 
 export type sound = {
   isrc: string;

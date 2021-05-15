@@ -3,7 +3,10 @@
     <!-- TODO: 後で差し替える-->
     <img src="https://placehold.jp/150x150.png" alt="" class="header__logo" />
     <h1><router-link to="/" class="header__title">Sound Links</router-link></h1>
-    <search-form class="search-form-wrapper__results"></search-form>
+    <search-form
+      class="search-form-wrapper__results"
+      parent-component="ResultsPage"
+    ></search-form>
   </header>
   <main class="main-wrapper__results">
     <div v-show="store.state.isLoading" class="loader">Loading...</div>
@@ -40,23 +43,26 @@ export default defineComponent({
       if (route.query.keyword) {
         // NOTE: route.query.keywords をそのまま state.keywords にいれると、route.query.keywordsが String 以外にもなり得るため代入できない
         let params = new URLSearchParams(window.location.search);
-        store.commit("setKeyword", params.get("keyword"))
+        store.commit("setKeyword", params.get("keyword"));
       }
-    }
+    };
 
     const setCurrentPage = function () {
       if (route.query.page) {
         let params = new URLSearchParams(window.location.search);
-        store.commit("setCurrentPage", parseInt(params.get("page")))
+        store.commit("setCurrentPage", parseInt(params.get("page")));
       }
-    }
+    };
 
     const fetchResults = async () => {
-      await setKeyword()
+      await setKeyword();
       try {
         store.commit("setIsLoading", true);
         const response = await axios.get("search.json", {
-          params: { keyword: store.state.keyword, page: store.state.currentPage },
+          params: {
+            keyword: store.state.keyword,
+            page: store.state.currentPage,
+          },
         });
         store.commit("setKeyword", store.state.keyword);
         await store.dispatch("updateResultsAndPage", response.data);
@@ -65,10 +71,10 @@ export default defineComponent({
         store.commit("setIsLoading", false);
         console.log(`Error! : ${error}`);
       }
-    }
+    };
 
-    setCurrentPage()
-    fetchResults()
+    setCurrentPage();
+    fetchResults();
 
     return {
       store,

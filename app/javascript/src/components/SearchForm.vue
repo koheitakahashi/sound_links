@@ -27,16 +27,23 @@ import { useRouter, useRoute } from "vue-router";
 import SearchIcon from "./SearchIcon";
 import { key } from "../store";
 import { useStore } from "vuex";
+import axios from "axios";
 
 export default defineComponent({
   name: "SearchForm",
   components: {
     SearchIcon,
   },
-  setup() {
+  props: {
+    parentComponent: {
+      type: String,
+      default: "TopPage",
+    },
+  },
+  setup(props) {
     const router = useRouter();
     const route = useRoute();
-    const store = useStore(key)
+    const store = useStore(key);
 
     const state = reactive({
       keyword: "",
@@ -47,7 +54,7 @@ export default defineComponent({
         name: "ResultsPage",
         query: { keyword: keyword },
       });
-    }
+    };
 
     // NOTE: 直接URLにアクセスされた場合の対応
     const setKeyword = function () {
@@ -56,15 +63,39 @@ export default defineComponent({
         let params = new URLSearchParams(window.location.search);
         state.keyword = params.get("keyword");
       }
-    }
+    };
+
+    const fetchResults = async (keyword) => {
+      try {
+        store.commit("setIsLoading", true);
+        store.commit("setKeyword", keyword);
+        const response = await axios.get("search.json", {
+          params: {
+            keyword: store.state.keyword,
+            page: store.state.currentPage,
+          },
+        });
+        await store.dispatch("updateResultsAndPage", response.data);
+        store.commit("setIsLoading", false);
+      } catch (error) {
+        store.commit("setIsLoading", false);
+        console.log(`Error! : ${error}`);
+      }
+    };
 
     const submitSearch = async (keyword) => {
-      if (keyword === "") { return }
-      store.commit("setCurrentPage", 1)
-      goToResultPage(keyword)
-    }
+      if (keyword === "") {
+        return;
+      }
+      store.commit("setCurrentPage", 1);
 
-    setKeyword()
+      goToResultPage(keyword);
+      if (props.parentComponent === "ResultsPage") {
+        await fetchResults(keyword);
+      }
+    };
+
+    setKeyword();
     return {
       state,
       submitSearch,

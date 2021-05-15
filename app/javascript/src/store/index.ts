@@ -38,14 +38,14 @@ export const store = createStore<State>({
 
   actions: {
     updateResultsAndPage({ commit }, responseData: responseData) {
-      commit("setResults", parseResponseData(responseData["results"]))
-      commit("setCurrentPage", responseData["current_page"])
+      commit("setResults", parseResponseData(responseData["results"]));
+      commit("setCurrentPage", responseData["current_page"]);
     },
-    updateCurrentPage( { commit }, page: number) {
-      commit("setCurrentPage", page)
+    updateCurrentPage({ commit }, page: number) {
+      commit("setCurrentPage", page);
     },
-    updateKeyword( { commit }, keyword: string ) {
-      commit("setKeyword", keyword)
-    }
+    updateKeyword({ commit }, keyword: string) {
+      commit("setKeyword", keyword);
+    },
   },
 });

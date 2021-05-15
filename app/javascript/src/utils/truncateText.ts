@@ -1,6 +1,6 @@
 const MAX_STRING_LENGTH_WITH_WIDE_WIDTH = 100;
 const MAX_STRING_LENGTH_WITH_NARROW_WIDTH = 30;
-const NARROW_WIDTH = 480
+const NARROW_WIDTH = 480;
 
 // TODO: リファクタリングする
 export function truncateText(string: string): string {

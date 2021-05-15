@@ -20,7 +20,10 @@
           </p>
         </div>
       </div>
-      <search-form class="welcome-section__search-form"></search-form>
+      <search-form
+        class="welcome-section__search-form"
+        parent-compont="topPage"
+      ></search-form>
       <div class="welcome-section__external-service">
         <h3 class="welcome-section-external-service__header">
           以下のサービスに対応しています
