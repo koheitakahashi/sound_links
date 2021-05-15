@@ -9,6 +9,7 @@ export interface State {
   results: result[];
   isLoading: boolean;
   currentPage: number;
+  showError: boolean;
 }
 
 export const key: InjectionKey<Store<State>> = Symbol();
@@ -19,6 +20,7 @@ export const store = createStore<State>({
     results: [],
     isLoading: false,
     currentPage: 1,
+    showError: false,
   },
 
   mutations: {
@@ -33,6 +35,9 @@ export const store = createStore<State>({
     },
     setCurrentPage(state, page: number) {
       state.currentPage = page;
+    },
+    setShowError(state, boolean: boolean) {
+      state.showError = boolean;
     },
   },
 

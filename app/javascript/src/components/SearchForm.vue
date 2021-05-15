@@ -79,7 +79,7 @@ export default defineComponent({
         store.commit("setIsLoading", false);
       } catch (error) {
         store.commit("setIsLoading", false);
-        console.log(`Error! : ${error}`);
+        store.commit("setShowError", true);
       }
     };
 

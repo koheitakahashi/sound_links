@@ -9,11 +9,14 @@
     ></search-form>
   </header>
   <main class="main-wrapper__results">
-    <div v-show="store.state.isLoading" class="loader">Loading...</div>
-    <results-list
-      v-show="!store.state.isLoading"
-      :results="store.state.results"
-    ></results-list>
+    <error-message v-show="store.state.showError"></error-message>
+    <div v-show="!store.state.showError">
+      <div v-show="store.state.isLoading" class="loader">Loading...</div>
+      <results-list
+        v-show="!store.state.isLoading"
+        :results="store.state.results"
+      ></results-list>
+    </div>
   </main>
   <footer-component class="footer-wrapper__results"></footer-component>
 </template>
@@ -22,11 +25,12 @@
 import { defineComponent } from "vue";
 import { key } from "../store";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 import axios from "axios";
 import ResultsList from "../components/ResultsList";
 import FooterComponent from "../components/Footer";
 import SearchForm from "../components/SearchForm";
-import { useRoute } from "vue-router";
+import ErrorMessage from "../components/ErrorMessage";
 
 export default defineComponent({
   name: "ResultsPage",
@@ -34,6 +38,7 @@ export default defineComponent({
     SearchForm,
     ResultsList,
     FooterComponent,
+    ErrorMessage,
   },
   setup() {
     const route = useRoute();
@@ -69,7 +74,7 @@ export default defineComponent({
         store.commit("setIsLoading", false);
       } catch (error) {
         store.commit("setIsLoading", false);
-        console.log(`Error! : ${error}`);
+        store.commit("setShowError", true);
       }
     };
 
