@@ -1,12 +1,13 @@
 <template>
-  <div v-show="results.length === 0 && !store.state.isLoading" class="results-message"> 検索結果がありませんでした</div>
-  <div v-show="results.length !== 0" class="results-section">
+  <div>
     <h2 class="result-section__title">検索結果一覧</h2>
     <pagination></pagination>
+    <div v-show="results.length === 0 && !store.state.isLoading" class="results-message" data-test="no-result-message">検索結果がありませんでした</div>
     <div
       class="result-section__list"
       v-for="result in results"
       :key="result.isrc"
+      v-show="results.length !== 0"
     >
       <result :result="result"></result>
     </div>

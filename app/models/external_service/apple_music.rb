@@ -35,7 +35,9 @@ module ExternalService
 
       # TODO: 共通化したい
       def build_sounds(response)
-        response.dig("results", "songs", "data").map do |result|
+        return [] unless results = response.dig("results", "songs", "data")
+
+        results.map do |result|
           Sound.new(
             isrc: result["attributes"]["isrc"],
             thumbnail_url: format_artwork_url(result["attributes"]["artwork"]["url"]),

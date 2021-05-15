@@ -1,12 +1,12 @@
 <template>
-  <nav class="pagination">
+  <nav class="pagination" data-test="pagination">
     <ul class="pagination__items">
       <li class="pagination-item__previous-link">
-        <button @click="linkToPreviousPage()">&lt;</button>
+        <button @click="linkToPreviousPage()" data-test="pagination-previous-button">&lt;</button>
       </li>
-      <li class="pagination__current-page">{{ store.state.currentPage }}ページ目</li>
+      <li class="pagination__current-page" data-test="pagination-current-page-number">{{ store.state.currentPage }}ページ目</li>
       <li class="pagination-item__next-link">
-        <button @click="linkToNextPage()">></button>
+        <button @click="linkToNextPage()" data-test="pagination-next-button">></button>
       </li>
     </ul>
   </nav>

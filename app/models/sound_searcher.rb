@@ -55,6 +55,8 @@ class SoundSearcher
 
     def create_sounds_associated(searching:, offset: offset_number)
       sounds = fetch_results(keyword: searching.keyword, offset: offset)
+      return if sounds.empty?
+
       associated_sounds_hash = associate_sound_with_searching(searching: searching, sounds_hashes: sounds)
       Sound.insert_all(associated_sounds_hash)
     end

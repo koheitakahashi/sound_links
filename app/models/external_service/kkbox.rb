@@ -33,7 +33,9 @@ module ExternalService
       end
 
       def build_sounds(response)
-        response["tracks"]["data"].map do |result|
+        return [] unless results = response.dig("tracks", "data")
+
+        results.map do |result|
           Sound.new(
             isrc: result["isrc"],
             # NOTE: height = 160, width = 160 のサムネイルを取得するためにインデックス0番目の URL を取得する
