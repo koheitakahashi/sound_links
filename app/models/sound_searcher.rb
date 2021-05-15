@@ -97,6 +97,6 @@ class SoundSearcher
     end
 
     def offset_number
-      page == DEFAULT_PAGE_NUMBER ? DEFAULT_OFFSET_NUMBER : (page - DEFAULT_PAGE_NUMBER) * MAX_PER_PAGE
+      page <= DEFAULT_PAGE_NUMBER ? DEFAULT_OFFSET_NUMBER : (page - DEFAULT_PAGE_NUMBER) * MAX_PER_PAGE
     end
 end
