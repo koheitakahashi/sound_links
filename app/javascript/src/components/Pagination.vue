@@ -4,7 +4,7 @@
       <li class="pagination-item__previous-link">
         <button @click="linkToPreviousPage()" data-test="pagination-previous-button">&lt;</button>
       </li>
-      <li class="pagination__current-page" data-test="pagination-current-page-number">{{ store.state.currentPage }}ページ目</li>
+      <li class="pagination-item__current-page" data-test="pagination-current-page-number">{{ store.state.currentPage }}ページ目</li>
       <li class="pagination-item__next-link">
         <button @click="linkToNextPage()" data-test="pagination-next-button">></button>
       </li>
@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent } from "vue";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
 import axios from "axios";

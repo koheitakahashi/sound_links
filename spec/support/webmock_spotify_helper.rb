@@ -29,7 +29,6 @@ module WebmockSpotifyHelper
            .to_return(body: file_fixture("spotify_api_response.json"),
                       status: 200,
                       headers: { "Content-Type" =>  "application/json" })
-
   end
 
   def mock_spotify_search_results_when_no_results
