@@ -1,4 +1,3 @@
-require("@rails/ujs").start();
 import "../assets/stylesheets/application.scss";
 
 import { createApp } from "vue";
