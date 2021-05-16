@@ -8,6 +8,7 @@
     "@fortawesome/vue-fontawesome": "3.0.0-1",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
+    "@types/node": "^15.3.0",
     "@vue/compiler-sfc": "^3.0.4",
     "axios": "^0.21.1",
     "es6-promise": "^4.2.8",
