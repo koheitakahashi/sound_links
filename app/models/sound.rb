@@ -7,6 +7,8 @@ class Sound < ApplicationRecord
   validates :title, presence: true
   validates :artist, presence: true
 
+  paginates_per 10
+
   def attributes_exclude(*attribute)
     exclude_keys = attribute.map(&:to_s)
     sound_attributes = attributes

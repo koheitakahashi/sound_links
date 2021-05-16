@@ -3,7 +3,7 @@
     <label for="form"></label>
     <input
       v-model="state.keyword"
-      @keydown.enter="submitSearch(state.keyword)"
+      @keypress.enter="submitSearch(state.keyword)"
       type="search"
       name="keyword"
       id="form"
@@ -23,19 +23,24 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import { useStore } from "vuex";
-import { parseResponseData } from "../utils/parseResponseData";
 import { useRouter, useRoute } from "vue-router";
-import axios from "axios";
+import SearchIcon from "./fontAwesome/SearchIcon";
 import { key } from "../store";
-import SearchIcon from "./SearchIcon";
+import { useStore } from "vuex";
+import axios from "axios";
 
 export default defineComponent({
   name: "SearchForm",
   components: {
     SearchIcon,
   },
-  setup() {
+  props: {
+    parentComponent: {
+      type: String,
+      default: "TopPage",
+    },
+  },
+  setup(props) {
     const router = useRouter();
     const route = useRoute();
     const store = useStore(key);
@@ -44,36 +49,53 @@ export default defineComponent({
       keyword: "",
     });
 
+    const goToResultPage = function (keyword) {
+      router.push({
+        name: "ResultsPage",
+        query: { keyword: keyword },
+      });
+    };
+
+    // NOTE: 直接URLにアクセスされた場合の対応
+    const setKeyword = function () {
+      if (route.query.keyword) {
+        // NOTE: route.query.keywords をそのまま state.keywords にいれると、route.query.keywordsが String 以外にもなり得るため代入できない
+        let params = new URLSearchParams(window.location.search);
+        state.keyword = params.get("keyword");
+      }
+    };
+
+    const fetchResults = async (keyword) => {
+      try {
+        store.commit("setIsLoading", true);
+        store.commit("setKeyword", keyword);
+        const response = await axios.get("search.json", {
+          params: {
+            keyword: store.state.keyword,
+            page: store.state.currentPage,
+          },
+        });
+        await store.dispatch("updateResultsAndPage", response.data);
+        store.commit("setIsLoading", false);
+      } catch (error) {
+        store.commit("setIsLoading", false);
+        store.commit("setShowError", true);
+      }
+    };
+
     const submitSearch = async (keyword) => {
       if (keyword === "") {
         return;
       }
+      store.commit("setCurrentPage", 1);
 
-      try {
-        await router.push({
-          name: "ResultsPage",
-          query: { keyword: keyword },
-        });
-        store.commit("setIsLoading", true);
-        const response = await axios.get("search.json", {
-          params: { keyword: keyword },
-        });
-        store.commit("setKeyword", keyword);
-        store.commit("setResults", parseResponseData(response.data));
-        store.commit("setIsLoading", false);
-      } catch (error) {
-        store.commit("setIsLoading", false);
-        console.log(`Error! : ${error}`);
+      goToResultPage(keyword);
+      if (props.parentComponent === "ResultsPage") {
+        await fetchResults(keyword);
       }
     };
 
-    if (route.query.keyword) {
-      // NOTE: route.query.keywords をそのまま state.keywords にいれると、route.query.keywordsが String 以外にもなり得るため代入できない
-      let params = new URLSearchParams(window.location.search);
-      state.keyword = params.get("keyword");
-      submitSearch(route.query.keyword);
-    }
-
+    setKeyword();
     return {
       state,
       submitSearch,

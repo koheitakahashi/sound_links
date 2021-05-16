@@ -18,9 +18,7 @@
 
 .welcome-section-explain__inner-text {
   margin-top: 1.5rem;
-}
 
-.welcome-section-explain__inner-text p {
   @media (max-width: 480px) {
     margin-top: 1.5rem;
   }
@@ -32,6 +30,7 @@
 
   @media (max-width: 480px) {
     width: 80%;
+    margin-top: 2rem;
   }
 }
 
@@ -40,6 +39,7 @@
   width: 70%;
 
   @media (max-width: 480px) {
+    margin-top: 1rem;
     width: 80%;
   }
 }
@@ -48,6 +48,10 @@
   margin-top: 2rem;
   display: flex;
   justify-content: space-around;
+
+  @media (max-width: 480px) {
+    margin-top: 1rem;
+  }
 }
 
 .welcome-small-section {
@@ -59,6 +63,11 @@
 .welcome-small-section__image {
   width: 80px;
   height: 80px;
+
+  @media (max-width: 480px) {
+    width: 70px;
+    height: 70px;
+  }
 }
 
 .welcome-small-section__title {

@@ -2,17 +2,17 @@
 
 module ExternalService
   class Spotify < Base
-    def self.search(keyword)
-      new.search(keyword)
+    def initialize(keyword:, offset: DEFAULT_OFFSET_NUMBER)
+      super
     end
 
-    def search(keyword)
+    def search
       return [] if keyword.blank?
 
       @response = ExternalService::Request.new.get(
         url: SoundLinksConstants::SPOTIFY_SEARCH_URL,
         headers: { Authorization: "Bearer #{access_token}" },
-        params: { q: keyword, type: "track", market: "JP", limit: SEARCH_TRACKS_NUMBER }
+        params: { q: keyword, type: "track", market: "JP", limit: SEARCH_TRACKS_NUMBER, offset: offset }
       )
 
       raise_external_service_error(response: @response) if @response.status_code != 200
@@ -38,7 +38,8 @@ module ExternalService
       end
 
       def build_sounds(response)
-        response.dig("tracks", "items").map do |result|
+        return [] unless results = response.dig("tracks", "items")
+        results.map do |result|
           Sound.new(
             isrc: result["external_ids"]["isrc"],
             # height = 300, width = 300 のサムネイルを取得するためにインデックス1の url を取得

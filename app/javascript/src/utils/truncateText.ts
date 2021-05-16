@@ -1,8 +1,18 @@
-const MAX_STRING_LENGTH = 30;
+const MAX_STRING_LENGTH_WITH_WIDE_WIDTH = 100;
+const MAX_STRING_LENGTH_WITH_NARROW_WIDTH = 30;
+const NARROW_WIDTH = 480;
 
+// TODO: リファクタリングする
 export function truncateText(string: string): string {
-  if (string.length <= MAX_STRING_LENGTH) {
-    return string;
+  if (window.innerWidth <= NARROW_WIDTH) {
+    if (string.length <= MAX_STRING_LENGTH_WITH_NARROW_WIDTH) {
+      return string;
+    }
+    return string.slice(0, MAX_STRING_LENGTH_WITH_NARROW_WIDTH) + "...";
+  } else {
+    if (string.length <= MAX_STRING_LENGTH_WITH_WIDE_WIDTH) {
+      return string;
+    }
+    return string.slice(0, MAX_STRING_LENGTH_WITH_WIDE_WIDTH) + "...";
   }
-  return string.slice(0, MAX_STRING_LENGTH) + "...";
 }

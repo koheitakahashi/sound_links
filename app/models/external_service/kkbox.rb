@@ -2,17 +2,17 @@
 
 module ExternalService
   class Kkbox < Base
-    def self.search(keyword)
-      new.search(keyword)
+    def initialize(keyword:, offset: DEFAULT_OFFSET_NUMBER)
+      super
     end
 
-    def search(keyword)
+    def search
       return [] if keyword.blank?
 
       @response = ExternalService::Request.new.get(
         url: SoundLinksConstants::KKBOX_SEARCH_URL,
         headers: { Authorization: "Bearer #{access_token}" },
-        params: { q: keyword, type: "track", territory: "JP", limit: SEARCH_TRACKS_NUMBER }
+        params: { q: keyword, type: "track", territory: "JP", limit: SEARCH_TRACKS_NUMBER, offset: offset }
       )
 
       raise_external_service_error(response: @response) if @response.status_code != 200
@@ -33,7 +33,9 @@ module ExternalService
       end
 
       def build_sounds(response)
-        response["tracks"]["data"].map do |result|
+        return [] unless results = response.dig("tracks", "data")
+
+        results.map do |result|
           Sound.new(
             isrc: result["isrc"],
             # NOTE: height = 160, width = 160 のサムネイルを取得するためにインデックス0番目の URL を取得する
