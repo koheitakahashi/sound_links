@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_01_091604) do
+ActiveRecord::Schema.define(version: 2021_05_28_122043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_05_01_091604) do
   end
 
   create_table "sounds", force: :cascade do |t|
-    t.string "isrc", null: false
+    t.string "isrc"
     t.string "thumbnail_url"
     t.string "title", null: false
     t.string "artist", null: false
