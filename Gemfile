@@ -45,7 +45,7 @@ group :test do
   gem "webdrivers"
 
   # not default
-  gem 'rspec-rails', '~> 5.0.0'
+  gem "rspec-rails", "~> 5.0.0"
   gem "factory_bot"
   gem "webmock"
   gem "simplecov", require: false
