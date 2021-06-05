@@ -48,5 +48,5 @@ group :test do
   gem "rspec-rails", "~> 4.0.0"
   gem "factory_bot"
   gem "webmock"
-  gem 'simplecov', require: false
+  gem "simplecov", require: false
 end
