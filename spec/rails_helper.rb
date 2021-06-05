@@ -81,4 +81,11 @@ RSpec.configure do |config|
   # NOTE: FactoryBot を使うための設定
   # ref: https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md#configure-your-test-suite
   config.include FactoryBot::Syntax::Methods
+
+  # simplecov を有効にする
+  require "simplecov"
+  SimpleCov.start do
+    add_group "Models", "app/models"
+    add_group "Controllers", "app/controllers"
+  end
 end
