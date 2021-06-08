@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="result-section">
     <h2 class="result-section__title">検索結果一覧</h2>
     <pagination></pagination>
     <div

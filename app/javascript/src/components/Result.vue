@@ -1,6 +1,8 @@
 <template>
   <div class="results-item">
-    <img :src="thumbnail()" alt="" class="results-item__image" />
+    <div class="results-item-image__layout">
+      <img :src="thumbnail()" alt="" class="results-item__image" />
+    </div>
     <div class="results-item-section">
       <div class="results-item-section__explain">
         <p class="results-item-section-explain__title" data-test="title">
