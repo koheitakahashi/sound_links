@@ -1,0 +1,28 @@
+html {
+  font-size: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: "Yu Gothic Medium", "游ゴシック Medium", "游ゴシック体", "Hiragino Sans", "ヒラギノ角ゴ Pro W3", sans-serif; // TODO: 後で良いフォントがあれば変えたい
+}
+
+#js-mount-id {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+}

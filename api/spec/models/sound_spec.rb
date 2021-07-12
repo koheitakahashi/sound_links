@@ -4,22 +4,6 @@ require "rails_helper"
 
 RSpec.describe Sound, type: :model do
   describe "validates" do
-    describe "isrc" do
-      let(:sound) { FactoryBot.build(:sound, isrc: isrc) }
-
-      describe "presence" do
-        context "blank ではない場合" do
-          let(:isrc) { "JPU901700684" }
-          it { expect(sound).to be_valid }
-        end
-
-        context "blank の場合" do
-          let(:isrc) { "" }
-          it { expect(sound).to be_invalid }
-        end
-      end
-    end
-
     describe "title" do
       let(:sound) { FactoryBot.build(:sound, title: title) }
 

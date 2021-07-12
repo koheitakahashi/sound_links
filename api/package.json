@@ -1,0 +1,43 @@
+{
+  "name": "sound_links",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-brands-svg-icons": "^5.15.2",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/vue-fontawesome": "3.0.0-1",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "4.2.2",
+    "@types/node": "^15.3.0",
+    "@vue/compiler-sfc": "^3.0.4",
+    "axios": "^0.21.1",
+    "es6-promise": "^4.2.8",
+    "is-svg": "4.2.2",
+    "postcss": "8.2.10",
+    "serialize-javascript": "^3.1.0",
+    "ssri": "8.0.1",
+    "stylelint": "^13.10.0",
+    "stylelint-config-standard": "^20.0.0",
+    "ts-loader": "^8.0.11",
+    "typescript": "^4.1.2",
+    "vue": "^3.0.4",
+    "vue-loader": "^16.1.1",
+    "vue-router": "4",
+    "vue-template-compiler": "^2.6.12",
+    "vuex": "^4.0.0-rc.2"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "eslint": "^7.15.0",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-prettier": "^3.2.0",
+    "eslint-plugin-vue": "^7.2.0",
+    "fork-ts-checker-webpack-plugin": "^6.0.5",
+    "pnp-webpack-plugin": "^1.6.4",
+    "prettier": "^2.2.1",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
