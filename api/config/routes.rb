@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: "home#index"
-  get "search", to: "searches#index"
-  get "terms", to: "terms#index"
+  namespace "api" do
+    namespace "v1" do
+      get "search", to: "searches#index"
+    end
+  end
 end
