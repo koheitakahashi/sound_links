@@ -3,11 +3,11 @@ version: 2.1
 executors:
   default:
     docker:
-      - image: circleci/ruby:2.6.6-node-browsers
+      - image: circleci/ruby:3.0.1
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle
+          BUNDLE_PATH: ~/project/api/vendor/bundle
           PGHOST: 127.0.0.1
           PGUSER: user
           RAILS_ENV: test
@@ -17,45 +17,33 @@ executors:
           POSTGRES_DB: sound_links_test
           POSTGRES_PASSWORD: "postgres"
 
-
 commands:
   setup:
     steps:
       - restore_cache:
          keys:
-            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1-{{ checksum "~/project/api/Gemfile.lock" }}
             - gem-cache-v1
 
       - run:
           name: Update bundler
           command: gem update bundler
+          working_directory: ~/project/api
 
       - run:
           name: Set bundle config clean
           command: bundle config set clean "true"
+          working_directory: ~/project/api
 
       - run:
           name: Install gems
           command: bundle check || bundle install
+          working_directory: ~/project/api
 
       - save_cache:
-          key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
+          key: gem-cache-v1-{{ checksum "~/project/api/Gemfile.lock" }}
           paths:
-            - vendor/bundle
-
-      - restore_cache:
-          keys:
-            - yarn-cache-v1-{{ checksum "yarn.lock" }}
-            - yarn-cache-v1
-
-      - run:
-          name: Yarn Install
-          command: yarn install --cache-folder ~/.cache/yarn
-
-      - save_cache:
-          key: yarn-cache-v1-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+            - ~/project/api/vendor/bundle
 
 jobs:
   test:
@@ -65,35 +53,26 @@ jobs:
       - setup
       - run:
           name: Run Lint
-          command: |
-            bundle exec rubocop
-            bin/yarn eslint app/javascript/packs/*.ts
-            bin/yarn eslint app/javascript/src/*.ts
-            bin/yarn eslint app/javascript/src/*.vue
-            bin/yarn eslint app/javascript/src/*/*.vue
-            bin/yarn eslint app/javascript/src/*/*.ts
-            bin/yarn stylelint app/javascript/assets/stylesheets/layout/*.scss
-            bin/yarn stylelint app/javascript/assets/stylesheets/modules/*.scss
-            bin/yarn stylelint app/javascript/assets/stylesheets/application.scss
+          command: bundle exec rubocop
+          working_directory: ~/project/api
 
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
+          working_directory: ~/project/api
 
       - run:
           name: Database setup
           command: bin/rails db:schema:load --trace
+          working_directory: ~/project/api
 
       - run:
           name: Run RSpec
           command: bundle exec rspec
+          working_directory: ~/project/api
 
       - store_test_results:
           path: tmp/test-results
-
-      - store_artifacts:
-          path: tmp/screenshots
-          destination: screenshots
 
 workflows:
   version: 2.1
