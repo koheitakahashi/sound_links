@@ -99,7 +99,7 @@ bin/rails s
 http://localhost:3000 にアクセスして、以下のページが表示されることを確認してください。
 そして、検索フォームにキーワードを入れて検索結果が表示されることを確認してください。
 
-![image](./images/top_page_image.png)
+![image](./docs/top_page_image.png)
 
 # lint・フォーマッターの実行
 
