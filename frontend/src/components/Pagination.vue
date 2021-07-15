@@ -62,7 +62,7 @@ export default defineComponent({
         store.commit('setIsLoading', true);
         await store.dispatch('updateCurrentPage', store.state.currentPage + 1);
 
-        const response = await axios.get('search.json', {
+        const response = await axios.get('api/v1/search', {
           params: {
             keyword: store.state.keyword,
             page: store.state.currentPage,
@@ -95,7 +95,7 @@ export default defineComponent({
         store.commit('setIsLoading', true);
         await store.dispatch('updateCurrentPage', store.state.currentPage - 1);
 
-        const response = await axios.get('search.json', {
+        const response = await axios.get('api/v1/search', {
           params: {
             keyword: store.state.keyword,
             page: store.state.currentPage,

@@ -64,7 +64,7 @@ export default defineComponent({
       await setKeyword();
       try {
         store.commit('setIsLoading', true);
-        const response = await axios.get('search.json', {
+        const response = await axios.get('api/v1/search', {
           params: {
             keyword: store.state.keyword,
             page: store.state.currentPage,
