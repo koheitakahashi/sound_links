@@ -28,6 +28,10 @@ import { useStore } from 'vuex';
 import axios from 'axios';
 import SearchIcon from './fontAwesome/SearchIcon.vue';
 
+type State = {
+  keyword: string | (string | null)[]
+}
+
 export default defineComponent({
   name: 'SearchForm',
   components: {
@@ -44,7 +48,7 @@ export default defineComponent({
     const route = useRoute();
     const store = useStore();
 
-    const state = reactive({
+    const state = reactive<State>({
       keyword: '',
     });
 
@@ -57,12 +61,9 @@ export default defineComponent({
 
     // NOTE: 直接URLにアクセスされた場合の対応
     function setKeyword() {
-      if (route.query.keyword) {
-        // NOTE: route.query.keywords をそのまま state.keywords にいれると、route.query.keywordsが
-        // String 以外にもなり得るため代入できない
-        // TODO: type エラーが解消できないため、一旦コメントアウトする
-        // let params = new URLSearchParams(window.location.search);
-        // state.keyword = params.get("keyword");
+      const keywordFromQuery = route.query.keyword;
+      if (keywordFromQuery) {
+        state.keyword = keywordFromQuery;
       }
     }
 
