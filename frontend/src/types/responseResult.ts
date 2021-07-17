@@ -8,7 +8,7 @@ export type sound = {
   kkboxUrl: string;
 };
 
-export type responseData = {
+export type responseResult = {
   results: sound[];
   currentPage: number;
 };

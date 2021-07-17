@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import { result } from '@/types/result';
-import { responseData } from '@/types/responseData';
-import parseResponseData from '@/utils/parseResponseData';
+import { responseResult } from '@/types/responseResult';
+import parseResponseResult from '@/utils/parseResponseResult';
 
 export interface State {
   keyword: string;
@@ -39,8 +39,8 @@ export default createStore<State>({
   },
 
   actions: {
-    updateResultsAndPage({ commit }, response: responseData) {
-      commit('setResults', parseResponseData(response.results));
+    updateResultsAndPage({ commit }, response: responseResult) {
+      commit('setResults', parseResponseResult(response.results));
       commit('setCurrentPage', response.currentPage);
     },
     updateCurrentPage({ commit }, page: number) {
