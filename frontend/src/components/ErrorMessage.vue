@@ -1,6 +1,7 @@
 <template>
   <div class="error-message__content">
-    <fa :icon="['fa', 'exclamation-circle']"></fa>
+<!--    TODO: コンポーネント化する-->
+<!--    <fa :icon="['fa', 'exclamation-circle']"></fa>-->
     <div class="error-message__text">
       <p>エラーにより検索結果を表示することができませんでした。</p>
       <p>別のキーワードで検索いただくか、時間をおいてからお試しください。</p>

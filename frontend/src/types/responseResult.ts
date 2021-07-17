@@ -9,6 +9,8 @@ export type sound = {
 };
 
 export type responseResult = {
-  results: sound[];
-  currentPage: number;
+  data: {
+    results: sound[];
+    currentPage: number;
+  }
 };

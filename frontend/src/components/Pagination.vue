@@ -2,10 +2,8 @@
   <nav class="pagination" data-test="pagination">
     <ul class="pagination__items">
       <li class="pagination-item__previous-link">
-        <fa :icon="['fa', 'faChevronLeft']"
-          @click="linkToPreviousPage()"
-          data-test="pagination-previous-button"
-        ></fa>
+<!--        TODO: 次のページへのリンクを追加-->
+        <left-arrow-icon></left-arrow-icon>
       </li>
       <li
         class="pagination-item__current-page"
@@ -15,10 +13,12 @@
       </li>
 
       <li class="pagination-item__next-link">
-        <fa :icon="['fa', 'faChevronRight']"
-          @click="linkToPreviousPage()"
-          data-test="pagination-previous-button"
-        ></fa>
+        <!--        TODO: 次のページへのリンクを追加-->
+        <right-arrow-icon></right-arrow-icon>
+<!--        <fa :icon="['fa', 'faChevronRight']"-->
+<!--          @click="linkToPreviousPage()"-->
+<!--          data-test="pagination-previous-button"-->
+<!--        ></fa>-->
       </li>
     </ul>
   </nav>
@@ -29,9 +29,12 @@ import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
+import RightArrowIcon from './fontAwesome/RightArrowIcon.vue';
+import LeftArrowIcon from './fontAwesome/LeftArrowIcon.vue';
 
 export default defineComponent({
   name: 'Pagination',
+  components: { RightArrowIcon, LeftArrowIcon },
   setup() {
     const router = useRouter();
     const route = useRoute();

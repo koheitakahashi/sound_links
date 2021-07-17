@@ -1,18 +1,18 @@
 import { sound } from '@/types/responseResult';
 import truncateText from './truncateText';
 
-export default function parseResponseResult(responseData: sound[]) :sound[] {
+export default function parseResponseResult(response: sound[]) :sound[] {
   const parsedResponse: sound[] = [];
 
-  responseData.forEach((data) => {
+  response.forEach((element) => {
     parsedResponse.push({
-      isrc: data.isrc,
-      thumbnailUrl: data.thumbnailUrl,
-      title: truncateText(data.title),
-      artist: truncateText(data.artist),
-      spotifyUrl: data.spotifyUrl,
-      appleMusicUrl: data.appleMusicUrl,
-      kkboxUrl: data.kkboxUrl,
+      isrc: element.isrc,
+      thumbnailUrl: element.thumbnailUrl,
+      title: truncateText(element.title),
+      artist: truncateText(element.artist),
+      spotifyUrl: element.spotifyUrl,
+      appleMusicUrl: element.appleMusicUrl,
+      kkboxUrl: element.kkboxUrl,
     });
   });
 

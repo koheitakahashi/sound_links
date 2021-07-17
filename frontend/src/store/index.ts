@@ -40,8 +40,8 @@ export default createStore<State>({
 
   actions: {
     updateResultsAndPage({ commit }, response: responseResult) {
-      commit('setResults', parseResponseResult(response.results));
-      commit('setCurrentPage', response.currentPage);
+      commit('setResults', parseResponseResult(response.data.results));
+      commit('setCurrentPage', response.data.currentPage);
     },
     updateCurrentPage({ commit }, page: number) {
       commit('setCurrentPage', page);
