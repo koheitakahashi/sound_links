@@ -1,5 +1,7 @@
 <template>
-  <font-awesome-icon icon="chevron-right" :size="size"></font-awesome-icon>
+  <font-awesome-icon icon="chevron-right" :size="size" @click="$emit('click', $event)"
+                     data-test="pagination-next-button"
+  ></font-awesome-icon>
 </template>
 
 <script lang="ts">
@@ -12,6 +14,7 @@ library.add(faChevronRight);
 
 export default defineComponent({
   name: 'RightArrowIcon',
+  emits: ['click'],
   components: {
     FontAwesomeIcon,
   },

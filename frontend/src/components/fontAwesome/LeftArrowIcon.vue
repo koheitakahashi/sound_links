@@ -1,5 +1,7 @@
 <template>
-  <font-awesome-icon icon="chevron-left" :size="size"></font-awesome-icon>
+  <font-awesome-icon icon="chevron-left" :size="size" @click="$emit('click', $event)"
+                     data-test="pagination-previous-button"
+  ></font-awesome-icon>
 </template>
 
 <script lang="ts">
@@ -15,6 +17,7 @@ export default defineComponent({
   components: {
     FontAwesomeIcon,
   },
+  emits: ['click'],
   props: {
     size: {
       type: String,

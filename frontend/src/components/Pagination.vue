@@ -2,8 +2,7 @@
   <nav class="pagination" data-test="pagination">
     <ul class="pagination__items">
       <li class="pagination-item__previous-link">
-<!--        TODO: 次のページへのリンクを追加-->
-        <left-arrow-icon></left-arrow-icon>
+        <left-arrow-icon @click="linkToPreviousPage()"></left-arrow-icon>
       </li>
       <li
         class="pagination-item__current-page"
@@ -13,12 +12,7 @@
       </li>
 
       <li class="pagination-item__next-link">
-        <!--        TODO: 次のページへのリンクを追加-->
-        <right-arrow-icon></right-arrow-icon>
-<!--        <fa :icon="['fa', 'faChevronRight']"-->
-<!--          @click="linkToPreviousPage()"-->
-<!--          data-test="pagination-previous-button"-->
-<!--        ></fa>-->
+        <right-arrow-icon @click="linkToNextPage()"></right-arrow-icon>
       </li>
     </ul>
   </nav>
@@ -31,6 +25,9 @@ import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
 import RightArrowIcon from './fontAwesome/RightArrowIcon.vue';
 import LeftArrowIcon from './fontAwesome/LeftArrowIcon.vue';
+
+const minimumPageNumber = 1;
+const aroundCurrentPageNumber = 1;
 
 export default defineComponent({
   name: 'Pagination',
@@ -50,17 +47,18 @@ export default defineComponent({
 
     const linkToNextPage = async () => {
       // TODO: 共通化する
+      const nextPageNumber = store.state.currentPage + aroundCurrentPageNumber;
       try {
         await router.push({
           name: 'ResultsPage',
           query: {
             keyword: store.state.keyword,
-            page: store.state.currentPage + 1,
+            page: nextPageNumber,
           },
         });
 
         store.commit('setIsLoading', true);
-        await store.dispatch('updateCurrentPage', store.state.currentPage + 1);
+        await store.dispatch('updateCurrentPage', nextPageNumber);
 
         const response = await axios.get('api/v1/search', {
           params: {
@@ -73,27 +71,27 @@ export default defineComponent({
         store.commit('setIsLoading', false);
       } catch (error) {
         store.commit('setIsLoading', false);
-        console.log(`Error! : ${error}`);
       }
     };
 
     const linkToPreviousPage = async () => {
-      if (store.state.currentPage === 1) {
+      if (store.state.currentPage === minimumPageNumber) {
         return;
       }
 
       // TODO: 共通化する
+      const previousPageNumber = store.state.currentPage - aroundCurrentPageNumber;
       await router.push({
         name: 'ResultsPage',
         query: {
           keyword: store.state.keyword,
-          page: store.state.currentPage - 1,
+          page: previousPageNumber,
         },
       });
 
       try {
         store.commit('setIsLoading', true);
-        await store.dispatch('updateCurrentPage', store.state.currentPage - 1);
+        await store.dispatch('updateCurrentPage', previousPageNumber);
 
         const response = await axios.get('api/v1/search', {
           params: {
@@ -106,7 +104,6 @@ export default defineComponent({
         store.commit('setIsLoading', false);
       } catch (error) {
         store.commit('setIsLoading', false);
-        console.log(`Error! : ${error}`);
       }
     };
 
