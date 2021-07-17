@@ -42,12 +42,9 @@ export default defineComponent({
 
     // NOTE: page を含むURLに直接アクセスされた時に、 currentPage が正しく表示されるようにしている
     function setCurrentPage() {
-      if (route.query.page) {
-      // NOTE: route.query.keywords をそのまま state.keywords にいれると、
-      // route.query.keywordsが String 以外にもなり得るため代入できない
-      // TODO: Type エラーになるため、一旦コメントアウトするが、後で修正する
-      // let params = new URLSearchParams(window.location.search);
-      // store.commit("setCurrentPage", parseInt(params.get("page")));
+      const currentPageFromQuery = route.query.page;
+      if (currentPageFromQuery) {
+        store.commit('setCurrentPage', Number(currentPageFromQuery));
       }
     }
 
