@@ -26,7 +26,7 @@
         <div class="results-item-section__images">
           <a :href="result.appleMusicUrl" data-test="apple-music-url">
             <img
-              src="../assets/img/apple-music-icon.svg"
+              src="../../public/img/icons/apple-music-icon.svg"
               alt=""
               v-show="result.appleMusicUrl"
               class="results-item-section__icon"
@@ -34,7 +34,7 @@
           </a>
           <a :href="result.spotifyUrl" data-test="spotify-url">
             <img
-              src="../assets/img/spotify-icon.svg"
+              src="../../public/img/icons/spotify-icon.svg"
               alt=""
               v-show="result.spotifyUrl"
               class="results-item-section__icon"
@@ -42,7 +42,7 @@
           </a>
           <a :href="result.kkboxUrl" data-test="kkbox-url">
             <img
-              src="../assets/img/kkbox-icon.svg"
+              src="../../public/img/icons/kkbox-icon.svg"
               alt=""
               v-show="result.kkboxUrl"
               class="results-item-section__icon"

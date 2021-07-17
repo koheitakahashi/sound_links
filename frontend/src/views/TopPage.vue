@@ -30,7 +30,7 @@
           <div class="welcome-small-section">
             <a href="https://www.apple.com/jp/apple-music">
               <img
-                src="../assets/img/apple-music-icon.svg"
+                src="../../public/img/icons/apple-music-icon.svg"
                 alt=""
                 class="welcome-small-section__image"
               />
@@ -45,7 +45,7 @@
           <div class="welcome-small-section">
             <a href="https://www.spotify.com/us">
               <img
-                src="../assets/img/spotify-icon.svg"
+                src="../../public/img/icons/spotify-icon.svg"
                 alt=""
                 class="welcome-small-section__image"
               />
@@ -59,7 +59,7 @@
           <div class="welcome-small-section">
             <a href="https://www.kkbox.com/jp/ja/">
               <img
-                src="../assets/img/kkbox-icon.svg"
+                src="../../public/img/icons/kkbox-icon.svg"
                 alt=""
                 class="welcome-small-section__image"
               />
