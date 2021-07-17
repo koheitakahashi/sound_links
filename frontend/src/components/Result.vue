@@ -24,25 +24,25 @@
           >
         </div>
         <div class="results-item-section__images">
-          <a :href="result.spotifyUrl" data-test="spotify-url">
-            <img
-              src="spotify_icon.svg"
-              alt=""
-              v-show="result.spotifyUrl"
-              class="results-item-section__icon"
-            />
-          </a>
           <a :href="result.appleMusicUrl" data-test="apple-music-url">
             <img
-              src="apple_music_icon.svg"
+              src="../assets/img/apple-music-icon.svg"
               alt=""
               v-show="result.appleMusicUrl"
               class="results-item-section__icon"
             />
           </a>
+          <a :href="result.spotifyUrl" data-test="spotify-url">
+            <img
+              src="../assets/img/spotify-icon.svg"
+              alt=""
+              v-show="result.spotifyUrl"
+              class="results-item-section__icon"
+            />
+          </a>
           <a :href="result.kkboxUrl" data-test="kkbox-url">
             <img
-              src="kkbox_icon.svg"
+              src="../assets/img/kkbox-icon.svg"
               alt=""
               v-show="result.kkboxUrl"
               class="results-item-section__icon"
