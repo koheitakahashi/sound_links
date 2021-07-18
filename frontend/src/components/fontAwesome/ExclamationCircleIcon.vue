@@ -1,23 +1,20 @@
 <template>
-  <font-awesome-icon icon="chevron-left" :size="size" @click="$emit('click', $event)"
-                     data-test="pagination-previous-button"
-  ></font-awesome-icon>
+  <font-awesome-icon icon="exclamation-circle" :size="size"></font-awesome-icon>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faChevronLeft);
+library.add(faExclamationCircle);
 
 export default defineComponent({
-  name: 'LeftArrowIcon',
+  name: 'ExclamationCircleIcon',
   components: {
     FontAwesomeIcon,
   },
-  emits: ['click'],
   props: {
     size: {
       type: String,

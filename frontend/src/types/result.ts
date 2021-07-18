@@ -1,4 +1,5 @@
 export type result = {
+  id: number;
   isrc: string;
   thumbnailUrl: string;
   title: string;

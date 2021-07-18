@@ -31,3 +31,5 @@ vendor/bundle/
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+coverage

@@ -1,4 +1,5 @@
 export type sound = {
+  id: number;
   isrc: string;
   thumbnailUrl: string;
   title: string;
@@ -6,9 +7,4 @@ export type sound = {
   spotifyUrl: string;
   appleMusicUrl: string;
   kkboxUrl: string;
-};
-
-export type responseData = {
-  results: sound[];
-  currentPage: number;
 };

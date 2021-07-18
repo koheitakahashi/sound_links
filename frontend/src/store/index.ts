@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import { result } from '@/types/result';
-import { responseData } from '@/types/responseData';
-import parseResponseData from '@/utils/parseResponseData';
+import { responseResult } from '@/types/responseResult';
+import parseResponseResult from '@/utils/parseResponseResult';
 
 export interface State {
   keyword: string;
@@ -27,6 +27,19 @@ export default createStore<State>({
     setResults(state, results: result[]) {
       state.results = results;
     },
+    sortResults(state) {
+      const resultsDup = state.results;
+      const sortedResults: result[] = resultsDup.sort((element, otherElement) => {
+        if (element.id > otherElement.id) {
+          return 1;
+        }
+        if (element.id < otherElement.id) {
+          return -1;
+        }
+        return 0;
+      });
+      state.results = sortedResults;
+    },
     setIsLoading(state, boolean: boolean) {
       state.isLoading = boolean;
     },
@@ -39,9 +52,10 @@ export default createStore<State>({
   },
 
   actions: {
-    updateResultsAndPage({ commit }, response: responseData) {
-      commit('setResults', parseResponseData(response.results));
-      commit('setCurrentPage', response.currentPage);
+    updateResultsAndPage({ commit }, response: responseResult) {
+      commit('setResults', parseResponseResult(response.data.results));
+      commit('sortResults');
+      commit('setCurrentPage', response.data.currentPage);
     },
     updateCurrentPage({ commit }, page: number) {
       commit('setCurrentPage', page);

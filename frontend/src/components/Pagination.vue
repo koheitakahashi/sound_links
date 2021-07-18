@@ -2,10 +2,7 @@
   <nav class="pagination" data-test="pagination">
     <ul class="pagination__items">
       <li class="pagination-item__previous-link">
-        <fa :icon="['fa', 'faChevronLeft']"
-          @click="linkToPreviousPage()"
-          data-test="pagination-previous-button"
-        ></fa>
+        <left-arrow-icon @click="linkToPreviousPage()"></left-arrow-icon>
       </li>
       <li
         class="pagination-item__current-page"
@@ -15,10 +12,7 @@
       </li>
 
       <li class="pagination-item__next-link">
-        <fa :icon="['fa', 'faChevronRight']"
-          @click="linkToPreviousPage()"
-          data-test="pagination-previous-button"
-        ></fa>
+        <right-arrow-icon @click="linkToNextPage()"></right-arrow-icon>
       </li>
     </ul>
   </nav>
@@ -29,9 +23,15 @@ import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
+import RightArrowIcon from './fontAwesome/RightArrowIcon.vue';
+import LeftArrowIcon from './fontAwesome/LeftArrowIcon.vue';
+
+const minimumPageNumber = 1;
+const aroundCurrentPageNumber = 1;
 
 export default defineComponent({
   name: 'Pagination',
+  components: { RightArrowIcon, LeftArrowIcon },
   setup() {
     const router = useRouter();
     const route = useRoute();
@@ -39,30 +39,28 @@ export default defineComponent({
 
     // NOTE: page を含むURLに直接アクセスされた時に、 currentPage が正しく表示されるようにしている
     function setCurrentPage() {
-      if (route.query.page) {
-      // NOTE: route.query.keywords をそのまま state.keywords にいれると、
-      // route.query.keywordsが String 以外にもなり得るため代入できない
-      // TODO: Type エラーになるため、一旦コメントアウトするが、後で修正する
-      // let params = new URLSearchParams(window.location.search);
-      // store.commit("setCurrentPage", parseInt(params.get("page")));
+      const currentPageFromQuery = route.query.page;
+      if (currentPageFromQuery) {
+        store.commit('setCurrentPage', Number(currentPageFromQuery));
       }
     }
 
     const linkToNextPage = async () => {
       // TODO: 共通化する
+      const nextPageNumber = store.state.currentPage + aroundCurrentPageNumber;
       try {
         await router.push({
           name: 'ResultsPage',
           query: {
             keyword: store.state.keyword,
-            page: store.state.currentPage + 1,
+            page: nextPageNumber,
           },
         });
 
         store.commit('setIsLoading', true);
-        await store.dispatch('updateCurrentPage', store.state.currentPage + 1);
+        await store.dispatch('updateCurrentPage', nextPageNumber);
 
-        const response = await axios.get('search.json', {
+        const response = await axios.get('api/v1/search', {
           params: {
             keyword: store.state.keyword,
             page: store.state.currentPage,
@@ -73,29 +71,29 @@ export default defineComponent({
         store.commit('setIsLoading', false);
       } catch (error) {
         store.commit('setIsLoading', false);
-        console.log(`Error! : ${error}`);
       }
     };
 
     const linkToPreviousPage = async () => {
-      if (store.state.currentPage === 1) {
+      if (store.state.currentPage === minimumPageNumber) {
         return;
       }
 
       // TODO: 共通化する
+      const previousPageNumber = store.state.currentPage - aroundCurrentPageNumber;
       await router.push({
         name: 'ResultsPage',
         query: {
           keyword: store.state.keyword,
-          page: store.state.currentPage - 1,
+          page: previousPageNumber,
         },
       });
 
       try {
         store.commit('setIsLoading', true);
-        await store.dispatch('updateCurrentPage', store.state.currentPage - 1);
+        await store.dispatch('updateCurrentPage', previousPageNumber);
 
-        const response = await axios.get('search.json', {
+        const response = await axios.get('api/v1/search', {
           params: {
             keyword: store.state.keyword,
             page: store.state.currentPage,
@@ -106,7 +104,6 @@ export default defineComponent({
         store.commit('setIsLoading', false);
       } catch (error) {
         store.commit('setIsLoading', false);
-        console.log(`Error! : ${error}`);
       }
     };
 
