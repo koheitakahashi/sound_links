@@ -12,7 +12,7 @@
     <div
       class="result-section__list"
       v-for="result in results"
-      :key="result.isrc"
+      :key="result.id"
       v-show="results.length !== 0"
     >
       <result :result="result"></result>

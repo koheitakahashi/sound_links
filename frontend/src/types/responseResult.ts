@@ -1,12 +1,4 @@
-export type sound = {
-  isrc: string;
-  thumbnailUrl: string;
-  title: string;
-  artist: string;
-  spotifyUrl: string;
-  appleMusicUrl: string;
-  kkboxUrl: string;
-};
+import { sound } from '@/types/sound';
 
 export type responseResult = {
   data: {

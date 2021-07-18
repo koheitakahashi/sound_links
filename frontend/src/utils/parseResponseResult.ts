@@ -1,11 +1,12 @@
-import { sound } from '@/types/responseResult';
-import truncateText from './truncateText';
+import { sound } from '@/types/sound';
+import truncateText from '@/utils/truncateText';
 
 export default function parseResponseResult(response: sound[]) :sound[] {
   const parsedResponse: sound[] = [];
 
   response.forEach((element) => {
     parsedResponse.push({
+      id: element.id,
       isrc: element.isrc,
       thumbnailUrl: element.thumbnailUrl,
       title: truncateText(element.title),
