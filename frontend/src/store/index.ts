@@ -27,6 +27,19 @@ export default createStore<State>({
     setResults(state, results: result[]) {
       state.results = results;
     },
+    sortResults(state) {
+      const resultsDup = state.results;
+      const sortedResults: result[] = resultsDup.sort((element, otherElement) => {
+        if (element.id > otherElement.id) {
+          return 1;
+        }
+        if (element.id < otherElement.id) {
+          return -1;
+        }
+        return 0;
+      });
+      state.results = sortedResults;
+    },
     setIsLoading(state, boolean: boolean) {
       state.isLoading = boolean;
     },
@@ -41,6 +54,7 @@ export default createStore<State>({
   actions: {
     updateResultsAndPage({ commit }, response: responseResult) {
       commit('setResults', parseResponseResult(response.data.results));
+      commit('sortResults');
       commit('setCurrentPage', response.data.currentPage);
     },
     updateCurrentPage({ commit }, page: number) {
