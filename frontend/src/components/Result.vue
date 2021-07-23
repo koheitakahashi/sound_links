@@ -1,13 +1,15 @@
 <template>
   <div class="results-item">
-    <img :src="result.thumbnailUrl" alt="" class="results-item__image" />
+    <div class="results-item-image__layout">
+      <img :src="result.thumbnailUrl" alt="" class="results-item__image" />
+    </div>
     <div class="results-item-section">
       <div class="results-item-section__explain">
         <p class="results-item-section-explain__title" data-test="title">
-          {{ result.title }}
+          {{ truncatedTitle }}
         </p>
         <p class="results-item-section-explain__artist-name" data-test="artist">
-          {{ result.artist }}
+          {{ truncatedArtist }}
         </p>
       </div>
       <div class="results-item-section__actions">
@@ -55,8 +57,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, PropType } from 'vue';
+import {
+  defineComponent,
+  reactive,
+  computed,
+  PropType,
+} from 'vue';
 import { result } from '@/types/result';
+import truncateText from '@/utils/truncateText';
 
 const TOOLTIP_SHOW_TIME = 3000;
 
@@ -65,13 +73,10 @@ export default defineComponent({
   props: {
     result: {
       type: Object as PropType<result>,
-      default() {
-        return {};
-      },
     },
   },
 
-  setup() {
+  setup(props) {
     const state = reactive({
       isCopiedUrls: false,
     });
@@ -101,8 +106,24 @@ export default defineComponent({
       });
     }
 
+    const truncatedTitle = computed(() => {
+      if (typeof props.result === 'object') {
+        return truncateText(props.result.title);
+      }
+      return '';
+    });
+
+    const truncatedArtist = computed(() => {
+      if (typeof props.result === 'object') {
+        return truncateText(props.result.artist);
+      }
+      return '';
+    });
+
     return {
       state,
+      truncatedTitle,
+      truncatedArtist,
       copyUrlsToClipBoard,
     };
   },
