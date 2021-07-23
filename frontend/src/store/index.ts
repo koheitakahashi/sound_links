@@ -27,19 +27,6 @@ export default createStore<State>({
     setResults(state, results: result[]) {
       state.results = results;
     },
-    sortResults(state) {
-      const resultsDup = state.results;
-      const sortedResults: result[] = resultsDup.sort((element, otherElement) => {
-        if (element.id > otherElement.id) {
-          return 1;
-        }
-        if (element.id < otherElement.id) {
-          return -1;
-        }
-        return 0;
-      });
-      state.results = sortedResults;
-    },
     setIsLoading(state, boolean: boolean) {
       state.isLoading = boolean;
     },
@@ -51,15 +38,48 @@ export default createStore<State>({
     },
   },
 
+  getters: {
+    keyword(state) {
+      return state.keyword;
+    },
+
+    sortedResults(state) {
+      const resultsDup = state.results;
+      const sortedResults: result[] = resultsDup.sort((element, otherElement) => {
+        if (element.id > otherElement.id) {
+          return 1;
+        }
+        if (element.id < otherElement.id) {
+          return -1;
+        }
+        return 0;
+      });
+      return sortedResults;
+    },
+
+    isLoading(state) {
+      return state.isLoading;
+    },
+
+    currentPage(state) {
+      return state.currentPage;
+    },
+
+    showError(state) {
+      return state.showError;
+    },
+  },
+
   actions: {
     updateResultsAndPage({ commit }, response: responseResult) {
       commit('setResults', parseResponseResult(response.data.results));
-      commit('sortResults');
       commit('setCurrentPage', response.data.currentPage);
     },
+    // TODO: 不要な action かどうかを検討する
     updateCurrentPage({ commit }, page: number) {
       commit('setCurrentPage', page);
     },
+    // TODO: 不要な action かどうかを検討する
     updateKeyword({ commit }, keyword: string) {
       commit('setKeyword', keyword);
     },
