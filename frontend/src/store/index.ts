@@ -43,6 +43,7 @@ export default createStore<State>({
       return state.keyword;
     },
 
+    // TODO: マジックナンバーを定数に切り出す
     sortedResults(state) {
       const resultsDup = state.results;
       const sortedResults: result[] = resultsDup.sort((element, otherElement) => {

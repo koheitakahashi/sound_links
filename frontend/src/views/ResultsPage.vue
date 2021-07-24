@@ -7,12 +7,12 @@
     ></search-form>
   </header>
   <main class="main-wrapper__results">
-    <error-message v-show="store.state.showError"></error-message>
-    <div v-show="!store.state.showError">
-      <div v-show="store.state.isLoading" class="loader">Loading...</div>
+    <error-message v-show="store.getters.showError"></error-message>
+    <div v-show="!store.getters.showError">
+      <div v-show="store.getters.isLoading" class="loader">Loading...</div>
       <results-list
-        v-show="!store.state.isLoading"
-        :results="store.state.results"
+        v-show="!store.getters.isLoading"
+        :results="store.getters.sortedResults"
       ></results-list>
     </div>
   </main>
@@ -24,6 +24,7 @@ import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
+// TODO: list が冗長なので名前を変更する
 import ResultsList from '@/components/ResultsList.vue';
 import FooterComponent from '@/components/Footer.vue';
 import SearchForm from '@/components/SearchForm.vue';
@@ -41,36 +42,25 @@ export default defineComponent({
     const route = useRoute();
     const store = useStore();
 
+    // TODO: 不要かもしれない
     const setKeyword = async () => {
       if (route.query.keyword) {
-        // NOTE: route.query.keywords をそのまま state.keywords にいれると、route.query.keywordsが
-        // String 以外にもなり得るため代入できない
-        const params = new URLSearchParams(window.location.search);
-        store.commit('setKeyword', params.get('keyword'));
+        store.commit('setKeyword', route.query.keyword);
       }
     };
 
-    function setCurrentPage() {
-      if (route.query.page) {
-        // NOTE: route.query.keywords をそのまま state.keywords にいれると、route.query.keywordsが
-        // String 以外にもなり得るため代入できない
-        // TODO: type エラーが解消できないため、一旦コメントアウトする
-        // let params = new URLSearchParams(window.location.search);
-        // store.commit("setCurrentPage", parseInt(params.get("page")));
-      }
-    }
-
+    // TODO: これを store に移動したほうがよいかもしれない
     const fetchResults = async () => {
       await setKeyword();
       try {
         store.commit('setIsLoading', true);
         const response = await axios.get('api/v1/search', {
           params: {
-            keyword: store.state.keyword,
-            page: store.state.currentPage,
+            keyword: store.getters.keyword,
+            page: store.getters.currentPage,
           },
         });
-        store.commit('setKeyword', store.state.keyword);
+        store.commit('setKeyword', store.getters.keyword);
         await store.dispatch('updateResultsAndPage', response.data);
         store.commit('setIsLoading', false);
       } catch (error) {
@@ -79,7 +69,6 @@ export default defineComponent({
       }
     };
 
-    setCurrentPage();
     fetchResults();
 
     return {

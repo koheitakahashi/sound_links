@@ -1,7 +1,9 @@
 <template>
   <div class="results-item">
     <div class="results-item-image__layout">
-      <img :src="result.thumbnailUrl" alt="" class="results-item__image" />
+      <img :src="result.thumbnailUrl" alt="" class="results-item__image"
+           data-test="thumbnail-url"
+      />
     </div>
     <div class="results-item-section">
       <div class="results-item-section__explain">

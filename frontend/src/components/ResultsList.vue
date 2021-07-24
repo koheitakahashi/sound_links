@@ -3,7 +3,7 @@
     <h2 class="result-section__title">検索結果一覧</h2>
     <pagination></pagination>
     <div
-      v-show="results.length === 0 && !store.state.isLoading"
+      v-show="results.length === 0 && !store.getters.isLoading"
       class="result-section__no-message"
       data-test="no-result-message"
     >
