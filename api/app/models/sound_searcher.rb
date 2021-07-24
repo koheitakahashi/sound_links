@@ -89,7 +89,8 @@ class SoundSearcher
           merged_sound_hash[isrc_value] = result
         end
       end
-      merged_sound_hash.values
+      # NOTE: frontend には null を返さない方針のため、ここで nil の値は空文字にしている
+      merged_sound_hash.deep_transform_values { |value| value.to_s }.values
     end
 
     def merged_sound(merged_hash, merge_hash)
