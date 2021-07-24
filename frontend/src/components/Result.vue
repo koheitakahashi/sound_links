@@ -2,7 +2,7 @@
   <div class="results-item">
     <div class="results-item-image__layout">
       <img :src="result.thumbnailUrl" alt="" class="results-item__image"
-           data-test="thumbnail-url"
+           data-test="thumbnail"
       />
     </div>
     <div class="results-item-section">
@@ -24,32 +24,36 @@
             この曲をシェアする
           </button>
           <span v-show="state.isCopiedUrls" class="tooltip__copied--notice"
+                data-test="url-copy-notice"
             >楽曲のURLがコピーされました</span
           >
         </div>
         <div class="results-item-section__images">
-          <a :href="result.appleMusicUrl" data-test="apple-music-url">
+          <a :href="result.appleMusicUrl">
             <img
               src="../../public/img/icons/apple-music-icon.svg"
               alt=""
               v-show="result.appleMusicUrl"
               class="results-item-section__icon"
+              data-test="apple-music-icon"
             />
           </a>
-          <a :href="result.spotifyUrl" data-test="spotify-url">
+          <a :href="result.spotifyUrl">
             <img
               src="../../public/img/icons/spotify-icon.svg"
               alt=""
               v-show="result.spotifyUrl"
               class="results-item-section__icon"
+              data-test="spotify-icon"
             />
           </a>
-          <a :href="result.kkboxUrl" data-test="kkbox-url">
+          <a :href="result.kkboxUrl">
             <img
               src="../../public/img/icons/kkbox-icon.svg"
               alt=""
               v-show="result.kkboxUrl"
               class="results-item-section__icon"
+              data-test="kkbox-icon"
             />
           </a>
         </div>

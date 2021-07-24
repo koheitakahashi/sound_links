@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/vue';
+import { shallowMount } from '@vue/test-utils';
 import Result from '../../../src/components/Result.vue';
 
 describe('ResultComponent', () => {
@@ -14,33 +14,38 @@ describe('ResultComponent', () => {
   };
 
   describe('検索結果の表示', () => {
-    it('検索結果が1件、props で渡された場合場合、その検索結果が表示される', () => {
-      const { getByText } = render(Result, {
+    it('props で検索結果が渡された場合、その検索結果が表示される', () => {
+      const wrapper = shallowMount(Result, {
         props: { result },
       });
-      // const wrapper = render(Result, {
-      //   props: { result },
-      //   // NOTE: テスト実行時に以下のエラーが発生していた。
-      //   //   TypeScript diagnostics
-      //   //   (customize using `[jest-config].globals.ts-jest.diagnostics` option):
-      //   //   そのため、以下を参考に MountingOptions を設定した。
-      //   //   参考: https://github.com/vuejs/vue-test-utils-next/issues/194#issuecomment-749541682
-      //   // eslint-disable-next-line @typescript-eslint/ban-types
-      // });
 
-      getByText('リライト');
-
-      // expect(getByText('.results-item__image').text()).toBe('https://is3-ssl.mzstatic.com/image/thumb/Music124/v4/5a/6f/de/5a6fdeff-ba89-e6c4-dd0f-982481264c46/jacket_KSXX01381B00Z_550.jpg/300x300bb.jpeg');
+      expect(wrapper.find('[data-test="thumbnail"]').exists()).toBe(true);
+      expect(wrapper.find('[data-test="title"]').text()).toBe('リライト');
+      expect(wrapper.find('[data-test="artist"]').text()).toBe('ASIAN KUNG-FU GENERATION');
+      expect(wrapper.find('[data-test="apple-music-icon"]').isVisible()).toBe(true);
+      expect(wrapper.find('[data-test="spotify-icon"]').isVisible()).toBe(true);
+      expect(wrapper.find('[data-test="kkbox-icon"]').isVisible()).toBe(true);
     });
   });
 
   describe('楽曲の URL コピー機能', () => {
-    it('その楽曲に Spotify・AppleMusic・KKBOX の3つの URL がある場合、「この曲をシェアする」ボタンをクリックすると、3つの URL がクリップボードにコピーされる', () => {
-
+    // NOTE: mock方法は以下を参考にした
+    //   https://stackoverflow.com/questions/62351935/how-to-mock-navigator-clipboard-writetext-in-jest
+    Object.defineProperty(navigator, 'clipboard', {
+      value: {
+        writeText: () => Promise.resolve(),
+      },
     });
 
-    it('その楽曲に Spotify の1つの URL がある場合、「この曲をシェアする」ボタンをクリックすると、1つの URL がクリップボードにコピーされる', () => {
+    it('「この曲をシェアする」ボタンをクリックした場合、「この曲をシェアする」ボタンを押すとメッセージが表示される', async () => {
+      const wrapper = shallowMount(Result, {
+        props: { result },
+      });
 
+      expect(wrapper.find('[data-test="url-copy-notice"]').isVisible()).toBe(false);
+      await wrapper.find('[data-test=url-copy-button]').trigger('click');
+
+      expect(wrapper.find('[data-test="url-copy-notice"]').isVisible()).toBe(true);
     });
   });
 });
