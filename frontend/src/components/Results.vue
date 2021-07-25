@@ -14,6 +14,7 @@
       v-for="result in results"
       :key="result.id"
       v-show="results.length !== 0"
+      data-test="results-list"
     >
       <result :result="result"></result>
     </div>

@@ -10,10 +10,10 @@
     <error-message v-show="store.getters.showError"></error-message>
     <div v-show="!store.getters.showError">
       <div v-show="store.getters.isLoading" class="loader">Loading...</div>
-      <results-list
+      <results
         v-show="!store.getters.isLoading"
         :results="store.getters.sortedResults"
-      ></results-list>
+      ></results>
     </div>
   </main>
   <footer-component class="footer-wrapper__results"></footer-component>
@@ -25,7 +25,7 @@ import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
 // TODO: list が冗長なので名前を変更する
-import ResultsList from '@/components/ResultsList.vue';
+import Results from '@/components/Results.vue';
 import FooterComponent from '@/components/Footer.vue';
 import SearchForm from '@/components/SearchForm.vue';
 import ErrorMessage from '@/components/ErrorMessage.vue';
@@ -34,7 +34,7 @@ export default defineComponent({
   name: 'ResultsPage',
   components: {
     SearchForm,
-    ResultsList,
+    Results,
     FooterComponent,
     ErrorMessage,
   },
