@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="result-section__title">検索結果一覧</h2>
+    <h2 class="result-section__title" data-test="results-header">検索結果一覧</h2>
     <pagination></pagination>
     <div
       v-show="results.length === 0 && !store.getters.isLoading"
