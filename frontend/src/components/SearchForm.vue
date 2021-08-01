@@ -25,12 +25,13 @@
 import { defineComponent, reactive } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useStore } from 'vuex';
-import axios from 'axios';
 import SearchIcon from './fontAwesome/SearchIcon.vue';
 
 type State = {
-  keyword: string | (string | null)[]
+  keyword: string
 }
+
+const INITIAL_CURRENT_PAGE_NUMBER = 1;
 
 export default defineComponent({
   name: 'SearchForm',
@@ -61,39 +62,24 @@ export default defineComponent({
 
     // NOTE: 直接URLにアクセスされた場合の対応
     function setKeyword() {
-      const keywordFromQuery = route.query.keyword;
-      if (keywordFromQuery) {
-        state.keyword = keywordFromQuery;
+      let keywordFromQuery = '';
+      if (typeof route.query.keyword === 'string') {
+        keywordFromQuery = route.query.keyword;
       }
+      state.keyword = keywordFromQuery;
+      store.dispatch('updateKeyword', keywordFromQuery);
     }
-
-    const fetchResults = async (keyword :string) => {
-      try {
-        store.commit('setIsLoading', true);
-        store.commit('setKeyword', keyword);
-        const response = await axios.get('api/v1/search', {
-          params: {
-            keyword: store.state.keyword,
-            page: store.state.currentPage,
-          },
-        });
-        await store.dispatch('updateResultsAndPage', response.data);
-        store.commit('setIsLoading', false);
-      } catch (error) {
-        store.commit('setIsLoading', false);
-        store.commit('setShowError', true);
-      }
-    };
 
     const submitSearch = async (keyword :string) => {
       if (keyword === '') {
         return;
       }
-      store.commit('setCurrentPage', 1);
+      await store.dispatch('updateCurrentPage', INITIAL_CURRENT_PAGE_NUMBER);
 
       goToResultPage(keyword);
+      // TODO: Results.vue でも検索結果をとっているので不要かもしれない
       if (props.parentComponent === 'ResultsPage') {
-        await fetchResults(keyword);
+        await store.dispatch('fetchResults');
       }
     };
 

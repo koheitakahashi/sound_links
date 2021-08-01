@@ -7,13 +7,13 @@
     ></search-form>
   </header>
   <main class="main-wrapper__results">
-    <error-message v-show="store.state.showError"></error-message>
-    <div v-show="!store.state.showError">
-      <div v-show="store.state.isLoading" class="loader">Loading...</div>
-      <results-list
-        v-show="!store.state.isLoading"
-        :results="store.state.results"
-      ></results-list>
+    <error-message v-show="store.getters.showError"></error-message>
+    <div v-show="!store.getters.showError">
+      <div v-show="store.getters.isLoading" class="loader">Loading...</div>
+      <results
+        v-show="!store.getters.isLoading"
+        :results="store.getters.sortedResults"
+      ></results>
     </div>
   </main>
   <footer-component class="footer-wrapper__results"></footer-component>
@@ -23,8 +23,7 @@
 import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
-import axios from 'axios';
-import ResultsList from '@/components/ResultsList.vue';
+import Results from '@/components/Results.vue';
 import FooterComponent from '@/components/Footer.vue';
 import SearchForm from '@/components/SearchForm.vue';
 import ErrorMessage from '@/components/ErrorMessage.vue';
@@ -33,7 +32,7 @@ export default defineComponent({
   name: 'ResultsPage',
   components: {
     SearchForm,
-    ResultsList,
+    Results,
     FooterComponent,
     ErrorMessage,
   },
@@ -41,45 +40,11 @@ export default defineComponent({
     const route = useRoute();
     const store = useStore();
 
-    const setKeyword = async () => {
-      if (route.query.keyword) {
-        // NOTE: route.query.keywords をそのまま state.keywords にいれると、route.query.keywordsが
-        // String 以外にもなり得るため代入できない
-        const params = new URLSearchParams(window.location.search);
-        store.commit('setKeyword', params.get('keyword'));
-      }
-    };
-
-    function setCurrentPage() {
-      if (route.query.page) {
-        // NOTE: route.query.keywords をそのまま state.keywords にいれると、route.query.keywordsが
-        // String 以外にもなり得るため代入できない
-        // TODO: type エラーが解消できないため、一旦コメントアウトする
-        // let params = new URLSearchParams(window.location.search);
-        // store.commit("setCurrentPage", parseInt(params.get("page")));
-      }
-    }
-
     const fetchResults = async () => {
-      await setKeyword();
-      try {
-        store.commit('setIsLoading', true);
-        const response = await axios.get('api/v1/search', {
-          params: {
-            keyword: store.state.keyword,
-            page: store.state.currentPage,
-          },
-        });
-        store.commit('setKeyword', store.state.keyword);
-        await store.dispatch('updateResultsAndPage', response.data);
-        store.commit('setIsLoading', false);
-      } catch (error) {
-        store.commit('setIsLoading', false);
-        store.commit('setShowError', true);
-      }
+      await store.dispatch('updateKeyword', route.query.keyword);
+      await store.dispatch('fetchResults');
     };
 
-    setCurrentPage();
     fetchResults();
 
     return {

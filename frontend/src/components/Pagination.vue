@@ -2,17 +2,17 @@
   <nav class="pagination" data-test="pagination">
     <ul class="pagination__items">
       <li class="pagination-item__previous-link">
-        <left-arrow-icon @click="linkToPreviousPage()"></left-arrow-icon>
+        <left-arrow-icon @click="linkToPage('previous')"></left-arrow-icon>
       </li>
       <li
         class="pagination-item__current-page"
         data-test="pagination-current-page-number"
       >
-        {{ store.state.currentPage }}ページ目
+        {{ store.getters.currentPage }}ページ目
       </li>
 
       <li class="pagination-item__next-link">
-        <right-arrow-icon @click="linkToNextPage()"></right-arrow-icon>
+        <right-arrow-icon @click="linkToPage('next')"></right-arrow-icon>
       </li>
     </ul>
   </nav>
@@ -22,7 +22,6 @@
 import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
-import axios from 'axios';
 import RightArrowIcon from './fontAwesome/RightArrowIcon.vue';
 import LeftArrowIcon from './fontAwesome/LeftArrowIcon.vue';
 
@@ -45,63 +44,28 @@ export default defineComponent({
       }
     }
 
-    const linkToNextPage = async () => {
-      // TODO: 共通化する
-      const nextPageNumber = store.state.currentPage + aroundCurrentPageNumber;
+    const linkToPage = async (pageString: 'next' | 'previous') => {
+      if (pageString === 'previous' && store.getters.currentPage <= minimumPageNumber) {
+        return;
+      }
+
+      let linkToPageNumber: number;
+      if (pageString === 'next') {
+        linkToPageNumber = store.getters.currentPage + aroundCurrentPageNumber;
+      } else {
+        linkToPageNumber = store.getters.currentPage - aroundCurrentPageNumber;
+      }
+
+      await store.dispatch('updateCurrentPage', linkToPageNumber);
       try {
         await router.push({
           name: 'ResultsPage',
           query: {
-            keyword: store.state.keyword,
-            page: nextPageNumber,
+            keyword: store.getters.keyword,
+            page: linkToPageNumber,
           },
         });
-
-        store.commit('setIsLoading', true);
-        await store.dispatch('updateCurrentPage', nextPageNumber);
-
-        const response = await axios.get('api/v1/search', {
-          params: {
-            keyword: store.state.keyword,
-            page: store.state.currentPage,
-          },
-        });
-
-        await store.dispatch('updateResultsAndPage', response.data);
-        store.commit('setIsLoading', false);
-      } catch (error) {
-        store.commit('setIsLoading', false);
-      }
-    };
-
-    const linkToPreviousPage = async () => {
-      if (store.state.currentPage === minimumPageNumber) {
-        return;
-      }
-
-      // TODO: 共通化する
-      const previousPageNumber = store.state.currentPage - aroundCurrentPageNumber;
-      await router.push({
-        name: 'ResultsPage',
-        query: {
-          keyword: store.state.keyword,
-          page: previousPageNumber,
-        },
-      });
-
-      try {
-        store.commit('setIsLoading', true);
-        await store.dispatch('updateCurrentPage', previousPageNumber);
-
-        const response = await axios.get('api/v1/search', {
-          params: {
-            keyword: store.state.keyword,
-            page: store.state.currentPage,
-          },
-        });
-
-        await store.dispatch('updateResultsAndPage', response.data);
-        store.commit('setIsLoading', false);
+        await store.dispatch('fetchResults');
       } catch (error) {
         store.commit('setIsLoading', false);
       }
@@ -110,8 +74,7 @@ export default defineComponent({
     setCurrentPage();
     return {
       store,
-      linkToNextPage,
-      linkToPreviousPage,
+      linkToPage,
     };
   },
 });

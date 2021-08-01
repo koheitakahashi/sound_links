@@ -1,13 +1,17 @@
 <template>
   <div class="results-item">
-    <img :src="result.thumbnailUrl" alt="" class="results-item__image" />
+    <div class="results-item-image__layout">
+      <img :src="result.thumbnailUrl" alt="" class="results-item__image"
+           data-test="thumbnail"
+      />
+    </div>
     <div class="results-item-section">
       <div class="results-item-section__explain">
         <p class="results-item-section-explain__title" data-test="title">
-          {{ result.title }}
+          {{ truncatedTitle }}
         </p>
         <p class="results-item-section-explain__artist-name" data-test="artist">
-          {{ result.artist }}
+          {{ truncatedArtist }}
         </p>
       </div>
       <div class="results-item-section__actions">
@@ -20,32 +24,36 @@
             この曲をシェアする
           </button>
           <span v-show="state.isCopiedUrls" class="tooltip__copied--notice"
+                data-test="url-copy-notice"
             >楽曲のURLがコピーされました</span
           >
         </div>
         <div class="results-item-section__images">
-          <a :href="result.appleMusicUrl" data-test="apple-music-url">
+          <a :href="result.appleMusicUrl">
             <img
               src="../../public/img/icons/apple-music-icon.svg"
               alt=""
               v-show="result.appleMusicUrl"
               class="results-item-section__icon"
+              data-test="apple-music-icon"
             />
           </a>
-          <a :href="result.spotifyUrl" data-test="spotify-url">
+          <a :href="result.spotifyUrl">
             <img
               src="../../public/img/icons/spotify-icon.svg"
               alt=""
               v-show="result.spotifyUrl"
               class="results-item-section__icon"
+              data-test="spotify-icon"
             />
           </a>
-          <a :href="result.kkboxUrl" data-test="kkbox-url">
+          <a :href="result.kkboxUrl">
             <img
               src="../../public/img/icons/kkbox-icon.svg"
               alt=""
               v-show="result.kkboxUrl"
               class="results-item-section__icon"
+              data-test="kkbox-icon"
             />
           </a>
         </div>
@@ -55,8 +63,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, PropType } from 'vue';
+import {
+  defineComponent,
+  reactive,
+  computed,
+  PropType,
+} from 'vue';
 import { result } from '@/types/result';
+import truncateText from '@/utils/truncateText';
 
 const TOOLTIP_SHOW_TIME = 3000;
 
@@ -65,13 +79,10 @@ export default defineComponent({
   props: {
     result: {
       type: Object as PropType<result>,
-      default() {
-        return {};
-      },
     },
   },
 
-  setup() {
+  setup(props) {
     const state = reactive({
       isCopiedUrls: false,
     });
@@ -101,8 +112,24 @@ export default defineComponent({
       });
     }
 
+    const truncatedTitle = computed(() => {
+      if (typeof props.result === 'object') {
+        return truncateText(props.result.title);
+      }
+      return '';
+    });
+
+    const truncatedArtist = computed(() => {
+      if (typeof props.result === 'object') {
+        return truncateText(props.result.artist);
+      }
+      return '';
+    });
+
     return {
       state,
+      truncatedTitle,
+      truncatedArtist,
       copyUrlsToClipBoard,
     };
   },
