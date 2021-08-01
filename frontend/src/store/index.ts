@@ -78,7 +78,6 @@ export default createStore<State>({
       commit('setResults', parseResponseResult(response.data.results));
       commit('setCurrentPage', response.data.currentPage);
     },
-    // TODO: 不要な action かどうかを検討する
     updateCurrentPage({ commit }, page: number) {
       commit('setCurrentPage', page);
     },

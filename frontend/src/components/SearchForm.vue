@@ -77,6 +77,7 @@ export default defineComponent({
       await store.dispatch('updateCurrentPage', INITIAL_CURRENT_PAGE_NUMBER);
 
       goToResultPage(keyword);
+      // TODO: Results.vue でも検索結果をとっているので不要かもしれない
       if (props.parentComponent === 'ResultsPage') {
         await store.dispatch('fetchResults');
       }
