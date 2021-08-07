@@ -1,0 +1,69 @@
+version: "3"
+
+services:
+  db:
+    container_name: db
+    image: postgres:13.3
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      TZ: Asia/Tokyo
+    volumes:
+      - psgl_data:/var/lib/postgresql/data
+    ports:
+      - "5342:5342"
+    networks:
+      app_net:
+        ipv4_address: '172.20.0.2'
+
+  api:
+    container_name: api
+    build: ./api/
+    image: api
+    command: bundle exec rails server -b 0.0.0.0
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./api:/app:cached
+      - bundle_data:/usr/local/bundle:cached
+      - /app/vendor
+      - /app/tmp
+      - /app/log
+      - /app/.git
+    environment:
+      TZ: Asia/Tokyo
+      DATABASE_HOST: db
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: password
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    networks:
+      app_net:
+        ipv4_address: '172.20.0.3'
+
+  frontend:
+    container_name: front
+    build: ./frontend/
+    image: frontend
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "8080:8080"
+    command: "yarn serve"
+    networks:
+      app_net:
+        ipv4_address: '172.20.0.4'
+
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/24
+
+volumes:
+  psgl_data:
+  bundle_data:
