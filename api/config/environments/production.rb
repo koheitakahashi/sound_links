@@ -111,4 +111,8 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  # not default
+  # 本番環境のホストからアクセスを受け付ける
+  Rails.application.config.hosts << "api.sound-links.com"
 end

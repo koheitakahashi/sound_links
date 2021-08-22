@@ -51,7 +51,7 @@ services:
       - ./frontend:/app
     ports:
       - "8080:8080"
-    command: "yarn serve"
+    command: "yarn serve:development"
     networks:
       app_net:
         ipv4_address: '172.20.0.4'

@@ -8,7 +8,6 @@ default: &default
 
 development:
   <<: *default
-  host: db
   host: <%= ENV['DB_HOST'] || 'db' %>
   database: sound_links_development
 
@@ -19,3 +18,4 @@ test:
 production:
   <<: *default
   database: sound_links_production
+  url: <%= ENV['DATABASE_URL'] %>
