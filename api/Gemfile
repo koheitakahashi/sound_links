@@ -24,7 +24,7 @@ gem "rack-cors"
 
 # 4.0だと以下のエラーが発生したためバージョンを下げた
 # ref: https://github.com/rails/sprockets-rails/issues/444#issue-504540500
-gem 'sprockets', '~>3.0'
+gem "sprockets", "~>3.0"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
