@@ -3,9 +3,12 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   encoding: unicode
+  username: postgres
+  password: password
 
 development:
   <<: *default
+  host: <%= ENV['DB_HOST'] || 'db' %>
   database: sound_links_development
 
 test:
@@ -15,3 +18,4 @@ test:
 production:
   <<: *default
   database: sound_links_production
+  url: <%= ENV['DATABASE_URL'] %>

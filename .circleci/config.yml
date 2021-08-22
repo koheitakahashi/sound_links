@@ -13,9 +13,9 @@ executors:
           RAILS_ENV: test
       - image: circleci/postgres:12.3
         environment:
-          POSTGRES_USER: user
+          POSTGRES_USER: postgres
           POSTGRES_DB: sound_links_test
-          POSTGRES_PASSWORD: "postgres"
+          POSTGRES_PASSWORD: "password"
 
 commands:
   setup:
