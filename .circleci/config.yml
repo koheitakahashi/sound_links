@@ -1,7 +1,12 @@
 version: 2.1
 
+orbs:
+  aws-cli: circleci/aws-cli@2.0.3
+  aws-ecr: circleci/aws-ecr@7.2.0
+  aws-ecs: circleci/aws-ecs@2.2.1
+
 executors:
-  default:
+  api_executor:
     docker:
       - image: circleci/ruby:3.0.1
         environment:
@@ -16,14 +21,13 @@ executors:
           POSTGRES_USER: postgres
           POSTGRES_DB: sound_links_test
           POSTGRES_PASSWORD: "password"
-
 commands:
   setup:
     steps:
       - restore_cache:
          keys:
-            - gem-cache-v1-{{ checksum "~/project/api/Gemfile.lock" }}
-            - gem-cache-v1
+           - gem-cache-v1-{{ checksum "~/project/api/Gemfile.lock" }}
+           - gem-cache-v1
 
       - run:
           name: Update bundler
@@ -46,8 +50,8 @@ commands:
             - ~/project/api/vendor/bundle
 
 jobs:
-  test:
-    executor: default
+  api_test:
+    executor: api_executor
     steps:
       - checkout
       - setup
@@ -73,10 +77,82 @@ jobs:
 
       - store_test_results:
           path: tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+      - store_artifacts:
+          path: /home/circleci/project/tmp/screenshots
+
+  build_and_push_image_api:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - aws-cli/install:
+          override-installed: true
+      - checkout
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ACCOUNT_URL
+          repo: "sound-links-api"
+          region: AWS_REGION
+          tag: "${CIRCLE_SHA1}"
+          path: ./api/
+
+  build_and_push_image_frontend:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - aws-cli/install:
+          override-installed: true
+      - checkout
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ACCOUNT_URL
+          repo: "sound-links-frontend"
+          region: AWS_REGION
+          tag: "${CIRCLE_SHA1}"
+          path: ./frontend/
 
 workflows:
-  version: 2.1
-
-  build_and_test:
+  version: 2
+  test:
     jobs:
-      - test
+      - api_test
+          filters:
+            branches:
+              ignore: main
+  test_and_deploy:
+    jobs:
+      - api_test
+      - build_and_push_image_api:
+          requires:
+            - api_test
+          filters:
+            branches:
+              only: main
+      - build_and_push_image_frontend:
+          requires:
+            - api_test
+          filters:
+            branches:
+              only: main
+      - aws-ecs/deploy-service-update:
+          requires:
+            - build_and_push_image_api
+            - build_and_push_image_frontend
+          family: "sound-links-task-api"
+          service-name: "sound-links-service-api"
+          cluster-name: "sound-links-cluster"
+          container-image-name-updates: "container=sound-links-container-api,tag=${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only: main
+      - aws-ecs/deploy-service-update:
+          requires:
+            - build_and_push_image_api
+            - build_and_push_image_frontend
+          family: "sound-links-task-frontend"
+          service-name: "sound-links-service-frontend"
+          cluster-name: "sound-links-cluster"
+          container-image-name-updates: "container=sound-links-container-frontend,tag=${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only: main

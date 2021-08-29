@@ -19,6 +19,7 @@ RUN bundle install
 
 ADD . /app
 RUN mkdir -p tmp/sockets
+RUN mkdir tmp/pids
 
 RUN groupadd nginx
 RUN useradd -g nginx nginx
