@@ -115,7 +115,7 @@ workflows:
   version: 2
   test:
     jobs:
-      - api_test
+      - api_test:
           filters:
             branches:
               ignore: main
