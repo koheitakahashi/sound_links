@@ -1,103 +1,158 @@
 version: 2.1
 
+orbs:
+  aws-cli: circleci/aws-cli@2.0.3
+  aws-ecr: circleci/aws-ecr@7.2.0
+  aws-ecs: circleci/aws-ecs@2.2.1
+
 executors:
-  default:
+  api_executor:
     docker:
-      - image: circleci/ruby:3.0.1-node-browsers
+      - image: circleci/ruby:3.0.1
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle
+          BUNDLE_PATH: ~/project/api/vendor/bundle
           PGHOST: 127.0.0.1
           PGUSER: user
           RAILS_ENV: test
       - image: circleci/postgres:12.3
         environment:
-          POSTGRES_USER: user
+          POSTGRES_USER: postgres
           POSTGRES_DB: sound_links_test
-          POSTGRES_PASSWORD: "postgres"
-
-
+          POSTGRES_PASSWORD: "password"
 commands:
   setup:
     steps:
       - restore_cache:
          keys:
-            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v1
+           - gem-cache-v1-{{ checksum "~/project/api/Gemfile.lock" }}
+           - gem-cache-v1
 
       - run:
           name: Update bundler
           command: gem update bundler
+          working_directory: ~/project/api
 
       - run:
           name: Set bundle config clean
           command: bundle config set clean "true"
+          working_directory: ~/project/api
 
       - run:
           name: Install gems
           command: bundle check || bundle install
+          working_directory: ~/project/api
 
       - save_cache:
-          key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
+          key: gem-cache-v1-{{ checksum "~/project/api/Gemfile.lock" }}
           paths:
-            - vendor/bundle
-
-      - restore_cache:
-          keys:
-            - yarn-cache-v1-{{ checksum "yarn.lock" }}
-            - yarn-cache-v1
-
-      - run:
-          name: Yarn Install
-          command: yarn install --cache-folder ~/.cache/yarn
-
-      - save_cache:
-          key: yarn-cache-v1-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+            - ~/project/api/vendor/bundle
 
 jobs:
-  test:
-    executor: default
+  api_test:
+    executor: api_executor
     steps:
       - checkout
       - setup
       - run:
           name: Run Lint
-          command: |
-            bundle exec rubocop
-            bin/yarn eslint app/javascript/packs/*.ts
-            bin/yarn eslint app/javascript/src/*.ts
-            bin/yarn eslint app/javascript/src/*.vue
-            bin/yarn eslint app/javascript/src/*/*.vue
-            bin/yarn eslint app/javascript/src/*/*.ts
-            bin/yarn stylelint app/javascript/assets/stylesheets/layout/*.scss
-            bin/yarn stylelint app/javascript/assets/stylesheets/modules/*.scss
-            bin/yarn stylelint app/javascript/assets/stylesheets/application.scss
+          command: bundle exec rubocop
+          working_directory: ~/project/api
 
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
+          working_directory: ~/project/api
 
       - run:
           name: Database setup
           command: bin/rails db:schema:load --trace
+          working_directory: ~/project/api
 
       - run:
           name: Run RSpec
           command: bundle exec rspec
+          working_directory: ~/project/api
 
       - store_test_results:
           path: tmp/test-results
-
       - store_artifacts:
-          path: tmp/screenshots
-          destination: screenshots
+          path: /tmp/test-results
+          destination: test-results
+      - store_artifacts:
+          path: /home/circleci/project/tmp/screenshots
+
+  build_and_push_image_api:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - aws-cli/install:
+          override-installed: true
+      - checkout
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ACCOUNT_URL
+          repo: "sound-links-api"
+          region: AWS_REGION
+          tag: "${CIRCLE_SHA1}"
+          path: ./api/
+
+  build_and_push_image_frontend:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - aws-cli/install:
+          override-installed: true
+      - checkout
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ACCOUNT_URL
+          repo: "sound-links-frontend"
+          region: AWS_REGION
+          tag: "${CIRCLE_SHA1}"
+          path: ./frontend/
 
 workflows:
-  version: 2.1
-
-  build_and_test:
+  version: 2
+  test:
     jobs:
-      - test
+      - api_test:
+          filters:
+            branches:
+              ignore: main
+  test_and_deploy:
+    jobs:
+      - api_test
+      - build_and_push_image_api:
+          requires:
+            - api_test
+          filters:
+            branches:
+              only: main
+      - build_and_push_image_frontend:
+          requires:
+            - api_test
+          filters:
+            branches:
+              only: main
+      - aws-ecs/deploy-service-update:
+          requires:
+            - build_and_push_image_api
+            - build_and_push_image_frontend
+          family: "sound-links-task-api"
+          service-name: "sound-links-service-api"
+          cluster-name: "sound-links-cluster"
+          container-image-name-updates: "container=sound-links-container-api,tag=${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only: main
+      - aws-ecs/deploy-service-update:
+          requires:
+            - build_and_push_image_api
+            - build_and_push_image_frontend
+          family: "sound-links-task-frontend"
+          service-name: "sound-links-service-frontend"
+          cluster-name: "sound-links-cluster"
+          container-image-name-updates: "container=sound-links-container-frontend,tag=${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only: main
