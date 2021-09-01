@@ -34,4 +34,8 @@
   font-size: 2.5rem;
   text-decoration: none;
   // TODO: フォントを考える
+
+  @media (max-width: 480px) {
+    margin-left: 1rem;
+  }
 }
