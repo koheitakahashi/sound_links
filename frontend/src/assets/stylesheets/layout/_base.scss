@@ -3,8 +3,38 @@ html {
   height: 100%;
 }
 
+@font-face {
+  font-family: 'Noto Snas JP Medium';
+  src: url('~@/assets/fonts/Noto_Sans_JP/NotoSansJP-Medium.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Noto Snas JP Bold';
+  src: url('~@/assets/fonts/Noto_Sans_JP/NotoSansJP-Bold.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Noto Snas JP Light';
+  src: url('~@/assets/fonts/Noto_Sans_JP/NotoSansJP-Light.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Noto Snas JP Regular';
+  src: url('~@/assets/fonts/Noto_Sans_JP/NotoSansJP-Regular.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Noto Snas JP Thin';
+  src: url('~@/assets/fonts/Noto_Sans_JP/NotoSansJP-Thin.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Noto Snas JP Medium';
+  src: url('~@/assets/fonts/Noto_Sans_JP/NotoSansJP-Medium.otf') format('truetype');
+}
+
 body {
-  font-family: "Yu Gothic Medium", "游ゴシック Medium", "游ゴシック体", "Hiragino Sans", "ヒラギノ角ゴ Pro W3", sans-serif; // TODO: 後で良いフォントがあれば変えたい
+  font-family: "Noto Sans JP", sans-serif;
 }
 
 #app {
@@ -17,6 +47,7 @@ body {
 main {
   flex: 1;
 }
+
 
 .container {
   width: 80%;
