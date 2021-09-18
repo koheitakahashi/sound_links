@@ -1,6 +1,8 @@
 <template>
   <header class="header--results">
-    <h1><router-link to="/" class="header__title">Sound Links</router-link></h1>
+    <router-link to="/">
+      <img src="/img/logo.svg" alt="SoundLinksのロゴ" class="header__logo">
+    </router-link>
     <search-form
       class="search-form-wrapper__results"
       parent-component="ResultsPage"
@@ -8,12 +10,14 @@
   </header>
   <main class="main-wrapper__results">
     <error-message v-show="store.getters.showError"></error-message>
-    <div v-show="!store.getters.showError">
-      <div v-show="store.getters.isLoading" class="loader">Loading...</div>
-      <results
-        v-show="!store.getters.isLoading"
-        :results="store.getters.sortedResults"
-      ></results>
+    <div class="result-list">
+      <div v-show="!store.getters.showError">
+        <div v-show="store.getters.isLoading" class="loader">Loading...</div>
+        <results
+          v-show="!store.getters.isLoading"
+          :results="store.getters.sortedResults"
+        ></results>
+      </div>
     </div>
   </main>
   <footer-component class="footer-wrapper__results"></footer-component>
