@@ -4,37 +4,32 @@ html {
 }
 
 @font-face {
-  font-family: 'Noto Snas JP Medium';
+  font-family: 'NotoSnasJPMedium';
   src: url('~@/assets/fonts/Noto_Sans_JP/NotoSansJP-Medium.otf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Noto Snas JP Bold';
+  font-family: 'NotoSnasJPBold';
   src: url('~@/assets/fonts/Noto_Sans_JP/NotoSansJP-Bold.otf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Noto Snas JP Light';
+  font-family: 'NotoSnasJPLight';
   src: url('~@/assets/fonts/Noto_Sans_JP/NotoSansJP-Light.otf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Noto Snas JP Regular';
+  font-family: 'NotoSnasJPRegular';
   src: url('~@/assets/fonts/Noto_Sans_JP/NotoSansJP-Regular.otf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Noto Snas JP Thin';
+  font-family: 'NotoSnasJPThin';
   src: url('~@/assets/fonts/Noto_Sans_JP/NotoSansJP-Thin.otf') format('truetype');
 }
 
-@font-face {
-  font-family: 'Noto Snas JP Medium';
-  src: url('~@/assets/fonts/Noto_Sans_JP/NotoSansJP-Medium.otf') format('truetype');
-}
-
 body {
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: "NotoSnasJPRegular", sans-serif;
 }
 
 #app {
@@ -42,18 +37,4 @@ body {
   flex-direction: column;
   margin: 0;
   min-height: 100vh;
-}
-
-main {
-  flex: 1;
-}
-
-
-.container {
-  width: 80%;
-  margin: 0 auto;
-
-  @media (max-width: 480px) {
-    width: 100%;
-  }
 }

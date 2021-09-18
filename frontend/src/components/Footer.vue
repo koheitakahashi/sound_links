@@ -1,7 +1,8 @@
 <template>
   <footer class="footer">
-    <span class="footer__copyright">©️koheitakahashi 2021</span>
     <router-link to="/terms" class="footer__terms">免責事項</router-link>
+    <span class="footer__copyright">©️koheitakahashi 2021</span>
+    <img src="../../public/img/icons/github-icon.svg" alt="GitHubのアイコン" class="footer__github-icon">
   </footer>
 </template>
 
