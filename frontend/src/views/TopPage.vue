@@ -42,7 +42,7 @@
         </div>
         <div class="welcome-section-explain__usage">
           <div class="welcome-section-explain-usage__text">
-            <h2>音楽を探す</h2>
+            <h2>シェアする</h2>
             <p>コピーした音楽のURLをチャットやメール・SNSなどに貼り付けてシェアできます</p>
           </div>
           <img
@@ -63,7 +63,7 @@
             <a href="https://www.apple.com/jp/apple-music">
               <img
                 src="../../public/img/icons/apple-music-logo.svg"
-                alt=""
+                alt="AppleMusicのロゴ"
                 class="welcome-small-section__image"
               />
             </a>
@@ -76,7 +76,7 @@
             <a href="https://www.spotify.com/us">
               <img
                 src="../../public/img/icons/spotify-logo.svg"
-                alt=""
+                alt="Spotifyのロゴ"
                 class="welcome-small-section__image"
               />
             </a>
@@ -90,7 +90,7 @@
             <a href="https://www.kkbox.com/jp/ja/">
               <img
                 src="../../public/img/icons/kkbox-logo.svg"
-                alt=""
+                alt="KKBOXのロゴ"
                 class="welcome-small-section__image"
               />
             </a>

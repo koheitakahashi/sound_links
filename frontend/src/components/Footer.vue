@@ -2,7 +2,11 @@
   <footer class="footer">
     <router-link to="/terms" class="footer__terms">免責事項</router-link>
     <span class="footer__copyright">©️koheitakahashi 2021</span>
-    <img src="../../public/img/icons/github-icon.svg" alt="GitHubのアイコン" class="footer__github-icon">
+    <a href="https://github.com/koheitakahashi/sound_links">
+      <img src="../../public/img/icons/github-icon.svg"
+           alt="GitHubのアイコン"
+           class="footer__github-icon">
+    </a>
   </footer>
 </template>
 
