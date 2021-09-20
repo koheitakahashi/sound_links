@@ -1,7 +1,12 @@
 <template>
   <header class="header">
-    <h1><router-link to="/" class="header__title">Sound Links</router-link></h1>
-    <search-form class="search-form-wrapper__results"></search-form>
+    <router-link to="/">
+      <img src="/img/logo.svg" alt="SoundLinksのロゴ" class="header__logo">
+    </router-link>
+    <search-form
+      class="search-form-wrapper__results"
+      parent-component="ResultsPage"
+    ></search-form>
   </header>
   <main class="main-wrapper__terms">
     <terms></terms>
