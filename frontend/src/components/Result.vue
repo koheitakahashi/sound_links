@@ -35,7 +35,7 @@
         <a :href="result.appleMusicUrl">
           <img
             src="../../public/img/icons/apple-music-icon.svg"
-            alt=""
+            alt="AppleMusicのアイコン"
             v-show="result.appleMusicUrl"
             class="result-item-section__icon"
             data-test="apple-music-icon"
@@ -44,7 +44,7 @@
         <a :href="result.spotifyUrl">
           <img
             src="../../public/img/icons/spotify-icon.svg"
-            alt=""
+            alt="Spotifyのアイコン"
             v-show="result.spotifyUrl"
             class="result-item-section__icon"
             data-test="spotify-icon"
@@ -53,7 +53,7 @@
         <a :href="result.kkboxUrl">
           <img
             src="../../public/img/icons/kkbox-icon.svg"
-            alt=""
+            alt="KKBOXのアイコン"
             v-show="result.kkboxUrl"
             class="result-item-section__icon"
             data-test="kkbox-icon"
