@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="welcome-section__external-service">
-        <div class="welcome-section__external-service__text">
+        <div class="welcome-section-external-service__text">
           <h2>対応サービス</h2>
           <p>※APIが外部公開されている音楽配信サービスのみ対応しています。</p>
           <p>※今後他の音楽配信サービスのAPIが公開され次第、対応するサービスを拡大します。</p>
