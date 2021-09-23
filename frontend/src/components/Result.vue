@@ -26,7 +26,7 @@
           >
           <p class="result-item-section-button__text">URLをコピーする</p>
         </button>
-        <span v-show="!state.isCopiedUrls" class="tooltip__copied--notice"
+        <span v-show="state.isCopiedUrls" class="tooltip__copied--notice"
               data-test="url-copy-notice"
           >コピーしました</span
         >
