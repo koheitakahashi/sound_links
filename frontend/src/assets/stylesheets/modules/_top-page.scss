@@ -24,8 +24,10 @@
   color: #093F60;
 
   @media (max-width: 480px) {
-    font-size: 2rem;
-    margin: 2rem 1rem;
+    font-size: 2.5rem;
+    width: 17.5rem;
+    margin: 3rem auto 0;
+    text-align: center;
   }
 }
 
@@ -58,6 +60,8 @@
 
   @media (max-width: 480px) {
     flex-direction: column;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
 
@@ -72,6 +76,7 @@
     flex-direction: row;
     width: 90%;
     height: auto;
+    margin-bottom: 2rem;
   }
 }
 
@@ -158,6 +163,10 @@
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
   font-family: "NotoSnasJPBold", sans-serif;
+
+  @media (max-width: 480px) {
+    margin-bottom: 1rem;
+  }
 }
 
 
