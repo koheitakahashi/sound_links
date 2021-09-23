@@ -12,11 +12,12 @@
   color: #FFFFFF;
 
   @media (max-width: 480px) {
-    bottom: 2.5rem;
-    font-size: 0.8rem;
-    width: 70%;
-    left: 11rem;
-    padding: 1rem;
+    font-size: 0.7rem;
+    order: 0;
+    right: 10rem;
+    padding: 0rem;
+    width: 50%;
+    bottom: 2.2rem;
   }
 }
 
@@ -35,4 +36,10 @@
   border-right: 1rem solid #30AA29;
   left: -1.5rem;
   top: 0.5rem;
+
+  @media (max-width: 480px) {
+    left: 6.5rem;
+    border-right: 0rem solid #30AA29;
+    border-left: 1rem solid #30AA29;
+  }
 }

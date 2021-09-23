@@ -1,7 +1,11 @@
 .pagination {
   margin-bottom: 0.5rem;
   font-family: "NotoSnasJPBold", sans-serif;
-  color: #093F60
+  color: #093F60;
+
+  @media (max-width: 480px) {
+    margin-top: 1rem;
+  }
 }
 
 .pagination__items {
@@ -9,6 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 .pagination-item__previous-link {

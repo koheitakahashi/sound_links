@@ -9,12 +9,12 @@
     ></search-form>
   </header>
   <main class="main-wrapper__results">
-    <error-message v-show="!store.getters.showError"></error-message>
+    <error-message v-show="store.getters.showError"></error-message>
     <div class="result-list">
-      <div v-show="store.getters.showError">
+      <div v-show="!store.getters.showError">
         <div v-show="store.getters.isLoading" class="loader">Loading...</div>
         <results
-          v-show="store.getters.isLoading"
+          v-show="!store.getters.isLoading"
           :results="store.getters.sortedResults"
         ></results>
       </div>
