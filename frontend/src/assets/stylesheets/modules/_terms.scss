@@ -24,6 +24,10 @@
   display: flex;
   flex-direction: column;
   margin-left: 6rem;
+
+  @media (max-width: 480px) {
+    margin: auto;
+  }
 }
 
 .terms__text p {
