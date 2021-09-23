@@ -6,10 +6,6 @@
 .main-wrapper__results {
   display: flex;
   flex-direction: column;
-
-  @media (max-width: 480px) {
-    margin-top: 1rem;
-  }
 }
 
 .result-items {

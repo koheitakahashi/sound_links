@@ -16,7 +16,7 @@
 
   @media (max-width: 480px) {
     font-size: 1rem;
-    width: 90%;
+    width: 95%;
     height: 25rem;
   }
 }
@@ -26,10 +26,18 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
 }
 
-.error-message__header > h2 {
+.error-message__header  h2 {
   font-family: "NotoSnasJPBold", sans-serif;
+
+  @media (max-width: 480px) {
+    margin-top: 1rem;
+  }
 }
 
 .error-icon {
@@ -53,10 +61,11 @@
   }
 }
 
-.error-message__text p {
+.error-message__text  p {
   margin-top: 0.5rem;
 
   @media (max-width: 480px) {
     margin-top: 0.5rem;
+    font-size: 1.1rem;
   }
 }
