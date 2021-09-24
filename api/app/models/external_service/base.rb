@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module ExternalService
-  # NOTE: 共通項を切り出す
   class Base
-    SEARCH_TRACKS_NUMBER = 10
+    SEARCH_TRACKS_NUMBER = 25
     DEFAULT_OFFSET_NUMBER = 0
+    OK_STATUS_CODE = 200
 
     def self.search(keyword:, offset: DEFAULT_OFFSET_NUMBER)
       new(keyword: keyword, offset: offset).search

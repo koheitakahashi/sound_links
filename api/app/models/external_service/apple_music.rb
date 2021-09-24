@@ -2,6 +2,8 @@
 
 module ExternalService
   class AppleMusic < Base
+    EXPIRED_TIME = 3600
+
     def initialize(keyword:, offset: DEFAULT_OFFSET_NUMBER)
       super
     end
@@ -23,7 +25,7 @@ module ExternalService
       def authentication_payload
         { iss: SoundLinksConstants::APPLE_MUSIC_TEAM_ID,
           iat: Time.now.to_i,
-          exp: Time.now.to_i + 3600 }
+          exp: Time.now.to_i + EXPIRED_TIME }
       end
 
       def authentication_token
@@ -35,7 +37,7 @@ module ExternalService
 
       # TODO: 共通化したい
       def build_sounds(response)
-        return [] unless results = response.dig("results", "songs", "data")
+        return [] unless (results = response.dig("results", "songs", "data"))
 
         results.map do |result|
           Sound.new(
