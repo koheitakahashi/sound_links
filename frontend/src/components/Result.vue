@@ -1,6 +1,8 @@
 <template>
   <div>
-    <img :src="result.thumbnailUrl" alt="" class="result-item__image"
+    <img :src="result.thumbnailUrl"
+         alt="検索結果の曲のイメージ画像"
+         class="result-item__image"
          data-test="thumbnail"
     />
   </div>
@@ -28,7 +30,7 @@
         </button>
         <span v-show="state.isCopiedUrls" class="tooltip__copied--notice"
               data-test="url-copy-notice"
-          >コピーしました</span
+        >コピーしました</span
         >
       </div>
       <div class="result-item-section__images">

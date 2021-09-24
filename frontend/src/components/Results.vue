@@ -1,4 +1,5 @@
 <template>
+  <div>
     <h2 class="result-section__title" data-test="results-header">
       {{ resultHeaderText }}
     </h2>
@@ -9,18 +10,19 @@
     >
       検索結果がありませんでした
     </div>
-  <div class="result-items">
-    <div
-      v-for="result in results"
-      :key="result.id"
-      v-show="results.length !== 0"
-      data-test="result"
-      class="result-item"
-    >
-      <result :result="result"></result>
+    <div class="result-items">
+      <div
+        v-for="result in results"
+        :key="result.id"
+        v-show="results.length !== 0"
+        data-test="result"
+        class="result-item"
+      >
+        <result :result="result"></result>
+      </div>
     </div>
+    <pagination></pagination>
   </div>
-  <pagination></pagination>
 </template>
 
 <script lang="ts">
