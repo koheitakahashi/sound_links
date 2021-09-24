@@ -15,7 +15,7 @@ module ExternalService
         params: { term: keyword, limit: SEARCH_TRACKS_NUMBER, types: "songs", offset: offset }
       )
 
-      raise_external_service_error(response: @response) if @response.status_code != 200
+      raise_external_service_error(response: @response) if @response.status_code != OK_STATUS_CODE
       build_sounds(@response.body)
     end
 
@@ -53,7 +53,7 @@ module ExternalService
       end
 
       def raise_external_service_error(response:)
-        error_message = response.body.dig("error")
+        error_message = response.body.dig("errors").first
         raise ExternalService::Error.new, "There was an error connecting with the AppleMusic API. HTTP Status Code: #{response.status_code}, Error message: #{error_message["title"]}, #{error_message["detail"]}"
       end
   end

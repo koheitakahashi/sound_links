@@ -20,7 +20,6 @@ module ExternalService
       Rails.logger.info("** url = [#{url}]")
 
       response = client.post(url) do |request|
-        # TODO: presence にリファクタリング
         request.headers = headers if headers.present?
         request.body = body if body.present?
       end
