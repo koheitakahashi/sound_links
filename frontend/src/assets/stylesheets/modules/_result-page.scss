@@ -104,14 +104,6 @@
   }
 }
 
-//.result-item-image__layout {
-//  @media (max-width: 480px) {
-//    width: 160px;
-//    height: 160px;
-//    border: 1px solid #808080;
-//  }
-//}
-
 .result-item-section-explain__title {
   font-size: 1.4rem;
   height: 100%;
@@ -130,7 +122,6 @@
 .result-item-section-explain__artist-name {
   font-size: 1.4rem;
   height: 100%;
-  width: 50%;
   color: #093F60;
 
   @media (max-width: 480px) {
