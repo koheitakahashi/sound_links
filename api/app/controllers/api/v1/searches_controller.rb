@@ -4,6 +4,8 @@ module API
   module V1
     # TODO: リクエストスペックを書く
     class SearchesController < ApplicationController
+      before_action :validate_request, only: :index
+
       DEFAULT_CURRENT_PAGE = 1
 
       def index

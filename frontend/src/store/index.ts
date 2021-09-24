@@ -89,6 +89,15 @@ export default createStore<State>({
       try {
         await commit('setIsLoading', true);
         const response = await axios.get('api/v1/search', {
+          headers: {
+            'Content-Type': 'application/json',
+            // NOTE: frontend アプリからではなく、ブラウザから直接URLを叩かれたときに検索結果を返したくないため、
+            //  独自ヘッダを追加している。
+            'X-Requested-By': 'https://sound-links.com',
+          },
+          // NOTE: data: {} と指定しないと Content-Type ヘッダをリクエストできない
+          //   ref: https://github.com/axios/axios/issues/86
+          data: {},
           params: {
             keyword: state.keyword,
             page: state.currentPage,
