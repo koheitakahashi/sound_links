@@ -1,23 +1,42 @@
+.error-message-layout {
+  width: 100%;
+  color: #093F60;
+  background-color: #F4F0E7;
+}
+
 .error-message__content {
-  margin-top: 7rem !important;
-  margin-left: auto;
-  margin-right: auto;
-  width: 70%;
-  border: 1px solid #7d7d7d;
-  border-radius: 10px;
+  margin: 6rem auto 10rem;
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  height: 20rem;
   font-size: 1.5rem;
   text-align: center;
   line-height: 2rem;
 
   @media (max-width: 480px) {
     font-size: 1rem;
-    width: 90%;
+    width: 95%;
     height: 25rem;
+  }
+}
+
+.error-message__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+}
+
+.error-message__header  h2 {
+  font-family: "NotoSnasJPBold", sans-serif;
+
+  @media (max-width: 480px) {
+    margin-top: 1rem;
   }
 }
 
@@ -42,10 +61,11 @@
   }
 }
 
-.error-message__text p {
+.error-message__text  p {
   margin-top: 0.5rem;
 
   @media (max-width: 480px) {
     margin-top: 0.5rem;
+    font-size: 1.1rem;
   }
 }

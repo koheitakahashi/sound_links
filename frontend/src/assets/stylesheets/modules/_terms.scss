@@ -1,12 +1,33 @@
 .main-wrapper__terms {
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  color: #093F60;
+  background-color: #F4F0E7;
 }
 
-.terms__text h1 {
+.terms__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.terms__header > h1 {
+  font-family: "NotoSnasJPBold", sans-serif;
   margin-top: 2rem;
   margin-bottom: 1rem;
+}
+
+.terms__text {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 6rem;
+
+  @media (max-width: 480px) {
+    margin: auto;
+  }
 }
 
 .terms__text p {

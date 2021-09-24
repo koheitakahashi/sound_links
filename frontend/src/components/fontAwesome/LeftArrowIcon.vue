@@ -1,5 +1,5 @@
 <template>
-  <font-awesome-icon icon="chevron-left" :size="size" @click="$emit('click', $event)"
+  <font-awesome-icon icon="arrow-left" :size="size" @click="$emit('click', $event)"
                      data-test="pagination-previous-button"
   ></font-awesome-icon>
 </template>
@@ -7,10 +7,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faChevronLeft);
+library.add(faArrowLeft);
 
 export default defineComponent({
   name: 'LeftArrowIcon',

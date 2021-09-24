@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h2 class="result-section__title" data-test="results-header">検索結果一覧</h2>
-    <pagination></pagination>
+    <h2 class="result-section__title" data-test="results-header">
+      {{ resultHeaderText }}
+    </h2>
     <div
       v-show="results.length === 0 && !store.getters.isLoading"
       class="result-section__no-message"
@@ -9,20 +10,23 @@
     >
       検索結果がありませんでした
     </div>
-    <div
-      class="result-section__list"
-      v-for="result in results"
-      :key="result.id"
-      v-show="results.length !== 0"
-      data-test="results-list"
-    >
-      <result :result="result"></result>
+    <div class="result-items">
+      <div
+        v-for="result in results"
+        :key="result.id"
+        v-show="results.length !== 0"
+        data-test="result"
+        class="result-item"
+      >
+        <result :result="result"></result>
+      </div>
     </div>
+    <pagination></pagination>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import Result from './Result.vue';
 import Pagination from './Pagination.vue';
@@ -41,8 +45,11 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const resultHeaderText = computed(() => `「${store.getters.keyword}」の検索結果`);
+
     return {
       store,
+      resultHeaderText,
     };
   },
 });

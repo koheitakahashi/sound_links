@@ -1,21 +1,19 @@
 .header {
-  background-color: #7797a7;
+  background-color: #FFE03C;
   width: 100%;
-  height: 4rem;
+  height: 80px;
   display: flex;
   align-items: center;
 }
 
 .header--results {
-  background-color: #7797a7;
+  background-color: #FFE03C;
   width: 100%;
-  height: 4rem;
+  height: 80px;
   display: flex;
   align-items: center;
 
   @media (max-width: 480px) {
-    background-color: #7797a7;
-    width: 100%;
     height: 4rem;
     display: flex;
     align-items: center;
@@ -23,19 +21,12 @@
 }
 
 .header__logo {
-  margin: auto 0 auto 1rem;
-  width: 3.5rem;
-  height: 3.5rem;
-}
-
-.header__title {
   margin-left: 3rem;
-  color: #fff;
-  font-size: 2.5rem;
-  text-decoration: none;
-  // TODO: フォントを考える
+  margin-top: 0.25rem;
 
   @media (max-width: 480px) {
     margin-left: 1rem;
+    width: 90%;
+    height: auto;
   }
 }

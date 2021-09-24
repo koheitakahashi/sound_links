@@ -1,62 +1,66 @@
 <template>
-  <div class="results-item">
-    <div class="results-item-image__layout">
-      <img :src="result.thumbnailUrl" alt="" class="results-item__image"
-           data-test="thumbnail"
-      />
+  <div>
+    <img :src="result.thumbnailUrl"
+         alt="検索結果の曲のイメージ画像"
+         class="result-item__image"
+         data-test="thumbnail"
+    />
+  </div>
+  <div class="result-item-section">
+    <div class="result-item-section__explain">
+      <p class="result-item-section-explain__title" data-test="title">
+        {{ truncatedTitle }}
+      </p>
+      <p class="result-item-section-explain__artist-name" data-test="artist">
+        {{ truncatedArtist }}
+      </p>
     </div>
-    <div class="results-item-section">
-      <div class="results-item-section__explain">
-        <p class="results-item-section-explain__title" data-test="title">
-          {{ truncatedTitle }}
-        </p>
-        <p class="results-item-section-explain__artist-name" data-test="artist">
-          {{ truncatedArtist }}
-        </p>
+    <div class="result-item-section__actions">
+      <div class="result-item-section__copy-actions">
+        <button
+          @click="copyUrlsToClipBoard(result)"
+          class="result-item-section__button"
+          data-test="url-copy-button"
+        >
+          <img src="../../public/img/icons/clip-board-icon.svg"
+               alt="クリップボードのアイコン"
+               class="result-item-section-button__icon"
+          >
+          <p class="result-item-section-button__text">URLをコピーする</p>
+        </button>
+        <span v-show="state.isCopiedUrls" class="tooltip__copied--notice"
+              data-test="url-copy-notice"
+        >コピーしました</span
+        >
       </div>
-      <div class="results-item-section__actions">
-        <div class="results-item-section__copy-actions">
-          <button
-            @click="copyUrlsToClipBoard(result)"
-            class="results-item-section__button"
-            data-test="url-copy-button"
-          >
-            この曲をシェアする
-          </button>
-          <span v-show="state.isCopiedUrls" class="tooltip__copied--notice"
-                data-test="url-copy-notice"
-            >楽曲のURLがコピーされました</span
-          >
-        </div>
-        <div class="results-item-section__images">
-          <a :href="result.appleMusicUrl">
-            <img
-              src="../../public/img/icons/apple-music-icon.svg"
-              alt=""
-              v-show="result.appleMusicUrl"
-              class="results-item-section__icon"
-              data-test="apple-music-icon"
-            />
-          </a>
-          <a :href="result.spotifyUrl">
-            <img
-              src="../../public/img/icons/spotify-icon.svg"
-              alt=""
-              v-show="result.spotifyUrl"
-              class="results-item-section__icon"
-              data-test="spotify-icon"
-            />
-          </a>
-          <a :href="result.kkboxUrl">
-            <img
-              src="../../public/img/icons/kkbox-icon.svg"
-              alt=""
-              v-show="result.kkboxUrl"
-              class="results-item-section__icon"
-              data-test="kkbox-icon"
-            />
-          </a>
-        </div>
+      <div class="result-item-section__images">
+        <a :href="result.appleMusicUrl">
+          <img
+            src="../../public/img/icons/apple-music-icon.svg"
+            alt="AppleMusicのアイコン"
+            v-show="result.appleMusicUrl"
+            class="result-item-section__icon"
+            data-test="apple-music-icon"
+          />
+        </a>
+        <a :href="result.spotifyUrl">
+          <img
+            src="../../public/img/icons/spotify-icon.svg"
+            alt="Spotifyのアイコン"
+            v-show="result.spotifyUrl"
+            class="result-item-section__icon"
+            data-test="spotify-icon"
+          />
+        </a>
+        <a :href="result.kkboxUrl">
+          <img
+            src="../../public/img/icons/kkbox-icon.svg"
+            alt="KKBOXのアイコン"
+            v-show="result.kkboxUrl"
+            class="result-item-section__icon"
+            data-test="kkbox-icon"
+          />
+        </a>
       </div>
     </div>
   </div>
