@@ -8,12 +8,12 @@ default: &default
 
 development:
   <<: *default
-  host: <%= ENV['DB_HOST'] || 'db' %>
+  host: 'db'
   database: sound_links_development
 
 test:
   <<: *default
-  host: <%= ENV['DB_HOST'] || 'db' %>
+  host: <%= ENV['PGHOST'] || 'db' %>
   database: sound_links_test
 
 production:
