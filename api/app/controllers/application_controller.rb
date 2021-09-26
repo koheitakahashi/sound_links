@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   private
     def response_500(error)
       Rails.logger.error("Internal server error（500）because: #{error.message}")
-      render json: { errors: { message: "Internal server error." }}, status: :internal_server_error
+      render json: { errors: { message: "Internal server error." } }, status: :internal_server_error
     end
 
     # NOTE: frontend アプリからではなく、ブラウザから直接URLを叩かれたときに検索結果を返したくないため、リクエストをチェックしている。
