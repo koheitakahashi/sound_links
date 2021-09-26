@@ -15,7 +15,7 @@ module ExternalService
         params: { q: keyword, type: "track", market: "JP", limit: SEARCH_TRACKS_NUMBER, offset: offset }
       )
 
-      raise_external_service_error(response: @response) if @response.status_code != 200
+      raise_external_service_error(response: @response) if @response.status_code != OK_STATUS_CODE
       build_sounds(@response.body)
     end
 
@@ -29,7 +29,7 @@ module ExternalService
           headers: { Authorization: "Basic #{authorization_key}" }
         )
 
-        raise_external_service_error(response: @response) if @response.status_code != 200
+        raise_external_service_error(response: @response) if @response.status_code != OK_STATUS_CODE
         @access_token = @response.body["access_token"]
       end
 
@@ -53,7 +53,7 @@ module ExternalService
 
       def raise_external_service_error(response:)
         error_message = response.body.dig("error", "message")
-        raise ExternalService::Error.new, "There was an error connecting with the Spotify API. HTTP Status Code: #{@response.status_code}, Response error message: #{error_message}"
+        raise ExternalService::Error.new, "There was an error connecting with the Spotify API. HTTP Status Code: #{response.status_code}, Response error message: #{error_message}"
       end
   end
 end

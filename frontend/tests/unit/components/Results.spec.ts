@@ -35,7 +35,7 @@ describe('ResultComponent', () => {
         },
       });
 
-      expect(wrapper.findAll('[data-test="results-list"]').length).toBe(1);
+      expect(wrapper.findAll('[data-test="result"]').length).toBe(1);
     });
 
     it('props で2件の検索結果が渡された場合、その2件の検索結果が表示される', () => {
@@ -68,7 +68,7 @@ describe('ResultComponent', () => {
           plugins: [store],
         },
       });
-      expect(wrapper.findAll('[data-test="results-list"]').length).toBe(2);
+      expect(wrapper.findAll('[data-test="result"]').length).toBe(2);
     });
   });
 
@@ -82,7 +82,7 @@ describe('ResultComponent', () => {
       },
     });
 
-    expect(wrapper.findAll('[data-test="results-list"]').length).toBe(0);
+    expect(wrapper.findAll('[data-test="result"]').length).toBe(0);
     expect(wrapper.text()).toMatch('検索結果がありませんでした');
   });
 });

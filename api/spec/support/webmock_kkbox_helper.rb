@@ -13,7 +13,7 @@ module WebmockKkboxHelper
         })
       .to_return(status: 200, body: file_fixture("kkbox_api_response_when_authentication.json"))
 
-    stub_request(:get, "https://api.kkbox.com/v1.1/search?limit=10&offset=0&q=リライト&territory=JP&type=track")
+    stub_request(:get, "https://api.kkbox.com/v1.1/search?limit=25&offset=0&q=リライト&territory=JP&type=track")
       .with(
         headers: {
           "Authorization" => "Bearer {NEW_ACCESS_TOKEN}",
@@ -31,7 +31,7 @@ module WebmockKkboxHelper
         })
       .to_return(status: 200, body: file_fixture("kkbox_api_response_when_authentication.json"))
 
-    stub_request(:get, "https://api.kkbox.com/v1.1/search?limit=10&offset=0&q=リライト&territory=JP&type=track")
+    stub_request(:get, "https://api.kkbox.com/v1.1/search?limit=25&offset=0&q=リライト&territory=JP&type=track")
       .with(
         headers: {
           "Authorization" => "Bearer {NEW_ACCESS_TOKEN}",
@@ -49,7 +49,7 @@ module WebmockKkboxHelper
         })
       .to_return(status: 200, body: file_fixture("kkbox_api_response_when_authentication.json"))
 
-    stub_request(:get, "https://api.kkbox.com/v1.1/search?limit=10&offset=0&q=検索結果なし&territory=JP&type=track")
+    stub_request(:get, "https://api.kkbox.com/v1.1/search?limit=25&offset=0&q=検索結果なし&territory=JP&type=track")
       .with(
         headers: {
           "Authorization" => "Bearer {NEW_ACCESS_TOKEN}",
@@ -69,7 +69,7 @@ module WebmockKkboxHelper
         })
       .to_return(status: 401, body: file_fixture("kkbox_api_response_when_authentication_error.json"))
 
-    stub_request(:get, "https://api.kkbox.com/v1.1/search?limit=10&offset-0&q=bad_params&territory=JP&type=track")
+    stub_request(:get, "https://api.kkbox.com/v1.1/search?limit=25&offset-0&q=bad_params&territory=JP&type=track")
       .to_return(status: 200, body: file_fixture("kkbox_api_response_when_search_rewrite.json"), headers: {})
   end
 end

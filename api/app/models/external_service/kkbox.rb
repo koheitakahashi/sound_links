@@ -15,7 +15,7 @@ module ExternalService
         params: { q: keyword, type: "track", territory: "JP", limit: SEARCH_TRACKS_NUMBER, offset: offset }
       )
 
-      raise_external_service_error(response: @response) if @response.status_code != 200
+      raise_external_service_error(response: @response) if @response.status_code != OK_STATUS_CODE
       build_sounds(@response.body)
     end
 
@@ -28,7 +28,7 @@ module ExternalService
           body: "grant_type=client_credentials&client_id=#{SoundLinksConstants::KKBOX_API_KEY}&client_secret=#{SoundLinksConstants::KKBOX_API_SECRET_KEY}"
         )
 
-        raise_external_service_error(response: response) if response.status_code != 200
+        raise_external_service_error(response: response) if response.status_code != OK_STATUS_CODE
         response.body["access_token"]
       end
 
