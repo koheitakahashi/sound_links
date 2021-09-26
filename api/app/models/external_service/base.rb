@@ -2,6 +2,7 @@
 
 module ExternalService
   class Base
+    # NOTE: AppleMusic が一回のリクエストで取得できる曲数が25までだったため、その数字に合わせている。
     SEARCH_TRACKS_NUMBER = 25
     DEFAULT_OFFSET_NUMBER = 0
     OK_STATUS_CODE = 200
