@@ -21,8 +21,14 @@ executors:
           POSTGRES_USER: postgres
           POSTGRES_DB: sound_links_test
           POSTGRES_PASSWORD: "password"
+  frontend_executor:
+    docker:
+      - image: circleci/node:14.3
+        environment:
+          NODE_ENV: test
+
 commands:
-  setup:
+  setup_api:
     steps:
       - restore_cache:
          keys:
@@ -48,13 +54,29 @@ commands:
           key: gem-cache-v1-{{ checksum "~/project/api/Gemfile.lock" }}
           paths:
             - ~/project/api/vendor/bundle
+  setup_frontend:
+    steps:
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "~/project/frontend/package.json" }}
+          working_directory: ~/project/frontend
+
+      - run:
+          name: Install package
+          command: yarn install
+          working_directory: ~/project/frontend
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "~/project/frontend/package.json" }}
 
 jobs:
   api_test:
     executor: api_executor
     steps:
       - checkout
-      - setup
+      - setup_api
       - run:
           name: Run Lint
           command: bundle exec rubocop
@@ -82,6 +104,16 @@ jobs:
           destination: test-results
       - store_artifacts:
           path: /home/circleci/project/tmp/screenshots
+
+  frontend_test:
+    executor: frontend_executor
+    steps:
+      - checkout
+      - setup_frontend
+      - run:
+          name: test
+          command: yarn test:unit
+          working_directory: ~/project/frontend
 
   build_and_push_image_api:
     machine:
@@ -119,9 +151,21 @@ workflows:
           filters:
             branches:
               ignore: main
+      - frontend_test:
+          filters:
+            branches:
+              ignore: main
+
   test_and_deploy:
     jobs:
-      - api_test
+      - api_test:
+          filters:
+            branches:
+              only: main
+      - frontend_test:
+          filters:
+            branches:
+              only: main
       - build_and_push_image_api:
           requires:
             - api_test
@@ -130,7 +174,7 @@ workflows:
               only: main
       - build_and_push_image_frontend:
           requires:
-            - api_test
+            - frontend_test
           filters:
             branches:
               only: main
