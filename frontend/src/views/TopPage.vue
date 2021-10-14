@@ -61,17 +61,18 @@
           </div>
           <div class="welcome-section-external-service__sections">
             <div class="welcome-small-section">
-              <a href="https://www.apple.com/jp/apple-music">
-                <img
-                  src="../../public/img/icons/apple-music-logo.svg"
-                  alt="AppleMusicのロゴ"
-                  class="welcome-small-section__image"
-                />
-              </a>
-              <a
-                href="https://www.apple.com/jp/apple-music"
-                class="welcome-small-section__title"
-              ></a>
+              <div class="welcome-small-section__apple-music">
+                <a href="https://www.apple.com/jp/apple-music">
+                  <img
+                    src="../../public/img/icons/apple-music-icon.svg"
+                    alt="AppleMusicのロゴ"
+                    class="welcome-small-section-image__apple-music"
+                  />
+                </a>
+                <a href="https://www.apple.com/jp/apple-music" class="welcome-small-section__apple-music-title">
+                  <h3>Apple Music</h3>
+                </a>
+              </div>
             </div>
             <div class="welcome-small-section">
               <a href="https://www.spotify.com/us">
@@ -81,11 +82,6 @@
                   class="welcome-small-section__image"
                 />
               </a>
-              <a
-                href="https://www.spotify.com/us/"
-                class="welcome-small-section__title"
-              ></a
-              >
             </div>
             <div class="welcome-small-section">
               <a href="https://www.kkbox.com/jp/ja/">
@@ -95,10 +91,6 @@
                   class="welcome-small-section__image"
                 />
               </a>
-              <a
-                href="https://www.kkbox.com/jp/ja/"
-                class="welcome-small-section__title"
-              ></a>
             </div>
           </div>
         </div>
