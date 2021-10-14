@@ -190,7 +190,27 @@
   }
 }
 
+.welcome-small-section-image__apple-music {
+  height: 60px;
+  margin: auto;
+}
+
 .welcome-small-section__title {
   color: #000;
   text-decoration: none;
+}
+
+.welcome-small-section__apple-music {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-small-section__apple-music-title {
+  font-size: 1.6rem;
+  margin-left: 0.75rem;
+  margin-bottom: 0.1rem;
+  text-decoration: none;
+  color: #000;
 }
