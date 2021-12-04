@@ -8,7 +8,7 @@ orbs:
 executors:
   api_executor:
     docker:
-      - image: circleci/ruby:3.0.3
+      - image: cimg/ruby:3.0.3
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
