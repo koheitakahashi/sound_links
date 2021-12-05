@@ -1,8 +1,8 @@
 import { createStore } from 'vuex';
+import axios from 'axios';
 import { result } from '@/types/result';
 import { responseResult } from '@/types/responseResult';
 import parseResponseResult from '@/utils/parseResponseResult';
-import axios from 'axios';
 
 export interface State {
   keyword: string;
