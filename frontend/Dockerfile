@@ -15,8 +15,6 @@ RUN apt-get update -y && \
   yarn add @vue/cli@next && \
   yarn install
 
-RUN npm rebuild node-sass
-
 ADD . /app
 
 RUN yarn build
