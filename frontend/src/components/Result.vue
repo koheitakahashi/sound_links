@@ -74,6 +74,7 @@ import {
   PropType,
 } from 'vue';
 import { result } from '@/types/result';
+import buildUrls from '@/utils/buildUrls';
 import truncateText from '@/utils/truncateText';
 
 const TOOLTIP_SHOW_TIME = 3000;
@@ -91,25 +92,8 @@ export default defineComponent({
       isCopiedUrls: false,
     });
 
-    function urlsText(resultItem: result): string {
-      const urls = [`${resultItem.title}(${resultItem.artist})`];
-
-      if (resultItem.spotifyUrl) {
-        urls.push(`Spotify\n${resultItem.spotifyUrl}`);
-      }
-      if (resultItem.appleMusicUrl) {
-        urls.push(`Apple Music\n${resultItem.appleMusicUrl}`);
-      }
-      if (resultItem.kkboxUrl) {
-        urls.push(`KKBOX\n${resultItem.kkboxUrl}`);
-      }
-      urls.push('\nCreated by https://sound-links.com');
-
-      return urls.join('\n');
-    }
-
     function copyUrlsToClipBoard(resultItem: result): void {
-      navigator.clipboard.writeText(urlsText(resultItem)).then(() => {
+      navigator.clipboard.writeText(buildUrls(resultItem)).then(() => {
         state.isCopiedUrls = true;
         setTimeout(() => {
           state.isCopiedUrls = false;
