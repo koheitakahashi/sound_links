@@ -103,6 +103,7 @@ export default defineComponent({
       if (resultItem.kkboxUrl) {
         urls.push(`KKBOX\n${resultItem.kkboxUrl}`);
       }
+      urls.push('\nCreated by https://sound-links.com');
 
       return urls.join('\n');
     }
