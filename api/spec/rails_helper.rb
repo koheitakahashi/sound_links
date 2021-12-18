@@ -85,7 +85,9 @@ RSpec.configure do |config|
   # simplecov を有効にする
   require "simplecov"
   SimpleCov.start do
-    add_group "Models", "app/models"
-    add_group "Controllers", "app/controllers"
+    add_group "Models", "app/models/"
+    add_group "Controllers", "app/controllers/"
+    add_filter "factories/"
+    add_filter "spec/"
   end
 end
