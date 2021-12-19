@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 module API
   module V1
     RSpec.describe "/api/v1/search", type: :request do
-
       context "リクエストヘッダーが意図したものでない場合" do
         context "Content-Type が「text/html」、X-Requested-By が「https://example.com」の場合" do
           it "ステータスコード 401 エラーが返る" do
-            get "/api/v1/search", headers: { "Content-Type" => "text/html", "X-Requested-By" => "https://example.com"}
+            get "/api/v1/search", headers: { "Content-Type" => "text/html", "X-Requested-By" => "https://example.com" }
 
             parsed_response = JSON.parse(response.body)
 
@@ -18,7 +19,7 @@ module API
 
         context "Content-Type が「application/json」、X-Requested-By が「https://example.com」の場合" do
           it "ステータスコード 401 エラーが返る" do
-            get "/api/v1/search", headers: { "Content-Type" => "application/json", "X-Requested-By" => "https://example.com"}
+            get "/api/v1/search", headers: { "Content-Type" => "application/json", "X-Requested-By" => "https://example.com" }
 
             parsed_response = JSON.parse(response.body)
 
@@ -47,14 +48,14 @@ module API
         end
 
         it "ステータスコード 200 が返る" do
-          get "/api/v1/search", headers: { "Content-Type" => "application/json", "X-Requested-By" => "https://sound-links.com"}
+          get "/api/v1/search", headers: { "Content-Type" => "application/json", "X-Requested-By" => "https://sound-links.com" }
 
           expect(response.status).to eq 200
         end
 
         context "params[:keyword]が空の場合" do
           it "resultsが空配列が入ったレスポンスが返る" do
-            get "/api/v1/search", params: { keyword: "" }, headers: { "Content-Type" => "application/json", "X-Requested-By" => "https://sound-links.com"}
+            get "/api/v1/search", params: { keyword: "" }, headers: { "Content-Type" => "application/json", "X-Requested-By" => "https://sound-links.com" }
 
             parsed_response = JSON.parse(response.body)
 
@@ -64,7 +65,7 @@ module API
 
         context "params[:keyword]が「リライト」の場合" do
           it "resultsに値が入ったレスポンスが返る" do
-            get "/api/v1/search", params: { keyword: "リライト" }, headers: { "Content-Type" => "application/json", "X-Requested-By" => "https://sound-links.com"}
+            get "/api/v1/search", params: { keyword: "リライト" }, headers: { "Content-Type" => "application/json", "X-Requested-By" => "https://sound-links.com" }
 
             parsed_response = JSON.parse(response.body)
             parsed_response_first_result = parsed_response["results"].first
