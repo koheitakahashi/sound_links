@@ -19,12 +19,12 @@ gem 'kaminari'
 gem 'rack-cors'
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'debug', platforms: %i[ mri mingw x64_mingw ]
 end
 
 group :development do
   # default
-  gem "web-console"
+  gem 'web-console'
 
   # not default
   gem 'rubocop', require: false
