@@ -6,7 +6,7 @@ module API
     #   ゆえに、ヘルスチェック用のcontrollerを作成。
     class HealthsController < ApplicationController
       def index
-        render json: { message: "Health check is successfully" }, status: :ok
+        render json: { message: 'Health check is successfully' }, status: :ok
       end
     end
   end

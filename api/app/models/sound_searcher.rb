@@ -65,9 +65,9 @@ class SoundSearcher
     #       そのため、6.1 にあげた時に以下を書き換える
     def associate_sound_with_searching(searching:, sounds_hashes:)
       sounds_hashes.each do |sound_hash|
-        sound_hash["created_at"] = Time.current
-        sound_hash["updated_at"] = Time.current
-        sound_hash["search_id"] = searching.id
+        sound_hash['created_at'] = Time.current
+        sound_hash['updated_at'] = Time.current
+        sound_hash['search_id'] = searching.id
       end
     end
 
@@ -82,7 +82,7 @@ class SoundSearcher
     def merge_results(*sounds_hash)
       merged_sound_hash = {}
       sounds_hash.flatten.each do |result|
-        isrc_value = result["isrc"]
+        isrc_value = result['isrc']
         if merged_sound_hash[isrc_value]
           merged_sound_hash[isrc_value] = merged_sound(merged_sound_hash[isrc_value], result)
         else

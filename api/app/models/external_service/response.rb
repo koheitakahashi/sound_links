@@ -9,7 +9,7 @@ module ExternalService
       @status_code = status_code.to_i
       # NOTE: AppleMusic で Authorization エラーが発生する場合は、response_body が空文字になり、JSON.parse できないため
       #   以下で JSON.parse できる形にしている。ここで raise させるのではなく、ExternalService::AppleMusic などで raise するための処置。
-      @body = JSON.parse(body) unless body == ""
+      @body = JSON.parse(body) unless body == ''
     end
   end
 end
