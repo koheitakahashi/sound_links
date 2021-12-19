@@ -12,7 +12,7 @@ module ExternalService
       @response = ExternalService::Request.new.get(
         url: SoundLinksConstants::KKBOX_SEARCH_URL,
         headers: { Authorization: "Bearer #{access_token}" },
-        params: { q: keyword, type: "track", territory: "JP", limit: SEARCH_TRACKS_NUMBER, offset: offset }
+        params: { q: keyword, type: 'track', territory: 'JP', limit: SEARCH_TRACKS_NUMBER, offset: offset }
       )
 
       raise_external_service_error(response: @response) if @response.status_code != OK_STATUS_CODE
@@ -29,26 +29,26 @@ module ExternalService
         )
 
         raise_external_service_error(response: response) if response.status_code != OK_STATUS_CODE
-        response.body["access_token"]
+        response.body['access_token']
       end
 
       def build_sounds(response)
-        return [] unless results = response.dig("tracks", "data")
+        return [] unless results = response.dig('tracks', 'data')
 
         results.map do |result|
           Sound.new(
-            isrc: result["isrc"],
+            isrc: result['isrc'],
             # NOTE: height = 160, width = 160 のサムネイルを取得するためにインデックス0番目の URL を取得する
-            thumbnail_url: result["album"]["images"][0]["url"],
-            title: result["name"],
-            artist: result["album"]["artist"]["name"],
-            kkbox_url: result["url"]
+            thumbnail_url: result['album']['images'][0]['url'],
+            title: result['name'],
+            artist: result['album']['artist']['name'],
+            kkbox_url: result['url']
           )
         end.uniq { |sound| sound.isrc }
       end
 
       def raise_external_service_error(response:)
-        error_message = response.body.dig("error", "message")
+        error_message = response.body.dig('error', 'message')
         raise ExternalService::Error.new, "There was an error connecting with the KKBOX API. HTTP Status Code: #{response.status_code}, Error message: #{error_message}"
       end
   end

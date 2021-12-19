@@ -12,7 +12,7 @@ module API
         return render json: { results: [], current_page: DEFAULT_CURRENT_PAGE } if params[:keyword].blank?
 
         @results = SoundSearcher.execute!(keyword: params[:keyword], page: params[:page].to_i)
-        render "index", formats: :json
+        render 'index', formats: :json
       end
     end
   end
