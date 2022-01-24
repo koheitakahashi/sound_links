@@ -26,10 +26,6 @@ services:
     volumes:
       - ./api:/app:cached
       - bundle_data:/usr/local/bundle:cached
-      - /app/vendor
-      - /app/tmp
-      - /app/log
-      - /app/.git
     environment:
       TZ: Asia/Tokyo
       DATABASE_HOST: db
@@ -48,7 +44,8 @@ services:
     build: ./frontend/
     image: frontend
     volumes:
-      - ./frontend:/app
+      - ./frontend:/app:cached
+      - node_modules_data:/usr/local/node_modules:cached
     ports:
       - "8080:8080"
     command: "yarn serve:development"
@@ -67,3 +64,4 @@ networks:
 volumes:
   psgl_data:
   bundle_data:
+  node_modules_data:
